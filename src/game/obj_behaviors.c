@@ -724,6 +724,8 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
     return FALSE;
 }
 
+
+
 #include "behaviors/moving_coin.inc.c"
 #include "behaviors/seaweed.inc.c"
 #include "behaviors/bobomb.inc.c"
@@ -780,3 +782,4 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/treasure_chest.inc.c"
 #include "behaviors/mips.inc.c"
 #include "behaviors/yoshi.inc.c"
+#include "behaviors/luigiman_maple_treeway.inc.c"

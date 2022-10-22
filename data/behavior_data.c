@@ -6087,4 +6087,17 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
-
+extern void bhv_luigiman_leaf_pile_init();
+extern void bhv_luigiman_leaf_pile_loop();
+const BehaviorScript bhvLuigimanLeafPile[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    SET_INT(oNumLootCoins, 5),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HITBOX(/*Radius*/ 200, /*Height*/ 100),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_INT(oIntangibleTimer, 0),
+    CALL_NATIVE(bhv_luigiman_leaf_pile_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_luigiman_leaf_pile_loop),
+    END_LOOP(),
+};
