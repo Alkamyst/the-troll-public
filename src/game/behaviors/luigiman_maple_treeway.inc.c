@@ -22,3 +22,134 @@ void bhv_luigiman_leaf_pile_loop(void) {
         // obj_explode_and_spawn_coins(46.0f, COIN_TYPE_YELLOW);
     }
 }
+
+// Chestnuts Behavior
+
+static struct ObjectHitbox sChestnutHitbox = {
+    /* interactType:      */ INTERACT_DAMAGE,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 2,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 100,
+    /* height:            */ 150,
+    /* hurtboxRadius:     */ 0,
+    /* hurtboxHeight:     */ 0,
+};
+
+void bhv_luigiman_chestnut_init(void) {
+    o->oBulletBillInitialMoveYaw = o->oMoveAngleYaw;
+    o->oGravity = 5.0f;
+    o->oFriction = 0.999f;
+    o->oBuoyancy = 2.0f;
+    if (o->oBehParams2ndByte == 1) {
+        cur_obj_scale(3.0f);
+    }
+}
+
+void luigiman_chestnut_act_0(void) {
+    cur_obj_become_tangible();
+    o->oForwardVel = 0.0f;
+    o->oFaceAnglePitch = 0;
+    o->oFaceAngleRoll = 0;
+    o->oMoveFlags = OBJ_MOVE_NONE;
+    cur_obj_set_pos_to_home();
+    obj_set_hitbox(o, &sChestnutHitbox);
+    if (o->oBehParams2ndByte == 0) {
+        o->oGraphYOffset = 100.0f;
+    }
+    if (o->oBehParams2ndByte == 1) {
+        o->oGraphYOffset = 250.0f;
+    }
+    o->oAction = 2;
+}
+
+void luigiman_chestnut_act_1(void) {
+    f32 triggerDistance;
+
+    if (gCurrLevelNum != LEVEL_SA) {
+        triggerDistance = 1500.f; // Vanilla
+    } else if (BPARAM2 == 0xFF) {
+        triggerDistance = 5000.f;
+    } else if (BPARAM2 == 0xFE) {
+        triggerDistance = 1500.f;
+    } else {
+        triggerDistance = 2500.f;
+    }
+    s16 sp1E = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
+    if (sp1E < 0x2000 && 400.0f < o->oDistanceToMario && o->oDistanceToMario < triggerDistance) {
+        o->oAction = 2;
+    }
+}
+
+void luigiman_chestnut_act_2(void) {
+    if (o->oTimer < 10) {
+        o->oForwardVel = 2.0f;
+        
+    } else if (o->oTimer < 20) {
+        if (o->oTimer % 2) {
+            o->oForwardVel = 2.0f;
+        } else {
+            o->oForwardVel = -2.0f;
+        }
+    } else {
+        if (o->oTimer > 40) {
+            cur_obj_update_floor_and_walls();
+        }
+
+        o->oFaceAnglePitch += (s16)(o->oForwardVel * (100.0f));
+        o->oForwardVel = 15.0f;
+
+        if (o->oTimer > 20) {
+            object_step_without_floor_orient();
+            // o->oMoveAnglePitch -= 0x4F;
+            // o->oFaceAngleYaw = o->oMoveAngleYaw;
+        }
+
+        if (o->oTimer > 150 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+            o->oAction = 3;
+            spawn_mist_particles();
+        }
+    }
+}
+
+void luigiman_chestnut_act_3(void) {
+    // o->oMoveAngleYaw == 0x0;
+    // o->oMoveAngleYaw += 0x9000;
+    cur_obj_rotate_yaw_toward(0x0, 0x8000);
+    o->oAction = 0;
+}
+
+void luigiman_chestnut_act_4(void) {
+    spawn_mist_particles();
+    o->oAction = 0;
+/*
+    if (o->oTimer == 0) {
+        o->oForwardVel = -30.0f;
+        cur_obj_become_intangible();
+    }
+
+    o->oFaceAnglePitch += 0x1000;
+    o->oFaceAngleRoll += 0x1000;
+    o->oPosY += 20.0f;
+
+    if (o->oTimer > 90) {
+        o->oAction = 0;
+    }
+*/
+}
+
+ObjActionFunc sluigimanChustnutActions[] = {
+    luigiman_chestnut_act_0,
+    luigiman_chestnut_act_1,
+    luigiman_chestnut_act_2,
+    luigiman_chestnut_act_3,
+    luigiman_chestnut_act_4,
+};
+
+void bhv_luigiman_chestnut_loop(void) {
+    cur_obj_call_action_function(sluigimanChustnutActions);
+    if (cur_obj_check_interacted()) {
+        o->oAction = 4;
+    }
+}
