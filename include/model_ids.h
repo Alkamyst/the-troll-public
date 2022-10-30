@@ -574,6 +574,7 @@
 
 #define MODEL_LEAF_PILE 0x37
 #define MODEL_CHESTNUT 0x38
+#define MODEL_GOLDEN_CHESTNUT 0x39
 
 
 #endif // MODEL_IDS_H

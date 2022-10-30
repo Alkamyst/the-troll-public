@@ -542,5 +542,6 @@ extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvLuigimanLeafPile[];
 extern const BehaviorScript bhvLuigimanChestnut[];
+extern const BehaviorScript bhvLuigimanGoldenChestnut[];
 
 #endif // BEHAVIOR_DATA_H

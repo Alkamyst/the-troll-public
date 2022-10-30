@@ -15,3 +15,4 @@
 
 #include "levels/maple_treewway/leaf_pile/model.inc.c"
 #include "levels/maple_treewway/chestnut/model.inc.c"
+#include "levels/maple_treewway/golden_chestnut/model.inc.c"

@@ -32,6 +32,7 @@ const LevelScript level_maple_treewway_entry[] = {
 	JUMP_LINK(script_func_global_1), 
 	LOAD_MODEL_FROM_GEO(MODEL_LEAF_PILE, leaf_pile_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_CHESTNUT, chestnut_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_GOLDEN_CHESTNUT, golden_chestnut_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -42,9 +43,11 @@ const LevelScript level_maple_treewway_entry[] = {
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_CHESTNUT, -1313, 446, -1108, 0, 0, 0, (0 << 16), bhvLuigimanChestnut),
 		OBJECT(MODEL_CHESTNUT, -749, 446, -1108, 0, 0, 0, (1 << 16), bhvLuigimanChestnut),
+		OBJECT(MODEL_GOLDEN_CHESTNUT, -6, 100, -3250, 0, 0, 0, (0 << 16), bhvLuigimanGoldenChestnut),
 		OBJECT(MODEL_LEAF_PILE, 1104, 100, 14, 0, 0, 0, (1 << 16), bhvLuigimanLeafPile),
 		OBJECT(MODEL_LEAF_PILE, 1104, 100, -484, 0, 0, 0, (0 << 16), bhvLuigimanLeafPile),
 		OBJECT(MODEL_LEAF_PILE, 1104, 100, 511, 0, 0, 0, (2 << 16), bhvLuigimanLeafPile),
+		OBJECT(MODEL_METAL_BOX, 910, 100, -3250, 0, 0, 0, (0 << 16), bhvPushableMetalBox),
 		OBJECT(MODEL_NONE, 0, 200, 0, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		MARIO_POS(0x01, 0, 0, 200, 0),
 		TERRAIN(maple_treewway_area_1_collision),
