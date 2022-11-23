@@ -1,3 +1,4 @@
+extern void bounce_off_object(struct MarioState *m, struct Object *obj, f32 velY);
 
 /**
  * Behavior for bhvWigglerHead and bhvWigglerBody.
@@ -13,7 +14,7 @@
 static struct ObjectHitbox sWigglerBodyPartHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 3,
+    /* damageOrCoinValue: */ 2,
     /* health:            */ 99, // never decreases
     /* numLootCoins:      */ 0,
     /* radius:            */ 20,
@@ -28,7 +29,7 @@ static struct ObjectHitbox sWigglerBodyPartHitbox = {
 static struct ObjectHitbox sWigglerHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 3,
+    /* damageOrCoinValue: */ 2,
     /* health:            */ 4,
     /* numLootCoins:      */ 0,
     /* radius:            */ 60,
@@ -41,12 +42,12 @@ static struct ObjectHitbox sWigglerHitbox = {
  * Attack handler for wiggler while in the walking action.
  */
 static u8 sWigglerAttackHandlers[] = {
-    /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_KNOCKBACK,
-    /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_PUNCH:                 */ ATTACK_HANDLER_NOP,
+    /* ATTACK_KICK_OR_TRIP:          */ ATTACK_HANDLER_NOP,
     /* ATTACK_FROM_ABOVE:            */ ATTACK_HANDLER_SPECIAL_WIGGLER_JUMPED_ON,
     /* ATTACK_GROUND_POUND_OR_TWIRL: */ ATTACK_HANDLER_SPECIAL_WIGGLER_JUMPED_ON,
-    /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_KNOCKBACK,
-    /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_KNOCKBACK,
+    /* ATTACK_FAST_ATTACK:           */ ATTACK_HANDLER_SPECIAL_WIGGLER_JUMPED_ON,
+    /* ATTACK_FROM_BELOW:            */ ATTACK_HANDLER_NOP,
 };
 
 /**
@@ -100,9 +101,11 @@ void bhv_wiggler_body_part_update(void) {
 
     if (o->parentObj->oAction == WIGGLER_ACT_SHRINK) {
         cur_obj_become_intangible();
+    } else if (obj_handle_attacks(&sWigglerBodyPartHitbox, o->oAction, sWigglerAttackHandlers)) {
+        
     } else {
         obj_check_attacks(&sWigglerBodyPartHitbox, o->oAction);
-    }
+    } 
 }
 
 /**
@@ -198,22 +201,21 @@ void wiggler_init_segments(void) {
 static void wiggler_act_walk(void) {
     o->oWigglerWalkAnimSpeed = 0.06f * o->oForwardVel;
 
-    // Update text if necessary
-    if (o->oWigglerTextStatus < WIGGLER_TEXT_STATUS_COMPLETED_DIALOG) {
-        if (o->oWigglerTextStatus == WIGGLER_TEXT_STATUS_AWAIT_DIALOG) {
-            seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
-            o->oWigglerTextStatus = WIGGLER_TEXT_STATUS_SHOWING_DIALOG;
-        }
+        obj_forward_vel_approach(sWigglerSpeeds[o->oHealth - 1], 2.0f);
 
-        // If Mario is positioned below the wiggler, assume he entered through the
-        // lower cave entrance, so don't display text.
-        if (gMarioObject->oPosY < o->oPosY || cur_obj_update_dialog_with_cutscene(
-            MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_150)) {
-            o->oWigglerTextStatus = WIGGLER_TEXT_STATUS_COMPLETED_DIALOG;
-        }
-    } else {
-        obj_forward_vel_approach(sWigglerSpeeds[o->oHealth - 1], 1.0f);
 
+        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL || o->oMoveFlags & OBJ_MOVE_HIT_EDGE) {
+            o->oMoveAngleYaw += 0x8000;
+            o->oWigglerTargetYaw = o->oMoveAngleYaw;
+        }
+        // o->oMoveAngleYaw += 0x200;
+        s16 yawTurnSpeed = (s16)(60.0f * o->oForwardVel);
+        // cur_obj_rotate_yaw_toward(o->oWigglerTargetYaw, yawTurnSpeed);
+        obj_face_yaw_approach(o->oMoveAngleYaw, 2 * yawTurnSpeed);
+
+        obj_face_pitch_approach(0, 1600);
+        
+/*
         if (o->oWigglerWalkAwayFromWallTimer != 0) {
             o->oWigglerWalkAwayFromWallTimer--;
         } else {
@@ -246,25 +248,27 @@ static void wiggler_act_walk(void) {
         obj_face_yaw_approach(o->oMoveAngleYaw, 2 * yawTurnSpeed);
 
         obj_face_pitch_approach(0, 0x320);
-
+*/
         // For the first two seconds of walking, stay invulnerable
         if (o->oTimer < 60) {
             obj_check_attacks(&sWigglerHitbox, o->oAction);
         } else if (obj_handle_attacks(&sWigglerHitbox, o->oAction, sWigglerAttackHandlers)) {
             if (o->oAction != WIGGLER_ACT_JUMPED_ON) {
-                o->oAction = WIGGLER_ACT_KNOCKBACK;
+                // o->oAction = WIGGLER_ACT_KNOCKBACK;
             }
 
             o->oWigglerWalkAwayFromWallTimer = 0;
             o->oWigglerWalkAnimSpeed = 0.0f;
         }
-    }
+        
 }
 /**
  * Squish and unsquish, then show text and enter either the walking or shrinking
  * action.
  */
 static void wiggler_act_jumped_on(void) {
+
+/*
     // Text to show on first, second, and third attack.
     s32 attackText[3] = { DIALOG_152, DIALOG_168, DIALOG_151 };
 
@@ -302,6 +306,7 @@ static void wiggler_act_jumped_on(void) {
     } else {
         o->oTimer = 0;
     }
+*/
 
     obj_check_attacks(&sWigglerHitbox, o->oAction);
 }
@@ -366,10 +371,16 @@ static void wiggler_act_fall_through_floor(void) {
  * Stop and enter the jumped on action.
  */
 void wiggler_jumped_on_attack_handler(void) {
+    if (gPlayer1Controller->buttonDown & A_BUTTON){
+		set_mario_action(gMarioState, ACT_DOUBLE_JUMP, 0);
+        gMarioStates[0].vel[1] = 70;
+	}
+/*
     cur_obj_play_sound_2(SOUND_OBJ_WIGGLER_ATTACKED);
     o->oAction = WIGGLER_ACT_JUMPED_ON;
     o->oForwardVel = o->oVelY = 0.0f;
     o->oWigglerSquishSpeed = 0.4f;
+*/
 }
 
 /**

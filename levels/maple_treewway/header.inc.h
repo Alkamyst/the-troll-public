@@ -5,7 +5,7 @@ extern const MacroObject maple_treewway_area_1_macro_objs[];
 extern Lights1 maple_treewway_dl_Ground_lights;
 extern u8 maple_treewway_dl_ci4_nat_grass_ci4[];
 extern u8 maple_treewway_dl_ci4_nat_grass_ci4_pal_rgba16[];
-extern Vtx maple_treewway_dl_Cube_mesh_layer_1_vtx_0[24];
+extern Vtx maple_treewway_dl_Cube_mesh_layer_1_vtx_0[96];
 extern Gfx maple_treewway_dl_Cube_mesh_layer_1_tri_0[];
 extern Gfx mat_maple_treewway_dl_Ground[];
 extern Gfx mat_revert_maple_treewway_dl_Ground[];

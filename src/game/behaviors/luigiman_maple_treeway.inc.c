@@ -61,28 +61,10 @@ void luigiman_chestnut_act_0(void) {
     if (o->oBehParams2ndByte == 1) {
         o->oGraphYOffset = 250.0f;
     }
-    o->oAction = 2;
+    o->oAction = 1;
 }
 
 void luigiman_chestnut_act_1(void) {
-    f32 triggerDistance;
-
-    if (gCurrLevelNum != LEVEL_SA) {
-        triggerDistance = 1500.f; // Vanilla
-    } else if (BPARAM2 == 0xFF) {
-        triggerDistance = 5000.f;
-    } else if (BPARAM2 == 0xFE) {
-        triggerDistance = 1500.f;
-    } else {
-        triggerDistance = 2500.f;
-    }
-    s16 sp1E = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
-    if (sp1E < 0x2000 && 400.0f < o->oDistanceToMario && o->oDistanceToMario < triggerDistance) {
-        o->oAction = 2;
-    }
-}
-
-void luigiman_chestnut_act_2(void) {
     if (o->oTimer < 10) {
         o->oForwardVel = 2.0f;
         
@@ -113,21 +95,25 @@ void luigiman_chestnut_act_2(void) {
             spawn_mist_particles();
         }
 
-        if (o->oTimer > 150 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
-            o->oAction = 3;
+        if (o->oDistanceToMario >= 3500.0f) {
+            o->oAction = 0;
+        }
+
+        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+            o->oAction = 2;
             spawn_mist_particles();
         }
     }
 }
 
-void luigiman_chestnut_act_3(void) {
+void luigiman_chestnut_act_2(void) {
     // o->oMoveAngleYaw == 0x0;
     // o->oMoveAngleYaw += 0x9000;
     cur_obj_rotate_yaw_toward(0x0, 0x8000);
     o->oAction = 0;
 }
 
-void luigiman_chestnut_act_4(void) {
+void luigiman_chestnut_act_3(void) {
     spawn_mist_particles();
     o->oAction = 0;
 }
@@ -137,13 +123,12 @@ ObjActionFunc sluigimanChustnutActions[] = {
     luigiman_chestnut_act_1,
     luigiman_chestnut_act_2,
     luigiman_chestnut_act_3,
-    luigiman_chestnut_act_4,
 };
 
 void bhv_luigiman_chestnut_loop(void) {
     cur_obj_call_action_function(sluigimanChustnutActions);
     if (cur_obj_check_interacted()) {
-        o->oAction = 4;
+        o->oAction = 3;
     }
 }
 
@@ -165,13 +150,10 @@ void luigiman_golden_chestnut_act_0(void) {
     cur_obj_set_pos_to_home();
     obj_set_hitbox(o, &sChestnutHitbox);
     o->oGraphYOffset = 100.0f;
-    o->oAction = 2;
+    o->oAction = 1;
 }
 
 void luigiman_golden_chestnut_act_1(void) {
-}
-
-void luigiman_golden_chestnut_act_2(void) {
     struct Object *sparkleObj = spawn_object(o, MODEL_SPARKLES_ANIMATION, bhvSparkle);
     obj_translate_xyz_random(sparkleObj, 270.0f);
     obj_scale_random(sparkleObj, 2.0f, 0.0f);
@@ -194,18 +176,9 @@ void luigiman_golden_chestnut_act_2(void) {
     }
 }
 
-void luigiman_golden_chestnut_act_3(void) {
-}
-
-void luigiman_golden_chestnut_act_4(void) {
-}
-
 ObjActionFunc sluigimanGoldenChustnutActions[] = {
     luigiman_golden_chestnut_act_0,
     luigiman_golden_chestnut_act_1,
-    luigiman_golden_chestnut_act_2,
-    luigiman_golden_chestnut_act_3,
-    luigiman_golden_chestnut_act_4,
 };
 
 void bhv_luigiman_golden_chestnut_loop(void) {
