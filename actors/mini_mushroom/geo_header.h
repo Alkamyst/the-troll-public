@@ -1,0 +1,16 @@
+extern const GeoLayout mini_mushroom_geo[];
+extern Lights1 mini_mushroom_Eyes_lights;
+extern Lights1 mini_mushroom_Head_lights;
+extern u8 mini_mushroom_mushroom_face_1_ia8[];
+extern u8 mini_mushroom_mushroom_head_ci4[];
+extern u8 mini_mushroom_mushroom_head_ci4_pal_rgba16[];
+extern Vtx mini_mushroom_Circle_mesh_layer_1_vtx_0[27];
+extern Gfx mini_mushroom_Circle_mesh_layer_1_tri_0[];
+extern Vtx mini_mushroom_Circle_mesh_layer_1_vtx_1[58];
+extern Gfx mini_mushroom_Circle_mesh_layer_1_tri_1[];
+extern Gfx mat_mini_mushroom_Eyes[];
+extern Gfx mat_revert_mini_mushroom_Eyes[];
+extern Gfx mat_mini_mushroom_Head[];
+extern Gfx mat_revert_mini_mushroom_Head[];
+extern Gfx mini_mushroom_Circle_mesh_layer_1[];
+extern Gfx mini_mushroom_material_revert_render_settings[];

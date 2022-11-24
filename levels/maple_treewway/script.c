@@ -47,6 +47,7 @@ const LevelScript level_maple_treewway_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_EXCLAMATION_BOX, 464, 278, -731, 0, 0, 0, (1 << 16), bhvExclamationBox),
 		OBJECT(MODEL_CHESTNUT, -1313, 446, -1108, 0, 0, 0, (0 << 16), bhvLuigimanChestnut),
 		OBJECT(MODEL_CHESTNUT, -749, 446, -1108, 0, 0, 0, (1 << 16), bhvLuigimanChestnut),
 		OBJECT(MODEL_GOLDEN_CHESTNUT, -6, 100, -3250, 0, 0, 0, (0 << 16), bhvLuigimanGoldenChestnut),

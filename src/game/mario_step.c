@@ -110,7 +110,7 @@ void mario_bonk_reflection(struct MarioState *m, u32 negateSpeed) {
         s16 wallAngle = m->wallYaw;
         m->faceAngle[1] = wallAngle - (s16)(m->faceAngle[1] - wallAngle);
 
-        play_sound((m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+        play_sound(SOUND_ACTION_BONK,
                    m->marioObj->header.gfx.cameraToObject);
     } else {
         play_sound(SOUND_ACTION_HIT, m->marioObj->header.gfx.cameraToObject);
@@ -488,6 +488,7 @@ s32 perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepAr
         floor->originOffset = -floorHeight;
     }
 
+
     //! This check uses f32, but findFloor uses short (overflow jumps)
     if (nextPos[1] <= floorHeight) {
         if (ceilHeight - floorHeight > 160.0f) {
@@ -604,6 +605,11 @@ u32 should_strengthen_gravity_for_jump_ascent(struct MarioState *m) {
     return FALSE;
 }
 
+static f32 get_gravity(struct MarioState *m)
+{
+    return m->flags & MARIO_METAL_CAP ? 1.8f : 2.0f;
+}
+
 void apply_gravity(struct MarioState *m) {
     if (m->action == ACT_TWIRLING && m->vel[1] < 0.0f) {
         apply_twirl_gravity(m);
@@ -614,7 +620,7 @@ void apply_gravity(struct MarioState *m) {
         }
     } else if (m->action == ACT_LONG_JUMP || m->action == ACT_SLIDE_KICK
                || m->action == ACT_BBH_ENTER_SPIN) {
-        m->vel[1] -= 2.0f;
+        m->vel[1] -= get_gravity(m);
         if (m->vel[1] < -75.0f) {
             m->vel[1] = -75.0f;
         }
@@ -645,7 +651,7 @@ void apply_gravity(struct MarioState *m) {
             }
         }
     } else {
-        m->vel[1] -= 4.0f;
+        m->vel[1] -= get_gravity(m) * 2.f;
         if (m->vel[1] < -75.0f) {
             m->vel[1] = -75.0f;
         }

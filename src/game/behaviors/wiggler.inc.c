@@ -18,9 +18,9 @@ static struct ObjectHitbox sWigglerBodyPartHitbox = {
     /* health:            */ 99, // never decreases
     /* numLootCoins:      */ 0,
     /* radius:            */ 20,
-    /* height:            */ 20,
+    /* height:            */ 50,
     /* hurtboxRadius:     */ 20,
-    /* hurtboxHeight:     */ 10,
+    /* hurtboxHeight:     */ 30,
 };
 
 /**
@@ -35,7 +35,7 @@ static struct ObjectHitbox sWigglerHitbox = {
     /* radius:            */ 60,
     /* height:            */ 50,
     /* hurtboxRadius:     */ 30,
-    /* hurtboxHeight:     */ 40,
+    /* hurtboxHeight:     */ 30,
 };
 
 /**

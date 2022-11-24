@@ -2018,7 +2018,6 @@ static void end_peach_cutscene_mario_landing(struct MarioState *m) {
 
     if (is_anim_at_end(m)) {
         // make wing cap run out
-        m->capTimer = 60;
 
         sEndJumboStarObj = spawn_object_abs_with_rot(gCurrentObject, 0, MODEL_STAR, bhvStaticObject, 0,
                                                      2528, -1800, 0, 0, 0);

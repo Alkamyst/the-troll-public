@@ -270,6 +270,12 @@ void adjust_sound_for_speed(struct MarioState *m) {
  */
 void play_sound_and_spawn_particles(struct MarioState *m, u32 soundBits, u32 waveParticleType) {
     if (m->terrainSoundAddend == (SOUND_TERRAIN_WATER << 16)) {
+        // Makes Mario lose a special cap when he touches water
+        if (m->flags & MARIO_SPECIAL_CAPS) {
+            play_sound(SOUND_MENU_ENTER_PIPE, m->marioObj->header.gfx.cameraToObject);
+            m->flags &= ~MARIO_SPECIAL_CAPS;
+            spawn_mist_particles();
+        }
         if (waveParticleType != 0) {
             m->particleFlags |= PARTICLE_SHALLOW_WATER_SPLASH;
         } else {
@@ -283,7 +289,7 @@ void play_sound_and_spawn_particles(struct MarioState *m, u32 soundBits, u32 wav
         }
     }
 
-    if ((m->flags & MARIO_METAL_CAP) || soundBits == SOUND_ACTION_UNSTUCK_FROM_GROUND
+    if (soundBits == SOUND_ACTION_UNSTUCK_FROM_GROUND
         || soundBits == SOUND_MARIO_PUNCH_HOO) {
         play_sound(soundBits, m->marioObj->header.gfx.cameraToObject);
     } else {
@@ -306,7 +312,7 @@ void play_mario_action_sound(struct MarioState *m, u32 soundBits, u32 wavePartic
  */
 void play_mario_landing_sound(struct MarioState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
+        m, soundBits, 1);
 }
 
 /**
@@ -316,7 +322,7 @@ void play_mario_landing_sound(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_landing_sound_once(struct MarioState *m, u32 soundBits) {
     play_mario_action_sound(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_LANDING : soundBits, 1);
+        m, soundBits, 1);
 }
 
 /**
@@ -324,7 +330,7 @@ void play_mario_landing_sound_once(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_heavy_landing_sound(struct MarioState *m, u32 soundBits) {
     play_sound_and_spawn_particles(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
+        m, soundBits, 1);
 }
 
 /**
@@ -334,7 +340,7 @@ void play_mario_heavy_landing_sound(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_heavy_landing_sound_once(struct MarioState *m, u32 soundBits) {
     play_mario_action_sound(
-        m, (m->flags & MARIO_METAL_CAP) ? SOUND_ACTION_METAL_HEAVY_LANDING : soundBits, 1);
+        m, soundBits, 1);
 }
 
 /**
@@ -342,8 +348,7 @@ void play_mario_heavy_landing_sound_once(struct MarioState *m, u32 soundBits) {
  */
 void play_mario_sound(struct MarioState *m, s32 actionSound, s32 marioSound) {
     if (actionSound == SOUND_ACTION_TERRAIN_JUMP) {
-        play_mario_action_sound(m, (m->flags & MARIO_METAL_CAP) ? (s32) SOUND_ACTION_METAL_JUMP
-                                                                : (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
+        play_mario_action_sound(m, (s32) SOUND_ACTION_TERRAIN_JUMP, 1);
     } else {
         play_sound_if_no_flag(m, actionSound, MARIO_ACTION_SOUND_PLAYED);
     }
@@ -744,18 +749,18 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
     switch (action) {
         case ACT_DOUBLE_JUMP:
             set_mario_y_vel_based_on_fspeed(m, 52.0f, 0.25f);
-            m->forwardVel *= 0.8f;
+            m->forwardVel *= m->flags & MARIO_METAL_CAP ? 0.6f : 0.8f;
             break;
 
         case ACT_BACKFLIP:
             m->marioObj->header.gfx.animInfo.animID = -1;
-            m->forwardVel = -16.0f;
+            m->forwardVel = m->flags & MARIO_METAL_CAP ? -12.0f : -16.0f;
             set_mario_y_vel_based_on_fspeed(m, 62.0f, 0.0f);
             break;
 
         case ACT_TRIPLE_JUMP:
             set_mario_y_vel_based_on_fspeed(m, 69.0f, 0.0f);
-            m->forwardVel *= 0.8f;
+            m->forwardVel *= m->flags & MARIO_METAL_CAP ? 0.6f : 0.8f;
             break;
 
         case ACT_FLYING_TRIPLE_JUMP:
@@ -771,7 +776,7 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
 
         case ACT_BURNING_JUMP:
             m->vel[1] = 31.5f;
-            m->forwardVel = 8.0f;
+            m->forwardVel = m->flags & MARIO_METAL_CAP ? 6.0f : 8.0f;
             break;
 
         case ACT_RIDING_SHELL_JUMP:
@@ -782,7 +787,7 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
         case ACT_HOLD_JUMP:
             m->marioObj->header.gfx.animInfo.animID = -1;
             set_mario_y_vel_based_on_fspeed(m, 42.0f, 0.25f);
-            m->forwardVel *= 0.8f;
+            m->forwardVel *= m->flags & MARIO_METAL_CAP ? 0.6f : 0.8f;
             break;
 
         case ACT_WALL_KICK_AIR:
@@ -796,7 +801,7 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
 
         case ACT_SIDE_FLIP:
             set_mario_y_vel_based_on_fspeed(m, 62.0f, 0.0f);
-            m->forwardVel = 8.0f;
+            m->forwardVel = m->flags & MARIO_METAL_CAP ? 6.0f : 8.0f;
             m->faceAngle[1] = m->intendedYaw;
             break;
 
@@ -807,15 +812,22 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
             break;
 
         case ACT_LAVA_BOOST:
-            m->vel[1] = 84.0f;
+            m->vel[1] = m->flags & MARIO_METAL_CAP ? 63.0f : 84.0f;
             if (actionArg == 0) {
                 m->forwardVel = 0.0f;
             }
             break;
 
         case ACT_DIVE:
-            if ((forwardVel = m->forwardVel + 15.0f) > 48.0f) {
-                forwardVel = 48.0f;
+            if (!(m->flags & MARIO_METAL_CAP)) {
+                if ((forwardVel = m->forwardVel + 15.0f) > 48.0f) {
+                    forwardVel = 48.0f;
+                }
+            }
+            if (m->flags & MARIO_METAL_CAP) {
+                if ((forwardVel = m->forwardVel + 15.0f) > 24.0f) {
+                    m->forwardVel = 24.0f;
+                }
             }
             mario_set_forward_vel(m, forwardVel);
             break;
@@ -827,20 +839,27 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
 
             //! (BLJ's) This properly handles long jumps from getting forward speed with
             //  too much velocity, but misses backwards longs allowing high negative speeds.
-            if ((m->forwardVel *= 1.5f) > 48.0f) {
-                m->forwardVel = 48.0f;
+            if (!(m->flags & MARIO_METAL_CAP)) {
+                 if ((m->forwardVel *= 1.5f) > 48.0f) {
+                    m->forwardVel = 48.0f;
+                }
+            }
+            if (m->flags & MARIO_METAL_CAP) {
+                if ((m->forwardVel *= 1.5f) > 24.0f) {
+                    m->forwardVel = 24.0f;
+                }
             }
             break;
 
         case ACT_SLIDE_KICK:
-            m->vel[1] = 12.0f;
+            m->vel[1] = m->flags & MARIO_METAL_CAP ? 8.0f : 12.0f;
             if (m->forwardVel < 32.0f) {
                 m->forwardVel = 32.0f;
             }
             break;
 
         case ACT_JUMP_KICK:
-            m->vel[1] = 20.0f;
+            m->vel[1] = m->flags & MARIO_METAL_CAP ? 16.0f : 20.0f;
             break;
     }
 
@@ -1147,6 +1166,13 @@ s32 set_water_plunge_action(struct MarioState *m) {
         set_camera_mode(m->area->camera, WATER_SURFACE_CAMERA_MODE, 1);
     }
 
+// Makes Mario lose a special cap when he falls in water
+    if (m->flags & MARIO_SPECIAL_CAPS) {
+        play_sound(SOUND_MENU_ENTER_PIPE, m->marioObj->header.gfx.cameraToObject);
+        m->flags &= ~MARIO_SPECIAL_CAPS;
+        spawn_mist_particles();
+    }
+
     return set_mario_action(m, ACT_WATER_PLUNGE, 0);
 }
 
@@ -1419,7 +1445,7 @@ void update_mario_health(struct MarioState *m) {
         // When already healing or hurting Mario, Mario's HP is not changed any more here.
         if (((u32) m->healCounter | (u32) m->hurtCounter) == 0) {
             if ((m->input & INPUT_IN_POISON_GAS) && !(m->action & ACT_FLAG_INTANGIBLE)) {
-                if (!(m->flags & MARIO_METAL_CAP) && !gDebugLevelSelect) {
+                if (!gDebugLevelSelect) {
                     m->health -= 4;
                 }
             } else {
@@ -1570,38 +1596,6 @@ u32 update_and_return_cap_flags(struct MarioState *m) {
     u32 flags = m->flags;
     u32 action;
 
-    if (m->capTimer > 0) {
-        action = m->action;
-
-        if ((m->capTimer <= 60)
-            || ((action != ACT_READING_AUTOMATIC_DIALOG) && (action != ACT_READING_NPC_DIALOG)
-                && (action != ACT_READING_SIGN) && (action != ACT_IN_CANNON))) {
-            m->capTimer -= 1;
-        }
-
-        if (m->capTimer == 0) {
-            stop_cap_music();
-
-            m->flags &= ~MARIO_SPECIAL_CAPS;
-            if (!(m->flags & MARIO_CAPS)) {
-                m->flags &= ~MARIO_CAP_ON_HEAD;
-            }
-        }
-
-        if (m->capTimer == 60) {
-            fadeout_cap_music();
-        }
-
-        // This code flickers the cap through a long binary string, increasing in how
-        // common it flickers near the end.
-        if ((m->capTimer < 64) && ((1ULL << m->capTimer) & sCapFlickerFrames)) {
-            flags &= ~MARIO_SPECIAL_CAPS;
-            if (!(flags & MARIO_CAPS)) {
-                flags &= ~MARIO_CAP_ON_HEAD;
-            }
-        }
-    }
-
     return flags;
 }
 
@@ -1616,8 +1610,12 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
         bodyState->modelState = MODEL_STATE_NOISE_ALPHA;
     }
 
-    if (flags & (MARIO_METAL_CAP | MARIO_METAL_SHOCK)) {
+    if (flags & (MARIO_METAL_SHOCK)) {
         bodyState->modelState |= MODEL_STATE_METAL;
+    }
+
+    if (m->flags & MARIO_METAL_CAP) {
+        vec3f_set(m->marioObj->header.gfx.scale, 0.5f, 0.5f, 0.5f);
     }
 
     //! (Pause buffered hitstun) Since the global timer increments while paused,
@@ -1645,9 +1643,9 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
 
     // Short hitbox for crouching/crawling/etc.
     if (m->action & ACT_FLAG_SHORT_HITBOX) {
-        m->marioObj->hitboxHeight = 100.0f;
+        m->marioObj->hitboxHeight = m->flags & MARIO_METAL_CAP ? 50.0f : 100.0f;
     } else {
-        m->marioObj->hitboxHeight = 160.0f;
+        m->marioObj->hitboxHeight = m->flags & MARIO_METAL_CAP ? 80.0f : 160.0f;
     }
 
     if ((m->flags & MARIO_TELEPORTING) && (m->fadeWarpOpacity != MODEL_STATE_MASK)) {
@@ -1667,12 +1665,6 @@ UNUSED static void debug_update_mario_cap(u16 button, s32 flags, u16 capTimer, u
     if ((gPlayer1Controller->buttonDown & Z_TRIG) && (gPlayer1Controller->buttonPressed & button)
         && !(gMarioState->flags & flags)) {
         gMarioState->flags |= (flags + MARIO_CAP_ON_HEAD);
-
-        if (capTimer > gMarioState->capTimer) {
-            gMarioState->capTimer = capTimer;
-        }
-
-        play_cap_music(capMusic);
     }
 }
 

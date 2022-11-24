@@ -48,13 +48,7 @@ s16 tilt_body_running(struct MarioState *m) {
 
 void play_step_sound(struct MarioState *m, s16 frame1, s16 frame2) {
     if (is_anim_past_frame(m, frame1) || is_anim_past_frame(m, frame2)) {
-        if (m->flags & MARIO_METAL_CAP) {
-            if (m->marioObj->header.gfx.animInfo.animID == MARIO_ANIM_TIPTOE) {
-                play_sound_and_spawn_particles(m, SOUND_ACTION_METAL_STEP_TIPTOE, 0);
-            } else {
-                play_sound_and_spawn_particles(m, SOUND_ACTION_METAL_STEP, 0);
-            }
-        } else if (m->quicksandDepth > 50.0f) {
+        if (m->quicksandDepth > 50.0f) {
             play_sound(SOUND_ACTION_QUICKSAND_STEP, m->marioObj->header.gfx.cameraToObject);
         } else if (m->marioObj->header.gfx.animInfo.animID == MARIO_ANIM_TIPTOE) {
             play_sound_and_spawn_particles(m, SOUND_ACTION_TERRAIN_STEP_TIPTOE, 0);
@@ -135,7 +129,7 @@ s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 a
     if (m->flags & MARIO_WING_CAP) {
         return set_mario_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
     } else if (m->forwardVel > 20.0f) {
-        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
+        return set_mario_action(m, m->flags & MARIO_METAL_CAP ? ACT_DOUBLE_JUMP : ACT_TRIPLE_JUMP, 0);
     } else {
         return set_mario_action(m, ACT_JUMP, 0);
     }
@@ -420,9 +414,9 @@ void update_walking_speed(struct MarioState *m) {
     f32 targetSpeed;
 
     if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
-        maxTargetSpeed = 24.0f;
+        maxTargetSpeed = m->flags & MARIO_METAL_CAP ? 20.0f : 24.0f;
     } else {
-        maxTargetSpeed = 32.0f;
+        maxTargetSpeed = m->flags & MARIO_METAL_CAP ? 28.0f : 32.0f;
     }
 
     targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
@@ -1218,7 +1212,7 @@ s32 act_riding_shell_ground(struct MarioState *m) {
 
         case GROUND_STEP_HIT_WALL:
             mario_stop_riding_object(m);
-            play_sound(m->flags & MARIO_METAL_CAP ? SOUND_ACTION_METAL_BONK : SOUND_ACTION_BONK,
+            play_sound(SOUND_ACTION_BONK,
                        m->marioObj->header.gfx.cameraToObject);
             m->particleFlags |= PARTICLE_VERTICAL_STAR;
             set_mario_action(m, ACT_BACKWARD_GROUND_KB, 0);
