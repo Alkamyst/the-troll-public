@@ -32,14 +32,14 @@ static struct ObjectHitbox sChestnutHitbox = {
     /* health:            */ 0,
     /* numLootCoins:      */ 0,
     /* radius:            */ 100,
-    /* height:            */ 150,
+    /* height:            */ 100,
     /* hurtboxRadius:     */ 0,
     /* hurtboxHeight:     */ 0,
 };
 
 void bhv_luigiman_chestnut_init(void) {
     // o->oBulletBillInitialMoveYaw = o->oMoveAngleYaw;
-    o->oGravity = 5.0f;
+    o->oGravity = -5.0f;
     o->oFriction = 0.999f;
     o->oBuoyancy = 2.0f;
     if (o->oBehParams2ndByte == 1) {
@@ -75,15 +75,18 @@ void luigiman_chestnut_act_1(void) {
             o->oForwardVel = -2.0f;
         }
     } else {
-        if (o->oTimer > 40) {
-            cur_obj_update_floor_and_walls();
-        }
+//        if (o->oTimer > 40) {
+//            cur_obj_update_floor_and_walls();
+//        }
 
         o->oFaceAnglePitch += (s16)(o->oForwardVel * (100.0f));
         o->oForwardVel = 15.0f;
 
         if (o->oTimer > 20) {
-            object_step_without_floor_orient();
+            //object_step_without_floor_orient();
+            cur_obj_update_floor_and_walls();
+            cur_obj_move_standard(-70);
+            sOrientObjWithFloor = FALSE;
             // o->oMoveAnglePitch -= 0x4F;
             // o->oFaceAngleYaw = o->oMoveAngleYaw;
         }
@@ -99,8 +102,8 @@ void luigiman_chestnut_act_1(void) {
             o->oAction = 0;
         }
 
-        if (o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
-            o->oAction = 2;
+        if ((o->oMoveFlags & OBJ_MOVE_HIT_WALL)) {
+            o->oAction = 0;
             spawn_mist_particles();
         }
     }

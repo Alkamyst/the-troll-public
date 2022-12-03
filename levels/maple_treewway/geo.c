@@ -19,3 +19,4 @@
 #include "levels/maple_treewway/leaf_pile/geo.inc.c"
 #include "levels/maple_treewway/chestnut/geo.inc.c"
 #include "levels/maple_treewway/golden_chestnut/geo.inc.c"
+#include "levels/maple_treewway/maple_tree/geo.inc.c"
