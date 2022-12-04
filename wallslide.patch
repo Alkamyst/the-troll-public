@@ -1,0 +1,125 @@
+diff --git a/desktop.ini b/desktop.ini
+new file mode 100644
+index 0000000..ceae44e
+--- /dev/null
++++ b/desktop.ini
+@@ -0,0 +1,2 @@
++[LocalizedFileNames]
++Super Mario 64 (U) [!].z64=@Super Mario 64 (U) [!],0
+diff --git a/include/sm64.h b/include/sm64.h
+index 632224e..b408677 100644
+--- a/include/sm64.h
++++ b/include/sm64.h
+@@ -296,6 +296,7 @@
+ #define ACT_GETTING_BLOWN              0x010208B8 // (0x0B8 | ACT_FLAG_AIR | ACT_FLAG_INVULNERABLE | ACT_FLAG_ALLOW_VERTICAL_WIND_ACTION)
+ #define ACT_THROWN_FORWARD             0x010208BD // (0x0BD | ACT_FLAG_AIR | ACT_FLAG_INVULNERABLE | ACT_FLAG_ALLOW_VERTICAL_WIND_ACTION)
+ #define ACT_THROWN_BACKWARD            0x010208BE // (0x0BE | ACT_FLAG_AIR | ACT_FLAG_INVULNERABLE | ACT_FLAG_ALLOW_VERTICAL_WIND_ACTION)
++#define ACT_WALL_SLIDE                 0x010208BF // Wall Slide
+ 
+ // group 0x0C0: submerged actions
+ #define ACT_WATER_IDLE                 0x380022C0 // (0x0C0 | ACT_FLAG_STATIONARY | ACT_FLAG_SWIMMING | ACT_FLAG_PAUSE_EXIT | ACT_FLAG_SWIMMING_OR_FLYING | ACT_FLAG_WATER_OR_TEXT)
+diff --git a/src/game/mario.c b/src/game/mario.c
+index 5b103fa..f9523f8 100644
+--- a/src/game/mario.c
++++ b/src/game/mario.c
+@@ -838,6 +838,11 @@ static u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actio
+             }
+             m->wallKickTimer = 0;
+             break;
++        
++        case ACT_WALL_SLIDE:
++            m->vel[1] = 4.0f;
++            mario_set_forward_vel(m, 8.0f);
++            break;
+ 
+         case ACT_SIDE_FLIP:
+             set_mario_y_vel_based_on_fspeed(m, 62.0f, 0.0f);
+diff --git a/src/game/mario_actions_airborne.c b/src/game/mario_actions_airborne.c
+index a9f0089..9ca53fb 100644
+--- a/src/game/mario_actions_airborne.c
++++ b/src/game/mario_actions_airborne.c
+@@ -1,6 +1,7 @@
+ #include <PR/ultratypes.h>
+ 
+ #include "sm64.h"
++#define ACT_WALL_SLIDE                 0x010208BF // Wall Slide
+ #include "area.h"
+ #include "audio/data.h"
+ #include "audio/external.h"
+@@ -15,6 +16,36 @@
+ #include "save_file.h"
+ #include "thread6.h"
+ 
++s32 act_wall_slide(struct MarioState *m) {
++    m->marioObj->header.gfx.angle[1] = m->faceAngle[1];
++    if (m->input & INPUT_A_PRESSED) {
++        m->faceAngle[1] += 0x8000;
++        m->particleFlags |= PARTICLE_VERTICAL_STAR;
++        return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
++    }
++    switch (perform_air_step(m, 0)) {
++        case AIR_STEP_NONE:
++            set_mario_action(m, ACT_FREEFALL, 0);
++            break;
++
++        case AIR_STEP_LANDED:
++            set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
++            break;
++
++        case AIR_STEP_HIT_LAVA_WALL:
++            lava_boost_on_wall(m);
++            break;
++    }
++    if (m->vel[1] < -20.0f) {
++        m->vel[1] = -20.0f;
++    }
++    mario_set_forward_vel(m, 1.0f);
++    play_sound(SOUND_MOVING_TERRAIN_SLIDE + m->terrainSoundAddend, m->marioObj->header.gfx.cameraToObject);
++    m->particleFlags |= PARTICLE_DUST;
++    m->marioObj->header.gfx.angle[1] = m->faceAngle[1]+0x8000;
++    return FALSE;
++}
++
+ void play_flip_sounds(struct MarioState *m, s16 frame1, s16 frame2, s16 frame3) {
+     s32 animFrame = m->marioObj->header.gfx.unk38.animFrame;
+     if (animFrame == frame1 || animFrame == frame2 || animFrame == frame3) {
+@@ -1305,11 +1336,12 @@ s32 act_air_hit_wall(struct MarioState *m) {
+         mario_drop_held_object(m);
+     }
+ 
+-    if (++(m->actionTimer) <= 2) {
++    if (++(m->actionTimer) <= 2) { //LUISFIX FIXED HSWK (HYPERSPEED WALL KICK) BY RESETTING MARIO'S SPEED BEFORE PERFORMING THE KICK//
+         if (m->input & INPUT_A_PRESSED) {
+             m->vel[1] = 52.0f;
+             m->faceAngle[1] += 0x8000;
+-            return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
++            m->forwardVel = 0.0f;
++            return set_mario_action(m, ACT_WALL_SLIDE, 0);
+         }
+     } else if (m->forwardVel >= 38.0f) {
+         m->wallKickTimer = 5;
+@@ -1328,7 +1360,7 @@ s32 act_air_hit_wall(struct MarioState *m) {
+         if (m->forwardVel > 8.0f) {
+             mario_set_forward_vel(m, -8.0f);
+         }
+-        return set_mario_action(m, ACT_SOFT_BONK, 0);
++        return set_mario_action(m, ACT_WALL_SLIDE, 0);
+     }
+ 
+ #ifdef AVOID_UB
+@@ -2073,6 +2105,7 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
+         case ACT_HOLD_FREEFALL:        cancel = act_hold_freefall(m);        break;
+         case ACT_SIDE_FLIP:            cancel = act_side_flip(m);            break;
+         case ACT_WALL_KICK_AIR:        cancel = act_wall_kick_air(m);        break;
++        case ACT_WALL_SLIDE:           cancel = act_wall_slide(m); break;
+         case ACT_TWIRLING:             cancel = act_twirling(m);             break;
+         case ACT_WATER_JUMP:           cancel = act_water_jump(m);           break;
+         case ACT_HOLD_WATER_JUMP:      cancel = act_hold_water_jump(m);      break;
+diff --git a/tools/ido7.1_compiler.tar/ido7.1_compiler.tar b/tools/ido7.1_compiler.tar/ido7.1_compiler.tar
+new file mode 100644
+index 0000000..7d62e61
+Binary files /dev/null and b/tools/ido7.1_compiler.tar/ido7.1_compiler.tar differ
+diff --git a/tools/iplfontutil b/tools/iplfontutil
+new file mode 100644
+index 0000000..739721b
+Binary files /dev/null and b/tools/iplfontutil differ

@@ -2,6 +2,7 @@
 
 #include "sm64.h"
 #include "mario_actions_airborne.h"
+#define ACT_WALL_SLIDE                 0x010208BF // Wall Slide
 #include "area.h"
 #include "audio/external.h"
 #include "camera.h"
@@ -16,6 +17,35 @@
 #include "rumble_init.h"
 
 #include "config.h"
+
+s32 act_wall_slide(struct MarioState *m) {
+    m->marioObj->header.gfx.angle[1] = m->faceAngle[1];
+    if (m->input & INPUT_A_PRESSED) {
+        m->faceAngle[1] += 0x8000;
+        return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
+    }
+    switch (perform_air_step(m, 0)) {
+        case AIR_STEP_NONE:
+            set_mario_action(m, ACT_FREEFALL, 0);
+            break;
+
+        case AIR_STEP_LANDED:
+            set_mario_action(m, ACT_JUMP_LAND_STOP, 0);
+            break;
+
+        case AIR_STEP_HIT_LAVA_WALL:
+            lava_boost_on_wall(m);
+            break;
+    }
+    if (m->vel[1] < -20.0f) {
+        m->vel[1] = -20.0f;
+    }
+    mario_set_forward_vel(m, 1.0f);
+    play_sound(SOUND_MOVING_TERRAIN_SLIDE + m->terrainSoundAddend, m->marioObj->header.gfx.cameraToObject);
+    m->particleFlags |= PARTICLE_DUST;
+    m->marioObj->header.gfx.angle[1] = m->faceAngle[1]+0x8000;
+    return FALSE;
+}
 
 void play_flip_sounds(struct MarioState *m, s16 frame1, s16 frame2, s16 frame3) {
     s32 animFrame = m->marioObj->header.gfx.animInfo.animFrame;
@@ -969,6 +999,12 @@ s32 act_ground_pound(struct MarioState *m) {
     f32 yOffset;
 
     play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
+    
+    if (m->input & INPUT_B_PRESSED) {
+        m->vel[1] = 5.0f;
+        mario_set_forward_vel(m, 150.0f);
+        return set_mario_action(m, ACT_DIVE, 0);
+    }
 
     if (m->actionState == 0) {
         if (m->actionTimer < 10) {
@@ -1332,12 +1368,13 @@ s32 act_air_hit_wall(struct MarioState *m) {
         mario_drop_held_object(m);
     }
 
-    if (++(m->actionTimer) <= 2) {
+    if (++(m->actionTimer) <= 2) { //LUISFIX FIXED HSWK (HYPERSPEED WALL KICK) BY RESETTING MARIO'S SPEED BEFORE PERFORMING THE KICK//
         if (m->input & INPUT_A_PRESSED) {
             m->vel[1] = 52.0f;
             m->faceAngle[1] += 0x8000;
             return set_mario_action(m, ACT_WALL_KICK_AIR, 0);
         }
+
     } else if (m->forwardVel >= 38.0f) {
         m->wallKickTimer = 5;
         if (m->vel[1] > 0.0f) {
@@ -1355,7 +1392,7 @@ s32 act_air_hit_wall(struct MarioState *m) {
         if (m->forwardVel > 8.0f) {
             mario_set_forward_vel(m, -8.0f);
         }
-        return set_mario_action(m, ACT_SOFT_BONK, 0);
+        return set_mario_action(m, ACT_WALL_SLIDE, 0);
     }
 
     set_mario_animation(m, MARIO_ANIM_START_WALLKICK);
@@ -2086,6 +2123,7 @@ s32 mario_execute_airborne_action(struct MarioState *m) {
         case ACT_HOLD_FREEFALL:        cancel = act_hold_freefall(m);        break;
         case ACT_SIDE_FLIP:            cancel = act_side_flip(m);            break;
         case ACT_WALL_KICK_AIR:        cancel = act_wall_kick_air(m);        break;
+        case ACT_WALL_SLIDE:           cancel = act_wall_slide(m); break;
         case ACT_TWIRLING:             cancel = act_twirling(m);             break;
         case ACT_WATER_JUMP:           cancel = act_water_jump(m);           break;
         case ACT_HOLD_WATER_JUMP:      cancel = act_hold_water_jump(m);      break;
