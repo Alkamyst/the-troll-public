@@ -711,12 +711,12 @@ void mtxf_mul(Mat4 dest, Mat4 a, Mat4 b) {
             temp2++;
             temp3++;
         }
-        *temp2 = 0;
+        //*temp2 = 0;
         temp += 4;
         temp2++;
     }
     vec3f_add(&dest[3][0], &b[3][0]);
-    ((u32 *) dest)[15] = FLOAT_ONE;
+    //((u32 *) dest)[15] = FLOAT_ONE;
 }
 
 /**

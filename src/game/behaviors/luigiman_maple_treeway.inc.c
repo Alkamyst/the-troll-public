@@ -65,14 +65,14 @@ void luigiman_chestnut_act_0(void) {
 }
 
 void luigiman_chestnut_act_1(void) {
-    if (o->oTimer < 10) {
-        o->oForwardVel = 2.0f;
+    if (o->oTimer < 20) {
+        o->oForwardVel = 8.0f;
         
-    } else if (o->oTimer < 20) {
+    } else if (o->oTimer < 40) {
         if (o->oTimer % 2) {
-            o->oForwardVel = 2.0f;
+            o->oForwardVel = 4.0f;
         } else {
-            o->oForwardVel = -2.0f;
+            o->oForwardVel = -4.0f;
         }
     } else {
 //        if (o->oTimer > 40) {
@@ -82,7 +82,7 @@ void luigiman_chestnut_act_1(void) {
         o->oFaceAnglePitch += (s16)(o->oForwardVel * (100.0f));
         o->oForwardVel = 15.0f;
 
-        if (o->oTimer > 20) {
+        if (o->oTimer > 40) {
             //object_step_without_floor_orient();
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(-70);
