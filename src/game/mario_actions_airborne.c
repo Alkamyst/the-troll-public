@@ -1000,9 +1000,11 @@ s32 act_ground_pound(struct MarioState *m) {
 
     play_sound_if_no_flag(m, SOUND_ACTION_THROW, MARIO_ACTION_SOUND_PLAYED);
     
+    // Ground Pound Dive
     if (m->input & INPUT_B_PRESSED) {
-        m->vel[1] = 5.0f;
-        mario_set_forward_vel(m, 150.0f);
+         m->vel[1] = 2.0f;
+        mario_set_forward_vel(m, 30.0f);
+        m->faceAngle[1]  = m->intendedYaw;
         return set_mario_action(m, ACT_DIVE, 0);
     }
 
