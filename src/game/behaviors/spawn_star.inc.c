@@ -164,15 +164,16 @@ void bhv_hidden_red_coin_star_init(void) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 
-    o->oHiddenStarTriggerCounter = 8 - numRedCoinsRemaining;
+    o->oHiddenStarTriggerCounter = 0;
 }
 
 void bhv_hidden_red_coin_star_loop(void) {
-    gRedCoinsCollected = o->oHiddenStarTriggerCounter;
+
+    s16 numRedCoinsRemaining = count_objects_with_behavior(bhvRedCoin);
 
     switch (o->oAction) {
         case HIDDEN_STAR_ACT_INACTIVE:
-            if (o->oHiddenStarTriggerCounter == 8) {
+            if ((numRedCoinsRemaining - 2) == 0) { // Spawn the red coin star when there are only two red coins remaining.
                 o->oAction = HIDDEN_STAR_ACT_ACTIVE;
             }
             break;

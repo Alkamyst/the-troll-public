@@ -42,6 +42,9 @@ void bhv_red_coin_init(void) {
  * the orange number counter.
  */
 void bhv_red_coin_loop(void) {
+
+    s16 numRedCoinsRemaining = count_objects_with_behavior(bhvRedCoin);
+
     // If Mario interacted with the object...
     if (o->oInteractStatus & INT_STATUS_INTERACTED) {
         // ...and there is a red coin star in the level...
@@ -50,14 +53,16 @@ void bhv_red_coin_loop(void) {
             o->parentObj->oHiddenStarTriggerCounter++;
 
             // Spawn the orange number counter, as long as it isn't the last coin.
-            if (o->parentObj->oHiddenStarTriggerCounter != 8) {
+            if ((numRedCoinsRemaining - 2) > 1) {
                 spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
             }
 
-            // On all versions but the JP version, each coin collected plays a higher noise.
-            play_sound(SOUND_MENU_COLLECT_RED_COIN
-                       + (((u8) o->parentObj->oHiddenStarTriggerCounter - 1) << 16),
-                       gGlobalSoundSource);
+            // On all versions but the JP version, each coin collected plays a higher noise, as long as the last coin hasn't been collected.
+            if ((numRedCoinsRemaining - 2) > 0) {
+                play_sound(SOUND_MENU_COLLECT_RED_COIN
+                    + (((u8) o->parentObj->oHiddenStarTriggerCounter - 1) << 16),
+                    gGlobalSoundSource);
+            }
         }
 
         coin_collected();

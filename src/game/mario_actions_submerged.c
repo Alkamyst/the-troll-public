@@ -938,8 +938,10 @@ static s32 act_water_plunge(struct MarioState *m) {
         if (m->peakHeight - m->pos[1] > FALL_DAMAGE_HEIGHT_SMALL) {
             play_sound(SOUND_MARIO_HAHA_WATER, m->marioObj->header.gfx.cameraToObject);
         }
+        if (m->peakHeight - m->pos[1] > 200.0f) {
+            m->particleFlags |= PARTICLE_WATER_SPLASH;
+        }
 
-        m->particleFlags |= PARTICLE_WATER_SPLASH; //TODO: Creates a water splash even if Mario is entering the water box from somewhere that is not the top. 
         m->actionState = ACT_STATE_WATER_PLUNGE_SINK;
 #if ENABLE_RUMBLE
         if (m->prevAction & ACT_FLAG_AIR) {
