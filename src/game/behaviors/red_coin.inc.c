@@ -51,6 +51,9 @@ void bhv_red_coin_loop(void) {
         if (o->parentObj != NULL) {
             // ...increment the star's counter.
             o->parentObj->oHiddenStarTriggerCounter++;
+            
+            // Increment the amount of coins on the pause screen.
+            gRedCoinsCollected++;
 
             // Spawn the orange number counter, as long as it isn't the last coin.
             if ((numRedCoinsRemaining - 2) > 1) {
