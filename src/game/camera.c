@@ -1,5 +1,9 @@
 #include <ultra64.h>
 
+#define ANALOG_AMOUNT 262144 / 315
+// Analog camera movement by Pathétique (github.com/vrmiguel), y0shin and Mors
+// Contribute or communicate bugs at github.com/vrmiguel/sm64-analog-camera
+
 #include "sm64.h"
 #include "camera.h"
 #include "seq_ids.h"
@@ -1135,6 +1139,21 @@ void mode_8_directions_camera(struct Camera *c) {
         // play_sound_cbutton_side();
     }
 
+    if (gPlayer2Controller->stickX != 0) 
+    {
+        if (gPlayer2Controller->stickX > 0) 
+        {
+            gCameraMovementFlags &= ~(CAM_MOVE_ROTATE_RIGHT | CAM_MOVE_ENTERED_ROTATE_SURFACE);
+            s8DirModeYawOffset += ANALOG_AMOUNT * ((gPlayer2Controller->stickX / 64.0f) * (gPlayer2Controller->stickX / 64.0f)) * 1.0f;
+        }
+        else 
+        {
+            gCameraMovementFlags &= ~(CAM_MOVE_ROTATE_LEFT | CAM_MOVE_ENTERED_ROTATE_SURFACE);
+            s8DirModeYawOffset += ANALOG_AMOUNT * ((gPlayer2Controller->stickX / 64.0f) * (gPlayer2Controller->stickX / 64.0f)) * -1.0f;
+        }
+    }
+
+/*
     if (gPlayer2Controller->rawStickX < -60){
         s8DirModeYawOffset -= DEGREES(5);
     } else if (gPlayer2Controller->rawStickX < -40){
@@ -1154,6 +1173,7 @@ void mode_8_directions_camera(struct Camera *c) {
     } else if (gPlayer2Controller->rawStickX > 10){
         s8DirModeYawOffset += DEGREES(1);
     } 
+*/
 
 // #ifdef PARALLEL_LAKITU_CAM
     // extra functionality
