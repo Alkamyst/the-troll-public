@@ -270,12 +270,7 @@ void adjust_sound_for_speed(struct MarioState *m) {
  */
 void play_sound_and_spawn_particles(struct MarioState *m, u32 soundBits, u32 waveParticleType) {
     if (m->terrainSoundAddend == (SOUND_TERRAIN_WATER << 16)) {
-        // Makes Mario lose a special cap when he touches water
-        if (m->flags & MARIO_SPECIAL_CAPS) {
-            play_sound(SOUND_MENU_ENTER_PIPE, m->marioObj->header.gfx.cameraToObject);
-            m->flags &= ~MARIO_SPECIAL_CAPS;
-            spawn_mist_particles();
-        }
+
         if (waveParticleType != 0) {
             m->particleFlags |= PARTICLE_SHALLOW_WATER_SPLASH;
         } else {
@@ -754,18 +749,18 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
     switch (action) {
         case ACT_DOUBLE_JUMP:
             set_mario_y_vel_based_on_fspeed(m, 52.0f, 0.25f);
-            m->forwardVel *= m->flags & MARIO_METAL_CAP ? 0.6f : 0.8f;
+            m->forwardVel *= 0.8f;
             break;
 
         case ACT_BACKFLIP:
             m->marioObj->header.gfx.animInfo.animID = -1;
-            m->forwardVel = m->flags & MARIO_METAL_CAP ? -12.0f : -16.0f;
+            m->forwardVel = -16.0f;
             set_mario_y_vel_based_on_fspeed(m, 62.0f, 0.0f);
             break;
 
         case ACT_TRIPLE_JUMP:
             set_mario_y_vel_based_on_fspeed(m, 69.0f, 0.0f);
-            m->forwardVel *= m->flags & MARIO_METAL_CAP ? 0.6f : 0.8f;
+            m->forwardVel *= 0.8f;
             break;
 
         case ACT_FLYING_TRIPLE_JUMP:
@@ -781,7 +776,7 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
 
         case ACT_BURNING_JUMP:
             m->vel[1] = 31.5f;
-            m->forwardVel = m->flags & MARIO_METAL_CAP ? 6.0f : 8.0f;
+            m->forwardVel = 8.0f;
             break;
 
         case ACT_RIDING_SHELL_JUMP:
@@ -792,7 +787,7 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
         case ACT_HOLD_JUMP:
             m->marioObj->header.gfx.animInfo.animID = -1;
             set_mario_y_vel_based_on_fspeed(m, 42.0f, 0.25f);
-            m->forwardVel *= m->flags & MARIO_METAL_CAP ? 0.6f : 0.8f;
+            m->forwardVel *= 0.8f;
             break;
 
         case ACT_WALL_KICK_AIR:
@@ -811,7 +806,7 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
 
         case ACT_SIDE_FLIP:
             set_mario_y_vel_based_on_fspeed(m, 62.0f, 0.0f);
-            m->forwardVel = m->flags & MARIO_METAL_CAP ? 6.0f : 8.0f;
+            m->forwardVel = 8.0f;
             m->faceAngle[1] = m->intendedYaw;
             break;
 
@@ -822,22 +817,18 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
             break;
 
         case ACT_LAVA_BOOST:
-            m->vel[1] = m->flags & MARIO_METAL_CAP ? 63.0f : 84.0f;
+            m->vel[1] = 84.0f;
             if (actionArg == 0) {
                 m->forwardVel = 0.0f;
             }
             break;
 
         case ACT_DIVE:
-            if (!(m->flags & MARIO_METAL_CAP)) {
-                if ((forwardVel = m->forwardVel + 15.0f) > 48.0f) {
-                    forwardVel = 48.0f;
-                }
+            if ((forwardVel = m->forwardVel + 15.0f) > 48.0f) {
+                forwardVel = 48.0f;
             }
-            if (m->flags & MARIO_METAL_CAP) {
-                if ((forwardVel = m->forwardVel + 15.0f) > 24.0f) {
-                    m->forwardVel = 24.0f;
-                }
+            if ((forwardVel = m->forwardVel + 15.0f) > 24.0f) {
+                m->forwardVel = 24.0f;
             }
             mario_set_forward_vel(m, forwardVel);
             break;
@@ -849,27 +840,20 @@ u32 set_mario_action_airborne(struct MarioState *m, u32 action, u32 actionArg) {
 
             //! (BLJ's) This properly handles long jumps from getting forward speed with
             //  too much velocity, but misses backwards longs allowing high negative speeds.
-            if (!(m->flags & MARIO_METAL_CAP)) {
-                 if ((m->forwardVel *= 1.5f) > 48.0f) {
-                    m->forwardVel = 48.0f;
-                }
-            }
-            if (m->flags & MARIO_METAL_CAP) {
-                if ((m->forwardVel *= 1.5f) > 24.0f) {
-                    m->forwardVel = 24.0f;
-                }
+            if ((m->forwardVel *= 1.5f) > 48.0f) {
+                m->forwardVel = 48.0f;
             }
             break;
 
         case ACT_SLIDE_KICK:
-            m->vel[1] = m->flags & MARIO_METAL_CAP ? 8.0f : 12.0f;
+            m->vel[1] = 12.0f;
             if (m->forwardVel < 32.0f) {
                 m->forwardVel = 32.0f;
             }
             break;
 
         case ACT_JUMP_KICK:
-            m->vel[1] = m->flags & MARIO_METAL_CAP ? 16.0f : 20.0f;
+            m->vel[1] = 20.0f;
             break;
     }
 
@@ -1345,6 +1329,15 @@ void update_mario_geometry_inputs(struct MarioState *m) {
             m->input |= INPUT_IN_POISON_GAS;
         }
 
+        // Makes Mario lose a special cap when he touches water (adjustable lose height)
+        if (m->pos[1] < m->waterLevel - 5) {
+            if (m->flags & MARIO_SPECIAL_CAPS) {
+                play_sound(SOUND_MENU_ENTER_PIPE, m->marioObj->header.gfx.cameraToObject);
+                m->flags &= ~MARIO_SPECIAL_CAPS;
+                spawn_mist_particles();
+            }
+        }
+
     } else {
         level_trigger_warp(m, WARP_OP_DEATH);
     }
@@ -1625,7 +1618,6 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
     }
 
     if (m->flags & MARIO_METAL_CAP) {
-        vec3f_set(m->marioObj->header.gfx.scale, 0.5f, 0.5f, 0.5f);
     }
 
     //! (Pause buffered hitstun) Since the global timer increments while paused,
@@ -1653,9 +1645,9 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
 
     // Short hitbox for crouching/crawling/etc.
     if (m->action & ACT_FLAG_SHORT_HITBOX) {
-        m->marioObj->hitboxHeight = m->flags & MARIO_METAL_CAP ? 50.0f : 100.0f;
+        m->marioObj->hitboxHeight = 100.0f;
     } else {
-        m->marioObj->hitboxHeight = m->flags & MARIO_METAL_CAP ? 80.0f : 160.0f;
+        m->marioObj->hitboxHeight = 160.0f;
     }
 
     if ((m->flags & MARIO_TELEPORTING) && (m->fadeWarpOpacity != MODEL_STATE_MASK)) {

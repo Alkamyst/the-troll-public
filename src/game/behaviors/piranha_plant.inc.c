@@ -247,12 +247,6 @@ void piranha_plant_act_biting(void) {
     if (o->oDistanceToMario > 500.0f && cur_obj_check_if_near_animation_end()) {
         o->oAction = PIRANHA_PLANT_ACT_STOPPED_BITING;
     }
-
-    // If the player is wearing the Metal Cap and interacts with the Piranha
-    // Plant, the Piranha Plant will die.
-    if ((o->oInteractStatus & INT_STATUS_INTERACTED) && (gMarioState->flags & MARIO_METAL_CAP)) {
-        o->oAction = PIRANHA_PLANT_ACT_ATTACKED;
-    }
 }
 
 /**

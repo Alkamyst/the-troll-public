@@ -531,7 +531,11 @@ s32 act_crouching(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        return set_mario_action(m, ACT_PUNCHING, 9);
+        if (!(m->flags & MARIO_METAL_CAP)) {
+            return set_mario_action(m, ACT_PUNCHING, 9);
+        } else {
+            spawn_object_relative(0, 0, 0, 0, m->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
+        }
     }
 
     stationary_ground_step(m);

@@ -682,11 +682,6 @@ u32 take_damage_from_interact_object(struct MarioState *m) {
     }
 
 
-// Makes Mario take more damage if he is wearing a metal cap
-    if (m->flags & MARIO_METAL_CAP) {
-        damage += damage / 2;
-    }
-
     m->hurtCounter += 4 * damage;
 
 #if ENABLE_RUMBLE
@@ -1429,21 +1424,21 @@ u32 interact_koopa_shell(struct MarioState *m, UNUSED u32 interactType, struct O
     if (!(m->action & ACT_FLAG_RIDING_SHELL)) {
         u32 interaction = determine_interaction(m, obj);
 
-        if (interaction == INT_HIT_FROM_ABOVE || m->action == ACT_WALKING
-            || m->action == ACT_HOLD_WALKING) {
+//        if (interaction == INT_HIT_FROM_ABOVE || interaction == INT_HIT_FROM_BELOW || m->action == ACT_WALKING
+//            || m->action == ACT_HOLD_WALKING || m->action == ACT_CROUCHING || m->action == ACT_STOP_CROUCHING 
+//            || m->action == ACT_START_CROUCHING) {
             m->interactObj = obj;
             m->usedObj = obj;
             m->riddenObj = obj;
 
             attack_object(obj, interaction);
             update_mario_sound_and_camera(m);
-            play_shell_music();
             mario_drop_held_object(m);
 
             //! Puts Mario in ground action even when in air, making it easy to
             // escape air actions into crouch slide (shell cancel)
             return set_mario_action(m, ACT_RIDING_SHELL_GROUND, 0);
-        }
+//        }
 
         push_mario_out_of_object(m, obj, 2.0f);
     }
@@ -1552,7 +1547,7 @@ u32 interact_hoot(struct MarioState *m, UNUSED u32 interactType, struct Object *
 u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     u32 capFlag = get_mario_cap_flag(obj);
 
-    if (m->action != ACT_GETTING_BLOWN && capFlag != 0) {
+    if (m->action != ACT_GETTING_BLOWN && capFlag != 0 && (!(m->flags & MARIO_SPECIAL_CAPS))) { // can't pick up caps if already wearing a special cap
         m->interactObj = obj;
         obj->oInteractStatus = INT_STATUS_INTERACTED;
 

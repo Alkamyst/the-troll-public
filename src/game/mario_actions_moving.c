@@ -129,7 +129,7 @@ s32 set_triple_jump_action(struct MarioState *m, UNUSED u32 action, UNUSED u32 a
     if (m->flags & MARIO_WING_CAP) {
         return set_mario_action(m, ACT_FLYING_TRIPLE_JUMP, 0);
     } else if (m->forwardVel > 20.0f) {
-        return set_mario_action(m, m->flags & MARIO_METAL_CAP ? ACT_DOUBLE_JUMP : ACT_TRIPLE_JUMP, 0);
+        return set_mario_action(m, ACT_TRIPLE_JUMP, 0);
     } else {
         return set_mario_action(m, ACT_JUMP, 0);
     }
@@ -414,9 +414,9 @@ void update_walking_speed(struct MarioState *m) {
     f32 targetSpeed;
 
     if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
-        maxTargetSpeed = m->flags & MARIO_METAL_CAP ? 20.0f : 24.0f;
+        maxTargetSpeed = 24.0f;
     } else {
-        maxTargetSpeed = m->flags & MARIO_METAL_CAP ? 28.0f : 32.0f;
+        maxTargetSpeed = 32.0f;
     }
 
     targetSpeed = m->intendedMag < maxTargetSpeed ? m->intendedMag : maxTargetSpeed;
@@ -1447,10 +1447,14 @@ s32 act_crouch_slide(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        if (m->forwardVel >= 10.0f) {
-            return set_mario_action(m, ACT_SLIDE_KICK, 0);
+        if (!(m->flags & MARIO_METAL_CAP)) {
+            if (m->forwardVel >= 10.0f) {
+                return set_mario_action(m, ACT_SLIDE_KICK, 0);
+            } else {
+                return set_mario_action(m, ACT_MOVE_PUNCHING, 0x9);
+            }
         } else {
-            return set_mario_action(m, ACT_MOVE_PUNCHING, 0x9);
+            spawn_object_relative(0, 0, 0, 0, m->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
         }
     }
 
