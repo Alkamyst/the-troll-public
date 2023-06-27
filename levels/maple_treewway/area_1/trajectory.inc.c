@@ -1,31 +1,31 @@
 // 0x07078EF8 - 0x07078F2C
 static const Trajectory maple_treeway_seg7_trajectory_mips_0[] = {
-    TRAJECTORY_POS(0, /*pos*/ -637, 3184, -7494),
-    TRAJECTORY_POS(1, /*pos*/ -837, 3184, -7494),
-    TRAJECTORY_POS(2, /*pos*/ -837, 3184, -8198),
-    TRAJECTORY_POS(3, /*pos*/ -463, 3184, -8198),
+    TRAJECTORY_POS(0, /*pos*/ -352, 3184, -7494),
+    TRAJECTORY_POS(1, /*pos*/ -552, 3184, -7494),
+    TRAJECTORY_POS(2, /*pos*/ -552, 3184, -8440),
+    TRAJECTORY_POS(3, /*pos*/ -7, 3184, -8440),
     TRAJECTORY_END(),
 };
 
 static const Trajectory maple_treeway_seg7_trajectory_mips_1[] = {
-    TRAJECTORY_POS(0, /*pos*/ -285, 3184, -7494),
-    TRAJECTORY_POS(1, /*pos*/ -85, 3184, -7494),
-    TRAJECTORY_POS(2, /*pos*/ -85, 3184, -8198),
-    TRAJECTORY_POS(3, /*pos*/ -463, 3184, -8198),
+    TRAJECTORY_POS(0, /*pos*/ 231, 3184, -7494),
+    TRAJECTORY_POS(1, /*pos*/ 431, 3184, -7494),
+    TRAJECTORY_POS(2, /*pos*/ 431, 3184, -8440),
+    TRAJECTORY_POS(3, /*pos*/ -7, 3184, -8440),
     TRAJECTORY_END(),
 };
 
 static const Trajectory maple_treeway_seg7_trajectory_mips_2[] = {
-    TRAJECTORY_POS(0, /*pos*/ -85, 3184, -8198),
-    TRAJECTORY_POS(1, /*pos*/ -85, 3184, -7494),
-    TRAJECTORY_POS(2, /*pos*/ -463, 3184, -7494),
+    TRAJECTORY_POS(0, /*pos*/ 431, 3184, -8440),
+    TRAJECTORY_POS(1, /*pos*/ 431, 3184, -7494),
+    TRAJECTORY_POS(2, /*pos*/ -7, 3184, -7494),
     TRAJECTORY_END(),
 };
 
 static const Trajectory maple_treeway_seg7_trajectory_mips_3[] = {
-    TRAJECTORY_POS(0, /*pos*/ -837, 3184, -8198),
-    TRAJECTORY_POS(1, /*pos*/ -837, 3184, -7494),
-    TRAJECTORY_POS(2, /*pos*/ -463, 3184, -7494),
+    TRAJECTORY_POS(0, /*pos*/ -552, 3184, -8440),
+    TRAJECTORY_POS(1, /*pos*/ -552, 3184, -7494),
+    TRAJECTORY_POS(2, /*pos*/ -7, 3184, -7494),
     TRAJECTORY_END(),
 };
 

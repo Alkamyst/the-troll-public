@@ -36,7 +36,7 @@ s32 bhv_mips_find_furthest_waypoint_to_mario(void) {
         vec3s_copy(pos, waypoint->pos);
 
         // Is the waypoint within 800 units of MIPS?
-        if (is_point_close_to_object(o, pos[0], pos[1], pos[2], 500)) {
+        if (is_point_close_to_object(o, pos[0], pos[1], pos[2], 600)) {
             // Is this further from Mario than the last waypoint?
             dx = pos[0] - gMarioObject->header.gfx.pos[0];
             dz = pos[2] - gMarioObject->header.gfx.pos[2];

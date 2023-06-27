@@ -1,7 +1,6 @@
 void scroll_maple_treewway_dl_Main_mesh_layer_7_vtx_0() {
 	int i = 0;
 	int count = 20;
-	int width = 32 * 0x20;
 	int height = 32 * 0x20;
 
 	static int currentY = 0;

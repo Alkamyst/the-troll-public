@@ -461,6 +461,7 @@ u32 common_air_action_step(struct MarioState *m, u32 landAction, s32 animation, 
 s32 act_jump(struct MarioState *m) {
 #ifdef EASIER_LONG_JUMPS
     if (m->actionTimer < 1) {
+        m->actionTimer++;
         if (m->input & INPUT_Z_PRESSED && m->forwardVel > 10.0f) {
             return set_jumping_action(m, ACT_LONG_JUMP, 0);
         }
