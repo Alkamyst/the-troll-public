@@ -66,8 +66,11 @@ void luigiman_chestnut_act_0(void) {
 
 void luigiman_chestnut_act_1(void) {
     if (o->oTimer < 20) {
-        o->oForwardVel = 8.0f;
-        
+        if (o->oBehParams2ndByte == 0) {
+            o->oForwardVel = 8.0f;
+        } else {
+            o->oForwardVel = 26.0f;
+        }
     } else if (o->oTimer < 40) {
         if (o->oTimer % 2) {
             o->oForwardVel = 4.0f;
@@ -80,7 +83,11 @@ void luigiman_chestnut_act_1(void) {
 //        }
 
         o->oFaceAnglePitch += (s16)(o->oForwardVel * (100.0f));
-        o->oForwardVel = 15.0f;
+        if (o->oBehParams2ndByte == 0) {
+            o->oForwardVel = 15.0f;
+        } else {
+            o->oForwardVel = 25.0f;
+        }
 
         if (o->oTimer > 40) {
             //object_step_without_floor_orient();
@@ -175,7 +182,7 @@ void luigiman_golden_chestnut_act_1(void) {
     if (dist_between_objects(o, o->parentObj) < 400.0f) {
         spawn_mist_particles();
         obj_mark_for_deletion(o);
-        spawn_default_star(0, 300.0f, 0);
+        spawn_default_star(7852.0f, 4006.0f, -9493.0f);
     }
 }
 

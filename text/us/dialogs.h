@@ -650,16 +650,16 @@ handstand for a high,\n\
 stylin' dismount."))
 
 DEFINE_DIALOG(DIALOG_052, 1, 5, 30, 200, _("\
-Stop and press [Z] to\n\
-crouch, then press [A]\n\
-to do a high, Backward\n\
-Somersault!\n\
-\n\
-To perform a Side\n\
-Somersault, run, do a\n\
-sharp U-turn and jump.\n\
-You can catch lots of\n\
-air with both jumps."))
+Some ledges may be too\n\
+high for the average\n\
+jump. In these cases,\n\
+you may need to perform\n\
+some expert manuevers!\n\
+One such manuever is the\n\
+@FF0000FFSide-Flip.@--------\n\
+Run, do a sharp U-turn \n\
+and press [A].\n\
+"))
 
 DEFINE_DIALOG(DIALOG_053, 1, 5, 30, 200, _("\
 Sometimes, if you pass\n\
