@@ -1622,12 +1622,12 @@ void render_pause_my_score_coins(void) {
         u8 *actName5 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 4]);
         u8 *actName6 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 5]);
 
-        print_generic_string(140, 121, actName1);
-        print_generic_string(140, 106, actName2);
-        print_generic_string(140, 91, actName3);
-        print_generic_string(140, 76, actName4);
-        print_generic_string(140, 61, actName5);
-        print_generic_string(140, 46, actName6);
+        print_generic_string(145, 121, actName1);
+        print_generic_string(145, 106, actName2);
+        print_generic_string(145, 91, actName3);
+        print_generic_string(145, 76, actName4);
+        print_generic_string(145, 61, actName5);
+        print_generic_string(145, 46, actName6);
 
         if (starFlags & (1 << 0)) {
             print_generic_string(130, 121, textStar);
