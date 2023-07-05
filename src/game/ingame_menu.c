@@ -1081,7 +1081,7 @@ void handle_special_dialog_text(s16 dialogID) { // dialog ID tables, in order
     }
 
     for (i = 0; i < (s16) ARRAY_COUNT(dialogStarSound); i++) {
-        if (dialogStarSound[i] == dialogID && gDialogLineNum == 1) {
+        if (dialogStarSound[i] == dialogID && gDialogResponse == 1) { //replaced dialogLineNum with gDialogResponse
             play_sound(SOUND_MENU_STAR_SOUND, gGlobalSoundSource);
             return;
         }
@@ -1174,8 +1174,20 @@ void render_dialog_entries(void) {
         case DIALOG_STATE_VERTICAL:
             gDialogBoxOpenTimer = 0.0f;
 
-            if (gPlayer3Controller->buttonPressed & (A_BUTTON | B_BUTTON | START_BUTTON | D_CBUTTONS | R_CBUTTONS | D_JPAD | R_JPAD)) {
+            if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON | D_CBUTTONS | R_CBUTTONS | D_JPAD | R_JPAD)) {
                 if (gLastDialogPageStrPos == -1) {
+                    gDialogResponse = gDialogLineNum;
+                    handle_special_dialog_text(gDialogID);
+                    gDialogBoxState = DIALOG_STATE_CLOSING;
+                } else {
+                    gDialogBoxState = DIALOG_STATE_HORIZONTAL;
+                    play_sound(SOUND_MENU_MESSAGE_NEXT_PAGE, gGlobalSoundSource);
+                }
+            }
+
+            if (gPlayer3Controller->buttonPressed & (B_BUTTON)) {
+                if (gLastDialogPageStrPos == -1) {
+                    gDialogResponse = DIALOG_RESPONSE_NO; // B Button cancels dialog response
                     handle_special_dialog_text(gDialogID);
                     gDialogBoxState = DIALOG_STATE_CLOSING;
                 } else {
@@ -1200,8 +1212,6 @@ void render_dialog_entries(void) {
             if (gDialogBoxOpenTimer == 20.0f) {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_MESSAGE_DISAPPEAR, gGlobalSoundSource);
-
-                gDialogResponse = gDialogLineNum;
             }
 
             gDialogBoxOpenTimer = gDialogBoxOpenTimer + 10.0f;
@@ -1586,8 +1596,8 @@ void render_pause_my_score_coins(void) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
     if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
-        print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 103);
-        print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 103);
+        print_hud_my_score_coins(1, gCurrSaveFileNum - 1, courseIndex, 178, 63);
+        print_hud_my_score_stars(gCurrSaveFileNum - 1, courseIndex, 118, 63);
     }
 
     gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
@@ -1597,18 +1607,71 @@ void render_pause_my_score_coins(void) {
 
     if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)
         && (save_file_get_course_star_count(gCurrSaveFileNum - 1, courseIndex) != 0)) {
-        print_generic_string(MYSCORE_X, 121, LANGUAGE_ARRAY(textMyScore));
+        print_generic_string(MYSCORE_X, 161, LANGUAGE_ARRAY(textMyScore));
     }
 
     u8 *courseName = segmented_to_virtual(courseNameTbl[courseIndex]);
 
     if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
-        print_generic_string(TXT_COURSE_X, 157, LANGUAGE_ARRAY(textCourse));
+
+// Display star names in pause menu (awful code from ScuttlePirate Bandy Remade)
+        u8 *actName1 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 0]);
+        u8 *actName2 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 1]);
+        u8 *actName3 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 2]);
+        u8 *actName4 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 3]);
+        u8 *actName5 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 4]);
+        u8 *actName6 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 5]);
+
+        print_generic_string(140, 121, actName1);
+        print_generic_string(140, 106, actName2);
+        print_generic_string(140, 91, actName3);
+        print_generic_string(140, 76, actName4);
+        print_generic_string(140, 61, actName5);
+        print_generic_string(140, 46, actName6);
+
+        if (starFlags & (1 << 0)) {
+            print_generic_string(130, 121, textStar);
+        } else {
+            print_generic_string(130, 121, textUnfilledStar);
+        }
+
+        if (starFlags & (1 << 1)) {
+            print_generic_string(130, 106, textStar);
+        } else {
+            print_generic_string(130, 106, textUnfilledStar);
+        }
+
+        if (starFlags & (1 << 2)) {
+            print_generic_string(130, 91, textStar);
+        } else {
+            print_generic_string(130, 91, textUnfilledStar);
+        }
+
+        if (starFlags & (1 << 3)) {
+            print_generic_string(130, 76, textStar);
+        } else {
+            print_generic_string(130, 76, textUnfilledStar);
+        }
+
+        if (starFlags & (1 << 4)) {
+            print_generic_string(130, 61, textStar);
+        } else {
+            print_generic_string(130, 61, textUnfilledStar);
+        }
+
+        if (starFlags & (1 << 5)) {
+            print_generic_string(130, 46, textStar);
+        } else {
+            print_generic_string(130, 46, textUnfilledStar);
+        }
+// End of code
+
+        print_generic_string(TXT_COURSE_X, 187, LANGUAGE_ARRAY(textCourse));
         int_to_str(gCurrCourseNum, strCourseNum);
-        print_generic_string(CRS_NUM_X1, 157, strCourseNum);
+        print_generic_string(CRS_NUM_X1, 187, strCourseNum);
 
         u8 *actName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + gDialogCourseActNum - 1]);
-
+/*
         if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
         } else {
@@ -1616,7 +1679,8 @@ void render_pause_my_score_coins(void) {
         }
 
         print_generic_string(ACT_NAME_X, 140, actName);
-        print_generic_string(LVL_NAME_X, 157, &courseName[3]);
+*/
+        print_generic_string(LVL_NAME_X, 187, &courseName[3]);
     } else {
         print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
     }
@@ -1660,36 +1724,28 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
     }
 }
 
-#define X_VAL8 4
+#define X_VAL8 64
 #define Y_VAL8 2
 
 void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     u8 textContinue[] = { TEXT_CONTINUE };
     u8 textExitCourse[] = { TEXT_EXIT_COURSE };
-    u8 textCameraAngleR[] = { TEXT_CAMERA_ANGLE_R };
 
-    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 3);
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 2);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
 
-    print_generic_string(x + 10, y - 2, LANGUAGE_ARRAY(textContinue));
-    print_generic_string(x + 10, y - 17, LANGUAGE_ARRAY(textExitCourse));
+    print_generic_string(x - 50, y - 2, LANGUAGE_ARRAY(textContinue));
+    print_generic_string(x - 50, y - 17, LANGUAGE_ARRAY(textExitCourse));
 
-    if (*index != MENU_OPT_CAMERA_ANGLE_R) {
-        print_generic_string(x + 10, y - 33, LANGUAGE_ARRAY(textCameraAngleR));
-        gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
-        create_dl_translation_matrix(MENU_MTX_PUSH, x - X_VAL8, (y - ((*index - 1) * yIndex)) - Y_VAL8, 0);
+    create_dl_translation_matrix(MENU_MTX_PUSH, x - X_VAL8, (y - ((*index - 1) * yIndex)) - Y_VAL8, 0);
 
-        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-        gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
-        gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
-    }
-
-    if (*index == MENU_OPT_CAMERA_ANGLE_R) {
-        render_pause_camera_options(x - 42, y - 42, &gDialogCameraAngleIndex, 110);
-    }
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
 void render_pause_castle_menu_box(s16 x, s16 y) {
@@ -1898,6 +1954,17 @@ s32 render_pause_courses_and_castle(void) {
                 } else { // MENU_OPT_CONTINUE or MENU_OPT_CAMERA_ANGLE_R
                     index = MENU_OPT_DEFAULT;
                 }
+
+                return index;
+            }
+
+            if (gPlayer3Controller->buttonPressed & (B_BUTTON)) {
+                level_set_transition(0, NULL);
+                play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
+                gDialogBoxState = DIALOG_STATE_OPENING;
+                gMenuMode = MENU_MODE_NONE;
+
+                index = MENU_OPT_DEFAULT;
 
                 return index;
             }

@@ -43,7 +43,7 @@ void bhv_luigiman_chestnut_init(void) {
     o->oFriction = 0.999f;
     o->oBuoyancy = 2.0f;
     if (o->oBehParams2ndByte == 1) {
-        cur_obj_scale(3.0f);
+        cur_obj_scale(3.5f);
     }
 }
 
@@ -98,13 +98,6 @@ void luigiman_chestnut_act_1(void) {
             // o->oFaceAngleYaw = o->oMoveAngleYaw;
         }
 
-        o->parentObj = cur_obj_nearest_object_with_behavior(bhvPushableMetalBox);
-
-        if (dist_between_objects(o, o->parentObj) < 400.0f) {
-            o->oAction = 0;
-            spawn_mist_particles();
-        }
-
         if (o->oDistanceToMario >= 3500.0f) {
             o->oAction = 0;
         }
@@ -113,6 +106,18 @@ void luigiman_chestnut_act_1(void) {
             o->oAction = 0;
             spawn_mist_particles();
         }
+    }
+
+    o->parentObj = cur_obj_nearest_object_with_behavior(bhvPushableMetalBox);
+
+    if ((dist_between_objects(o, o->parentObj) < 400.0f) && (o->oBehParams2ndByte == 0)) {
+        o->oAction = 0;
+        spawn_mist_particles();
+    }
+
+    if ((dist_between_objects(o, o->parentObj) < 500.0f) && (o->oBehParams2ndByte == 1)) {
+        o->oAction = 0;
+        spawn_mist_particles();
     }
 }
 

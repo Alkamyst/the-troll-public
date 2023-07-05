@@ -12,64 +12,35 @@
 #define SCRAM "scram--"
 #endif
 
-DEFINE_DIALOG(DIALOG_000, 1, 6, 30, 200, _("\
-Wow! You're smack in the\n\
-middle of the battlefield.\n\
-You'll find the Power\n\
-Stars that Bowser stole\n\
-inside the painting\n\
-worlds.\n\
-First, talk to the\n\
-Bob-omb Buddy. (Press [B]\n\
-to talk.) He'll certainly\n\
-help you out, and so will\n\
-his " COMRADES " in other\n\
-areas.\n\
-To read signs, stop, face\n\
-them and press [B]. Press [A]\n\
-or [B] to scroll ahead. You\n\
-can talk to some other\n\
-characters by facing them\n\
-and pressing [B]."))
+DEFINE_DIALOG(DIALOG_000, 1, 5, 30, 200, _("\
+The largest jump you can\n\
+perform is the @FF0000FFTriple Jump.@--------\n\
+When you have the space,\n\
+you can jump three times\n\
+in a row to jump high.\n\
+@FF0000FFMoving forward@-------- is needed\n\
+to do this move correctly.\n\
+Each jump you do will be\n\
+@FF0000FFhigher than the last one@--------\n\
+if done right."))
 
-DEFINE_DIALOG(DIALOG_001, 1, 4, 95, 200, _("\
-Watch out! If you wander\n\
-around here, you're liable\n\
-to be " PLASTERED " by a\n\
-water bomb!\n\
-Those enemy Bob-ombs love\n\
-to fight, and they're\n\
-always finding ways to\n\
-attack.\n\
-This meadow has become\n\
-a battlefield ever since\n\
-the Big Bob-omb got his\n\
-paws on the Power Star.\n\
-Can you recover the Star\n\
-for us? Cross the bridge\n\
-and go left up the path\n\
-to find the Big Bob-omb.\n\
-Please come back to see\n\
-me after you've retrieved\n\
-the Power Star!"))
+DEFINE_DIALOG(DIALOG_001, 1, 4, 30, 200, _("\
+If you want to go far,\n\
+perform a @FF0000FFLong Jump!@--------\n\
+Run, press [Z] to crouch,\n\
+then [A] to jump!"))
 
-DEFINE_DIALOG(DIALOG_002, 1, 4, 95, 200, _("\
-Hey, you! It's dangerous\n\
-ahead, so listen up! Take\n\
-my advice.\n\
-\n\
-Cross the two\n\
-bridges ahead, then\n\
-watch for falling\n\
-water bombs.\n\
-The Big Bob-omb at the\n\
-top of the mountain is\n\
-very powerful--don't let\n\
-him grab you!\n\
-We're Bob-omb Buddies,\n\
-and we're on your side.\n\
-You can talk to us\n\
-whenever you'd like to!"))
+DEFINE_DIALOG(DIALOG_002, 1, 5, 30, 200, _("\
+To gain extra height near\n\
+a wall, you can perform a\n\
+@FF0000FFWall Jump!@--------\n\
+Jump at a wall and press\n\
+[A] jump away from it.\n\
+When long jumping at a\n\
+wall, a Wall Jump can\n\
+still be done if [A] is\n\
+pressed right when you\n\
+hit the wall!"))
 
 DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
 Thank you, Mario! The Big\n\
@@ -205,16 +176,13 @@ Would you like to Save?\n\
 
 DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
 You've collected 100\n\
-coins! Mario gains more\n\
-power from the castle.\n\
+coins! Luigi gains more\n\
+power from the stars.\n\
 Do you want to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
-Wow! Another Power Star!\n\
-Mario gains more courage\n\
-from the power of the\n\
-castle.\n\
+Wow! Luigi got a Star!\n\
 Do you want to Save?\n\
 \n\
 //You Bet//Not Now"))
@@ -659,7 +627,14 @@ One such manuever is the\n\
 @FF0000FFSide-Flip.@--------\n\
 Run, do a sharp U-turn \n\
 and press [A].\n\
-"))
+\n\
+Another move is the\n\
+@FF0000FFGround-Pound Jump.@--------\n\
+Press [Z] in midair to\n\
+ground-pound, then [A]\n\
+when you hit the ground.\n\
+Try these moves to get\n\
+up this ledge!"))
 
 DEFINE_DIALOG(DIALOG_053, 1, 5, 30, 200, _("\
 Sometimes, if you pass\n\

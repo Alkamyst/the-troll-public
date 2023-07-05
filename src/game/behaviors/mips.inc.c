@@ -154,7 +154,7 @@ void bhv_mips_act_idle(void) {
 
     // Spawn a star if he was just picked up for the first time.
     if (o->oMipsStarStatus == MIPS_STAR_STATUS_SHOULD_SPAWN_STAR) {
-        spawn_default_star(0, 300.0f, 0);
+        spawn_default_star(-468.0f, 3507.0f, -9322.0f);
         // bhv_spawn_star_no_level_exit(o->oBehParams2ndByte + 3);
         o->oMipsStarStatus = MIPS_STAR_STATUS_ALREADY_SPAWNED_STAR;
     }
@@ -237,7 +237,7 @@ void bhv_mips_thrown(void) {
     o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
     cur_obj_init_animation(2);
     cur_obj_become_tangible();
-    o->oForwardVel = 25.0f;
+    o->oForwardVel = -25.0f;
     o->oVelY = 20.0f;
     o->oAction = MIPS_ACT_FALL_DOWN;
 }
