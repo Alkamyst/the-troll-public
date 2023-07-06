@@ -572,10 +572,7 @@
 #define MODEL_VCUTM_WARP_PIPE                     MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 #define MODEL_CASTLE_GROUNDS_WARP_PIPE            MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 
-#define MODEL_LEAF_PILE 0x37
-#define MODEL_CHESTNUT 0x38
-#define MODEL_GOLDEN_CHESTNUT 0x39
-#define MODEL_MAPLE_TREE 0x3A
+#define MODEL_CAGE 0x37
 
 
 #endif // MODEL_IDS_H

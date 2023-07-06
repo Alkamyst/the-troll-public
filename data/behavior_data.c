@@ -1017,9 +1017,9 @@ const BehaviorScript bhvThreeCoinsSpawn[] = {
 const BehaviorScript bhvTenCoinsSpawn[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    BEGIN_REPEAT(10),
-        SPAWN_CHILD(/*Model*/ MODEL_YELLOW_COIN, /*Behavior*/ bhvSingleCoinGetsSpawned),
-    END_REPEAT(),
+//    BEGIN_REPEAT(10),
+//        SPAWN_CHILD(/*Model*/ MODEL_YELLOW_COIN, /*Behavior*/ bhvSingleCoinGetsSpawned),
+//    END_REPEAT(),
     DEACTIVATE(),
 };
 
@@ -6135,5 +6135,17 @@ const BehaviorScript bhvLuigimanGoldenChestnut[] = {
     CALL_NATIVE(bhv_luigiman_golden_chestnut_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_luigiman_golden_chestnut_loop),
+    END_LOOP(),
+};
+
+extern void bhv_hidden_cage_loop();
+extern const Collision cage_collision[];
+const BehaviorScript bhvHiddenCage[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(cage_collision),
+    SET_FLOAT(oCollisionDistance, 300),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_hidden_cage_loop),
     END_LOOP(),
 };

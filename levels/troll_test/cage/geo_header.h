@@ -1,0 +1,17 @@
+extern const GeoLayout cage_geo[];
+extern Lights1 cage_Bars_001_lights;
+extern u8 cage_Tile0149_RGB_ci4[];
+extern u8 cage_Tile0149_RGB_ci4_pal_rgba16[];
+extern u8 cage_tex1_128x128_6fb074c6883f7a0b_14_ci8[];
+extern u8 cage_tex1_128x128_6fb074c6883f7a0b_14_ci8_pal_rgba16[];
+extern Vtx cage_Plane_mesh_layer_4_vtx_0[16];
+extern Gfx cage_Plane_mesh_layer_4_tri_0[];
+extern Vtx cage_Plane_mesh_layer_1_vtx_0[12];
+extern Gfx cage_Plane_mesh_layer_1_tri_0[];
+extern Gfx mat_cage_Bars_001[];
+extern Gfx mat_revert_cage_Bars_001[];
+extern Gfx mat_cage_Metal_001[];
+extern Gfx mat_revert_cage_Metal_001[];
+extern Gfx cage_Plane_mesh_layer_4[];
+extern Gfx cage_Plane_mesh_layer_1[];
+extern Gfx cage_material_revert_render_settings[];

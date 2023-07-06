@@ -315,6 +315,11 @@ Gfx *create_shadow_below_xyz(Vec3f pos, s16 shadowScale, u8 shadowSolidity, s8 s
         return NULL;
     }
 
+    // No shadow if Mario is above this floor type
+    if (isPlayer && floor->type == SURFACE_NO_SHADOW) {
+        return NULL;
+    }
+
     vec3f_set(s->floorNormal, nx, ny, nz);
 
     if (isPlayer) {

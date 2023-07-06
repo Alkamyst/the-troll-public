@@ -88,15 +88,19 @@ void exclamation_box_act_active(void) {
         o->oGraphYOffset = 0.0f;
     }
     if (cur_obj_was_attacked_or_ground_pounded()) {
-        cur_obj_become_intangible();
-        o->oExclamationBoxScaleAngle = 0x4000;
-        o->oVelY = 30.0f;
-        o->oGravity = -8.0f;
-        o->oFloorHeight = o->oPosY;
-        o->oAction = EXCLAMATION_BOX_ACT_SCALING;
+        if (!(o->oBehParams2ndByte == EXCLAMATION_BOX_BP_COINS_10)) {
+            cur_obj_become_intangible();
+            o->oExclamationBoxScaleAngle = 0x4000;
+            o->oVelY = 30.0f;
+            o->oGravity = -8.0f;
+            o->oFloorHeight = o->oPosY;
+            o->oAction = EXCLAMATION_BOX_ACT_SCALING;
 #if ENABLE_RUMBLE
-        queue_rumble_data(5, 80);
+            queue_rumble_data(5, 80);
 #endif
+        } else {
+            o->oAction = EXCLAMATION_BOX_ACT_KILL;
+        }
     }
     load_object_collision_model();
 }
@@ -157,6 +161,26 @@ void exclamation_box_act_wait_for_respawn(void) {
     }
 }
 
+void exclamation_box_act_kill(void) {
+    load_object_collision_model();
+    if (o->oPosY <= 400) {
+        o->oInteractType = INTERACT_DAMAGE;
+        o->hitboxDownOffset = 1;
+    }
+//    cur_obj_scale_over_time(SCALE_AXIS_X, 2, 1.0f, 3.0f);
+//    cur_obj_scale_over_time(SCALE_AXIS_Z, 2, 1.0f, 3.0f);
+    o->oVelY += -4.0f;
+    o->oPosY += o->oVelY;
+    if (o->oPosY <= 110) {
+        cur_obj_become_intangible();
+        o->oExclamationBoxScaleAngle = 0x4000;
+        o->oVelY = 30.0f;
+        o->oGravity = -8.0f;
+        o->oFloorHeight = o->oPosY;
+        o->oAction = EXCLAMATION_BOX_ACT_SCALING;
+    }
+}
+
 ObjActionFunc sExclamationBoxActions[] = {
     exclamation_box_act_init,
     exclamation_box_act_outline,
@@ -164,6 +188,7 @@ ObjActionFunc sExclamationBoxActions[] = {
     exclamation_box_act_scaling,
     exclamation_box_act_explode,
     exclamation_box_act_wait_for_respawn,
+    exclamation_box_act_kill,
 };
 
 void bhv_exclamation_box_loop(void) {

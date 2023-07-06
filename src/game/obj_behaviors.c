@@ -783,3 +783,4 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/mips.inc.c"
 #include "behaviors/yoshi.inc.c"
 #include "behaviors/luigiman_maple_treeway.inc.c"
+#include "behaviors/alkamyst_troll.inc.c"
