@@ -65,17 +65,11 @@ void luigiman_chestnut_act_0(void) {
 }
 
 void luigiman_chestnut_act_1(void) {
-    if (o->oTimer < 20) {
+    if (o->oTimer < 30) {
         if (o->oBehParams2ndByte == 0) {
-            o->oForwardVel = 8.0f;
+            o->oForwardVel = 5.0f;
         } else {
-            o->oForwardVel = 26.0f;
-        }
-    } else if (o->oTimer < 40) {
-        if (o->oTimer % 2) {
-            o->oForwardVel = 4.0f;
-        } else {
-            o->oForwardVel = -4.0f;
+            o->oForwardVel = 17.0f;
         }
     } else {
 //        if (o->oTimer > 40) {
@@ -89,7 +83,7 @@ void luigiman_chestnut_act_1(void) {
             o->oForwardVel = 25.0f;
         }
 
-        if (o->oTimer > 40) {
+        if (o->oTimer > 30) {
             //object_step_without_floor_orient();
             cur_obj_update_floor_and_walls();
             cur_obj_move_standard(-70);
@@ -142,6 +136,11 @@ ObjActionFunc sluigimanChustnutActions[] = {
 
 void bhv_luigiman_chestnut_loop(void) {
     cur_obj_call_action_function(sluigimanChustnutActions);
+
+    if (o->oDistanceToMario >= 3500.0f) {
+        o->oAction = 0;
+    }
+
     if (cur_obj_check_interacted()) {
         o->oAction = 3;
     }
