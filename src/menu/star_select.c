@@ -1,4 +1,3 @@
-#include "src/game/texscroll.h"
 #include <PR/ultratypes.h>
 
 #include "audio/external.h"
@@ -444,7 +443,7 @@ s32 lvl_update_obj_and_load_act_button_actions(UNUSED s32 arg, UNUSED s32 unused
         }
     }
 
-    area_update_objects(); scroll_textures();
+    area_update_objects();
     sActSelectorMenuTimer++;
     return sLoadedActNum;
 }
