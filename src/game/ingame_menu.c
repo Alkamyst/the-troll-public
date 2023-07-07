@@ -39,6 +39,7 @@ u16 gDialogTextAlpha;
 s16 gCutsceneMsgXOffset;
 s16 gCutsceneMsgYOffset;
 s8 gRedCoinsCollected;
+s16 gPauseTimer;
 #if defined(WIDE) && !defined(PUPPYCAM)
 u8 textCurrRatio43[] = { TEXT_HUD_CURRENT_RATIO_43 };
 u8 textCurrRatio169[] = { TEXT_HUD_CURRENT_RATIO_169 };
@@ -1614,6 +1615,7 @@ void render_pause_my_score_coins(void) {
 
     if (courseIndex <= COURSE_NUM_TO_INDEX(COURSE_STAGES_MAX)) {
 
+/*
 // Display star names in pause menu (awful code from ScuttlePirate Bandy Remade)
         u8 *actName1 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 0]);
         u8 *actName2 = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + 1]);
@@ -1665,12 +1667,13 @@ void render_pause_my_score_coins(void) {
             print_generic_string(130, 46, textUnfilledStar);
         }
 // End of code
+*/
 
-        print_generic_string(TXT_COURSE_X, 187, LANGUAGE_ARRAY(textCourse));
-        int_to_str(gCurrCourseNum, strCourseNum);
-        print_generic_string(CRS_NUM_X1, 187, strCourseNum);
+//        print_generic_string(TXT_COURSE_X, 187, LANGUAGE_ARRAY(textCourse));
+//        int_to_str(gCurrCourseNum, strCourseNum);
+//        print_generic_string(CRS_NUM_X1, 187, strCourseNum);
 
-        u8 *actName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + gDialogCourseActNum - 1]);
+//        u8 *actName = segmented_to_virtual(actNameTbl[COURSE_NUM_TO_INDEX(gCurrCourseNum) * 6 + gDialogCourseActNum - 1]);
 /*
         if (starFlags & (1 << (gDialogCourseActNum - 1))) {
             print_generic_string(TXT_STAR_X, 140, textStar);
@@ -1680,7 +1683,7 @@ void render_pause_my_score_coins(void) {
 
         print_generic_string(ACT_NAME_X, 140, actName);
 */
-        print_generic_string(LVL_NAME_X, 187, &courseName[3]);
+//        print_generic_string(TXT_COURSE_X, 187, &courseName[3]);
     } else {
         print_generic_string(SECRET_LVL_NAME_X, 157, &courseName[3]);
     }
@@ -1724,27 +1727,78 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
     }
 }
 
-#define X_VAL8 64
+#define X_VAL8 26
 #define Y_VAL8 2
 
 void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     u8 textContinue[] = { TEXT_CONTINUE };
-    u8 textExitCourse[] = { TEXT_EXIT_COURSE };
+    u8 textMockA[] = { TEXT_EXIT_COURSE };
+    u8 textMockB[] = { TEXT_MOCK_A };
 
-    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 2);
+    u16 pauseTimerNum = ((gPauseTimer / (30)) + 1);
+
+/*
+    if (gPauseTimer <= 30) {
+        strPauseTimerNum = { TEXT_CONTINUE };
+    }
+    if ((gPauseTimer > 30) && (gPauseTimer <= 60)) {
+        int_to_str(9, strPauseTimerNum);
+    }
+    if ((gPauseTimer > 60) && (gPauseTimer <= 90)) {
+        int_to_str(8, strPauseTimerNum);
+    }
+    if ((gPauseTimer > 90) && (gPauseTimer <= 120)) {
+        int_to_str(7, strPauseTimerNum);
+    }
+    if ((gPauseTimer > 120) && (gPauseTimer <= 150)) {
+        int_to_str(6, strPauseTimerNum);
+    }
+    if ((gPauseTimer > 150) && (gPauseTimer <= 180)) {
+        int_to_str(5, strPauseTimerNum);
+    }
+    if ((gPauseTimer >180) && (gPauseTimer <= 210)) {
+        int_to_str(4, strPauseTimerNum);
+    }
+    if ((gPauseTimer > 210) && (gPauseTimer <= 240)) {
+        int_to_str(3, strPauseTimerNum);
+    }
+    if ((gPauseTimer > 240) && (gPauseTimer <= 270)) {
+        int_to_str(2, strPauseTimerNum);
+    }
+    if (gPauseTimer > 270) {
+        int_to_str(1, strPauseTimerNum);
+    }
+*/
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 1);
+
+    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+
+    if (gPauseTimer >= 0) {
+        print_text_fmt_int(160, 130, "%d", pauseTimerNum);
+    }
+
+    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-
-    print_generic_string(x - 50, y - 2, LANGUAGE_ARRAY(textContinue));
-    print_generic_string(x - 50, y - 17, LANGUAGE_ARRAY(textExitCourse));
+    
+    print_generic_string(x + 40, y - 2, LANGUAGE_ARRAY(textContinue));
+    if (!(gCurrCourseNum == COURSE_WF)) {
+        print_generic_string(20, 157, LANGUAGE_ARRAY(textMockA));
+    }
+    if (gCurrCourseNum == COURSE_WF) {
+        print_generic_string(20, 157, LANGUAGE_ARRAY(textMockB));
+    }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
 
-    create_dl_translation_matrix(MENU_MTX_PUSH, x - X_VAL8, (y - ((*index - 1) * yIndex)) - Y_VAL8, 0);
+    create_dl_translation_matrix(MENU_MTX_PUSH, x + X_VAL8, (y - ((*index - 1) * yIndex)) - Y_VAL8, 0);
 
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    if (gPauseTimer < 0) {
+        gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    }
     gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
 }
 
@@ -1917,6 +1971,7 @@ s32 render_pause_courses_and_castle(void) {
             gDialogTextAlpha = 0;
             level_set_transition(-1, NULL);
             play_sound(SOUND_MENU_PAUSE_OPEN, gGlobalSoundSource);
+            gPauseTimer =  300;
 
             if (gCurrCourseNum >= COURSE_MIN
              && gCurrCourseNum <= COURSE_MAX) {
@@ -1932,18 +1987,14 @@ s32 render_pause_courses_and_castle(void) {
             shade_screen();
             render_pause_my_score_coins();
             render_pause_red_coins();
-#ifndef DISABLE_EXIT_COURSE
-#ifdef EXIT_COURSE_WHILE_MOVING
-            if ((gMarioStates[0].action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER | ACT_FLAG_PAUSE_EXIT))
-             || (gMarioStates[0].pos[1] <= gMarioStates[0].floorHeight)) {
-#else
-            if (gMarioStates[0].action & ACT_FLAG_PAUSE_EXIT) {
-#endif
-                render_pause_course_options(99, 93, &gDialogLineNum, 15);
+            if (gPauseTimer > (-10)) {
+                gPauseTimer--;
             }
-#endif
 
-            if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
+            render_pause_course_options(99, 93, &gDialogLineNum, 15);
+
+            if (gPauseTimer < 0) {
+                if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
                 level_set_transition(0, NULL);
                 play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
                 gDialogBoxState = DIALOG_STATE_OPENING;
@@ -1956,17 +2007,7 @@ s32 render_pause_courses_and_castle(void) {
                 }
 
                 return index;
-            }
-
-            if (gPlayer3Controller->buttonPressed & (B_BUTTON)) {
-                level_set_transition(0, NULL);
-                play_sound(SOUND_MENU_PAUSE_CLOSE, gGlobalSoundSource);
-                gDialogBoxState = DIALOG_STATE_OPENING;
-                gMenuMode = MENU_MODE_NONE;
-
-                index = MENU_OPT_DEFAULT;
-
-                return index;
+                }
             }
             break;
 
