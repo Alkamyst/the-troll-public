@@ -11,7 +11,7 @@ struct ExclamationBoxContents {
 struct ObjectHitbox sExclamationBoxHitbox = {
     /* interactType:      */ INTERACT_BREAKABLE,
     /* downOffset:        */ 5,
-    /* damageOrCoinValue: */ 0,
+    /* damageOrCoinValue: */ 1,
     /* health:            */ 1,
     /* numLootCoins:      */ 0,
     /* radius:            */ 40,

@@ -26,6 +26,7 @@
 #include "config.h"
 #include "puppycam2.h"
 #include "main.h"
+#include "menu/file_select.h""
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -1730,6 +1731,29 @@ void render_pause_camera_options(s16 x, s16 y, s8 *index, s16 xIndex) {
 #define X_VAL8 26
 #define Y_VAL8 2
 
+void render_file_select_options(s16 x, s16 y, s8 *index, s16 yIndex) {
+    u8 textMarioA[] = { TEXT_FILE_MARIO_A };
+    // u8 textMarioB[] = { TEXT_FILE_MARIO_B };
+    // u8 textMarioC[] = { TEXT_FILE_MARIO_C };
+
+    handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 1);
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    
+    print_generic_string(x + 10, y - 2, LANGUAGE_ARRAY(textMarioA));
+    // print_generic_string(x + 10, y - 17, LANGUAGE_ARRAY(textMarioB));
+    // print_generic_string(x + 10, y - 32, LANGUAGE_ARRAY(textMarioC));
+
+    gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
+
+    create_dl_translation_matrix(MENU_MTX_PUSH, x + X_VAL8 - 33, (y - ((*index - 1) * yIndex)) - Y_VAL8, 0);
+
+    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+    gSPDisplayList(gDisplayListHead++, dl_draw_triangle);
+    gSPPopMatrix(gDisplayListHead++, G_MTX_MODELVIEW);
+}
+
 void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     u8 textContinue[] = { TEXT_CONTINUE };
     u8 textMockA[] = { TEXT_EXIT_COURSE };
@@ -2027,9 +2051,63 @@ s32 render_pause_courses_and_castle(void) {
             }
             break;
     }
+/*
 #if defined(WIDE) && !defined(PUPPYCAM)
         render_widescreen_setting();
 #endif
+*/
+    if (gDialogTextAlpha < 250) {
+        gDialogTextAlpha += 25;
+    }
+#ifdef PUPPYCAM
+    } else {
+        shade_screen();
+        puppycam_display_options();
+    }
+
+    puppycam_render_option_text();
+#endif
+    return MENU_OPT_NONE;
+}
+
+s32 render_file_select_menu(void) {
+    s16 index;
+
+#ifdef PUPPYCAM
+    puppycam_check_pause_buttons();
+    if (!gPCOptionOpen) {
+#endif
+    switch (gDialogBoxState) {
+        case DIALOG_STATE_OPENING:
+            gDialogLineNum = MENU_OPT_DEFAULT;
+            gDialogTextAlpha = 0;
+            level_set_transition(-1, NULL);
+
+            change_dialog_camera_angle();
+            gDialogBoxState = DIALOG_STATE_VERTICAL;
+            
+            break;
+
+        case DIALOG_STATE_VERTICAL:
+
+            render_file_select_options(0, 47, &gDialogLineNum, 15);
+
+                if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
+                level_set_transition(0, NULL);
+                play_sound(SOUND_MENU_STAR_SOUND_OKEY_DOKEY, gGlobalSoundSource);
+                gDialogBoxState = DIALOG_STATE_OPENING;
+                gMenuMode = MENU_MODE_NONE;
+
+                index = gDialogLineNum;
+
+                load_main_menu_save_file(gDialogLineNum);
+
+                return index;
+                }
+
+            break;
+    }
+
     if (gDialogTextAlpha < 250) {
         gDialogTextAlpha += 25;
     }
@@ -2291,7 +2369,7 @@ s32 render_menus_and_dialogs(void) {
     if (gMenuMode != MENU_MODE_NONE) {
         switch (gMenuMode) {
             case MENU_MODE_UNUSED_0:
-                mode = render_pause_courses_and_castle();
+                mode = render_file_select_menu();
                 break;
             case MENU_MODE_RENDER_PAUSE_SCREEN:
                 mode = render_pause_courses_and_castle();

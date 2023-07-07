@@ -1,5 +1,4 @@
 extern const GeoLayout cage_geo[];
-extern Lights1 cage_Bars_001_lights;
 extern u8 cage_Tile0149_RGB_ci4[];
 extern u8 cage_Tile0149_RGB_ci4_pal_rgba16[];
 extern u8 cage_tex1_128x128_6fb074c6883f7a0b_14_ci8[];

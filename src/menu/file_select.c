@@ -888,10 +888,8 @@ void check_sound_mode_menu_clicked_buttons(struct Object *soundModeButton) {
  * Loads a save file selected after it goes into a full screen state
  * retuning sSelectedFileNum to a save value defined in fileNum.
  */
-void load_main_menu_save_file(struct Object *fileButton, s32 fileNum) {
-    if (fileButton->oMenuButtonState == MENU_BUTTON_STATE_FULLSCREEN) {
-        sSelectedFileNum = fileNum;
-    }
+void load_main_menu_save_file(s32 fileNum) {
+    sSelectedFileNum = fileNum;
 }
 
 /**
@@ -1119,10 +1117,10 @@ void bhv_menu_button_manager_loop(void) {
     switch (sSelectedButtonID) {
         case MENU_BUTTON_NONE: check_main_menu_clicked_buttons(); break;
 
-        case MENU_BUTTON_PLAY_FILE_A: load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_A], 1); break;
-        case MENU_BUTTON_PLAY_FILE_B: load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_B], 2); break;
-        case MENU_BUTTON_PLAY_FILE_C: load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_C], 3); break;
-        case MENU_BUTTON_PLAY_FILE_D: load_main_menu_save_file(sMainMenuButtons[MENU_BUTTON_PLAY_FILE_D], 4); break;
+        case MENU_BUTTON_PLAY_FILE_A: load_main_menu_save_file(1); break;
+        case MENU_BUTTON_PLAY_FILE_B: load_main_menu_save_file(2); break;
+        case MENU_BUTTON_PLAY_FILE_C: load_main_menu_save_file(3); break;
+        case MENU_BUTTON_PLAY_FILE_D: load_main_menu_save_file(4); break;
 
         case MENU_BUTTON_SCORE: check_score_menu_clicked_buttons(sMainMenuButtons[MENU_BUTTON_SCORE]); break;
         case MENU_BUTTON_COPY:  check_copy_menu_clicked_buttons (sMainMenuButtons[MENU_BUTTON_COPY ]); break;
@@ -1201,6 +1199,7 @@ void handle_cursor_button_input(void) {
 /**
  * Cursor function that handles analog stick input and button presses with a function near the end.
  */
+/*
 void handle_controller_cursor_input(void) {
     s16 rawStickX = gPlayer3Controller->rawStickX;
     s16 rawStickY = gPlayer3Controller->rawStickY;
@@ -1236,14 +1235,14 @@ void handle_controller_cursor_input(void) {
         handle_cursor_button_input();
     }
 }
-
+*/
 /**
  * Prints the cursor (Mario Hand, different to the one in the Mario screen)
  * and loads it's controller inputs in handle_controller_cursor_input
  * to be usable on the file select.
  */
 void print_menu_cursor(void) {
-    handle_controller_cursor_input();
+//    handle_controller_cursor_input();
     create_dl_translation_matrix(MENU_MTX_PUSH, sCursorPos[0] + 160.0f - 5.0, sCursorPos[1] + 120.0f - 25.0, 0.0f);
     // Get the right graphic to use for the cursor.
     if (sCursorClickingTimer == 0)
@@ -2039,6 +2038,7 @@ s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused) {
     sEraseYesNoHoverState = MENU_ERASE_HOVER_NONE;
     sSoundMode = save_file_get_sound_mode();
     gCurrLevelNum = LEVEL_UNKNOWN_1;
+    set_menu_mode(MENU_MODE_UNUSED_0); // Displays new file select
     return 0;
 }
 

@@ -138,6 +138,7 @@ void bhv_menu_button_init(void);
 void bhv_menu_button_loop(void);
 void bhv_menu_button_manager_init(void);
 void bhv_menu_button_manager_loop(void);
+void load_main_menu_save_file(s32 fileNum);
 Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 mtx);
 s32 lvl_init_menu_values_and_cursor_pos(UNUSED s32 arg, UNUSED s32 unused);
 s32 lvl_update_obj_and_load_file_selected(UNUSED s32 arg, UNUSED s32 unused);
