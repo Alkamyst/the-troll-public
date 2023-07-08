@@ -37,5 +37,13 @@ void bhv_pushable_loop(void) {
         }
     }
 
+    if (gMarioState->floor != NULL) {
+        s32 floorType = gMarioState->floor->type;
+
+        if (floorType == SURFACE_INTERACTION) {
+            cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
+        }
+    }
+
     cur_obj_move_using_fvel_and_gravity();
 }

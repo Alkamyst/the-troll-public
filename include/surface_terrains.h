@@ -94,11 +94,11 @@ enum SurfaceTypes {
     SURFACE_SWITCH,                     // 0x007A // Surface with no cam collision flag, non-slippery with noise, used by switches and Dorrie
     SURFACE_VANISH_CAP_WALLS,           // 0x007B // Vanish cap walls, pass through them with Vanish Cap
     SURFACE_NO_SHADOW,                  // 0x007C // A solid surface that does not show Mario's shadow
-    SURFACE_007D,                       // 0x007D // Unused
-    SURFACE_007E,                       // 0x007E // Unused
-    SURFACE_007F,                       // 0x007F // Unused
-    SURFACE_0080,                       // 0x0080 // Unused
-    SURFACE_0081,                       // 0x0081 // Unused
+    SURFACE_INTERACTION,                // 0x007D // Surface that activates events when Mario is over it
+    SURFACE_INTERACTION2,               // 0x007E // Surface that activates events when Mario is over it
+    SURFACE_INTERACTION3,               // 0x007F // Surface that activates events when Mario is over it
+    SURFACE_INTERACTION4,               // 0x0080 // Surface that activates events when Mario is over it
+    SURFACE_INTERACTION5,               // 0x0081 // Surface that activates events when Mario is over it
     SURFACE_0082,                       // 0x0082 // Unused
     SURFACE_0083,                       // 0x0083 // Unused
     SURFACE_0084,                       // 0x0084 // Unused

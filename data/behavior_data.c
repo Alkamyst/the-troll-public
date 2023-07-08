@@ -6149,3 +6149,32 @@ const BehaviorScript bhvHiddenCage[] = {
         CALL_NATIVE(bhv_hidden_cage_loop),
     END_LOOP(),
 };
+
+extern void bhv_moving_platform_slip();
+const BehaviorScript bhvMovingPlatformSlip1[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_moving_platform_slip),
+    END_LOOP(),
+};
+
+extern void bhv_pushing_wall_slip_init();
+extern void bhv_pushing_wall_slip_loop();
+const BehaviorScript bhvPushingWallSlip1[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    CALL_NATIVE(bhv_pushing_wall_slip_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pushing_wall_slip_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};

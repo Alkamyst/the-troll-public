@@ -42,6 +42,8 @@ const LevelScript level_troll_test_entry[] = {
 		OBJECT(MODEL_EXCLAMATION_BOX, 1201, 441, -12578, 0, 0, 0, (99 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, 1201, 441, -13182, 0, 0, 0, (4 << 16), bhvExclamationBox),
 		OBJECT(MODEL_CAGE, -886, 100, -12348, 0, 0, 0, 0x00000000, bhvHiddenCage),
+		OBJECT(MODEL_METAL_BOX, -1021, 100, -6340, 0, -180, 0, 0x00000000, bhvMovingPlatformSlip1),
+		OBJECT(MODEL_METAL_BOX, -1, 100, -6890, 0, -180, 0, 0x00000000, bhvPushingWallSlip1),
 		OBJECT(MODEL_PURPLE_SWITCH, -886, 100, -12348, 0, -180, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_NONE, 0, 200, -13463, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		MARIO_POS(0x01, 0, 0, 200, -13463),

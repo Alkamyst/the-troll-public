@@ -1088,6 +1088,7 @@ enum oBehParam1stByteStarAct { // BPARAM1
     #define BOMP_ACT_POKE_OUT                               0x1
     #define BOMP_ACT_EXTEND                                 0x2
     #define BOMP_ACT_RETRACT                                0x3
+    #define BOMP_ACT_LAUNCH                                 0x4
 
 /* WF Tower Platform Group */
     /* oAction */
