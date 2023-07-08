@@ -172,9 +172,11 @@ unsigned char textNo[] = { TEXT_NO };
  * Rotates the background at 180 grades and it's scale.
  * Although the scale is properly applied in the loop function.
  */
-void beh_yellow_background_menu_init(void) {
-    gCurrentObject->oFaceAngleYaw = 0x8000;
-    gCurrentObject->oMenuButtonScale = 9.0f;
+void beh_yellow_background_menu_init(void) { // ROTATES BACKGROUND OBJECT FOR FILE SELECT. VERY IMPORTANT. 0x4000 is 90 degrees
+    gCurrentObject->oFaceAnglePitch = 0x0000; 
+    gCurrentObject->oFaceAngleYaw = 0x0000; // Along Z Axis
+    gCurrentObject->oFaceAngleRoll = 0x0000;
+    //gCurrentObject->oMenuButtonScale = 9.0f;
 }
 
 /**
@@ -182,7 +184,7 @@ void beh_yellow_background_menu_init(void) {
  * Properly scales the background in the main menu.
  */
 void beh_yellow_background_menu_loop(void) {
-    cur_obj_scale(9.0f);
+    //cur_obj_scale(9.0f);
 }
 
 /**
@@ -2002,8 +2004,8 @@ void print_file_select_strings(void) {
  */
 Gfx *geo_file_select_strings_and_menu_cursor(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 mtx) {
     if (callContext == GEO_CONTEXT_RENDER) {
-        print_file_select_strings();
-        print_menu_cursor();
+        //print_file_select_strings();
+        //print_menu_cursor();
     }
     return NULL;
 }

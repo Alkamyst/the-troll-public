@@ -26,7 +26,8 @@
 #include "config.h"
 #include "puppycam2.h"
 #include "main.h"
-#include "menu/file_select.h""
+#include "menu/file_select.h"
+#include "puppyprint.h"
 
 #ifdef VERSION_EU
 #undef LANGUAGE_FUNCTION
@@ -1758,6 +1759,7 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     u8 textContinue[] = { TEXT_CONTINUE };
     u8 textMockA[] = { TEXT_EXIT_COURSE };
     u8 textMockB[] = { TEXT_MOCK_A };
+    char time[2];
 
     u16 pauseTimerNum = ((gPauseTimer / (30)) + 1);
 
@@ -1795,24 +1797,27 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
 */
     handle_menu_scrolling(MENU_SCROLL_VERTICAL, index, 1, 1);
 
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
-    gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
-
     if (gPauseTimer >= 0) {
-        print_text_fmt_int(160, 130, "%d", pauseTimerNum);
+        gSPDisplayList(gDisplayListHead++, dl_rgba16_text_begin);
+        gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
+        
+        sprintf(time, "%d", pauseTimerNum);
+        //print_text(160, 130, time);
+        print_small_text(160, 100, time, PRINT_TEXT_ALIGN_CENTRE, PRINT_ALL, FONT_OUTLINE);
+
+        gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
     }
 
-    gSPDisplayList(gDisplayListHead++, dl_rgba16_text_end);
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_begin);
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
     
-    print_generic_string(x + 40, y - 2, LANGUAGE_ARRAY(textContinue));
+    print_generic_string(x + 38, y - 2, LANGUAGE_ARRAY(textContinue));
     if (!(gCurrCourseNum == COURSE_WF)) {
-        print_generic_string(20, 157, LANGUAGE_ARRAY(textMockA));
+        print_generic_string(18, 157, LANGUAGE_ARRAY(textMockA));
     }
     if (gCurrCourseNum == COURSE_WF) {
-        print_generic_string(20, 157, LANGUAGE_ARRAY(textMockB));
+        print_generic_string(18, 157, LANGUAGE_ARRAY(textMockB));
     }
 
     gSPDisplayList(gDisplayListHead++, dl_ia_text_end);
