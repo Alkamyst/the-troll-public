@@ -1382,8 +1382,8 @@ enum oBehParams1stByteSlidingPlatform { // collisionDataIndex
 
 /* Key Door */
     /* oAction */
-    #define DOOR_IDLE                                    0x0
-    #define DOOR_OPEN                                    0x1
+    #define DOOR_IDLE                                       0x0
+    #define DOOR_OPEN                                       0x1
 
 /* Toad */
 enum animIDsToad {

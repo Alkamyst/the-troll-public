@@ -548,5 +548,8 @@ extern const BehaviorScript bhvMovingPlatformSlip1[];
 extern const BehaviorScript bhvPushingWallSlip1[];
 extern const BehaviorScript bhvDoorKey[];
 extern const BehaviorScript bhvKeyDoor[];
+extern const BehaviorScript bhvFinalBoss[];
+extern const BehaviorScript bhvFinalBossBulletBill[];
+extern const BehaviorScript bhvThrowShell[];
 
 #endif // BEHAVIOR_DATA_H

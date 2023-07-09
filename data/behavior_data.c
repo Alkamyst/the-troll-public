@@ -841,7 +841,7 @@ const BehaviorScript bhvWfRotatingWoodenPlatform[] = {
 
 const BehaviorScript bhvKoopaShellUnderwater[] = {
     BEGIN(OBJ_LIST_GENACTOR),
-    OR_LONG(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SILHOUETTE)),
+    OR_LONG(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SILHOUETTE | OBJ_FLAG_MOVE_XZ_USING_FVEL)),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_koopa_shell_underwater_loop),
     END_LOOP(),
@@ -6201,5 +6201,54 @@ const BehaviorScript bhvKeyDoor[] = {
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_key_door_loop),
+    END_LOOP(),
+};
+
+extern void bhv_troll_final_boss_init();
+extern void bhv_troll_final_boss_loop();
+const BehaviorScript bhvFinalBoss[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_HITBOX(/*Radius*/ 200, /*Height*/ 200),
+    SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    SET_INT(oDamageOrCoinValue, 2),
+    SET_INT(oHealth, 3),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_troll_final_boss_loop),
+    END_LOOP(),
+};
+
+extern void bhv_final_boss_bullet_bill_loop();
+const BehaviorScript bhvFinalBossBulletBill[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
+    SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    SET_INT(oDamageOrCoinValue, 2),
+    SCALE(/*Unused*/ 0, /*Field*/ 40),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_final_boss_bullet_bill_loop),
+    END_LOOP(),
+};
+
+extern void bhv_throw_shell_init();
+extern void bhv_throw_shell_loop();
+const BehaviorScript bhvThrowShell[] = {
+    BEGIN(OBJ_LIST_DESTRUCTIVE),
+    OR_INT(oFlags, (OBJ_FLAG_HOLDABLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    DROP_TO_FLOOR(),
+    SET_HOME(),
+    CALL_NATIVE(bhv_throw_shell_init),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_throw_shell_loop),
     END_LOOP(),
 };

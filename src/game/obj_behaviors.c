@@ -586,6 +586,7 @@ s32 obj_flicker_and_disappear(struct Object *obj, s16 lifeSpan) {
     return FALSE;
 }
 
+
 /**
  * Checks if a given room is Mario's current room, even if on an object.
  */

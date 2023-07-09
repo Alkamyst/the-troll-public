@@ -25,9 +25,10 @@ void bhv_koopa_shell_underwater_loop(void) {
             cur_obj_unrender_set_action_and_anim(-1, 0);
             break;
         case HELD_THROWN:
+            o->oForwardVel = 80.0f;
+            cur_obj_enable_rendering();
+            o->oFlags &= ~OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
         case HELD_DROPPED:
-            spawn_mist_particles();
-            obj_mark_for_deletion(o);
             break;
     }
 
