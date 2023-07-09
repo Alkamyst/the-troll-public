@@ -166,6 +166,7 @@ void exclamation_box_act_kill(void) {
     if (o->oPosY <= 400) {
         o->oInteractType = INTERACT_DAMAGE;
         o->hitboxDownOffset = 1;
+        o->hurtboxRadius = 120;
     }
 //    cur_obj_scale_over_time(SCALE_AXIS_X, 2, 1.0f, 3.0f);
 //    cur_obj_scale_over_time(SCALE_AXIS_Z, 2, 1.0f, 3.0f);

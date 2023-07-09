@@ -97,6 +97,13 @@ void bhv_pushing_wall_slip_loop(void) {
         
         case BOMP_ACT_LAUNCH:
             o->oPosX = (o->oPosX + 100.0f);
+
+            if (distToHome >= 3000.0f) {
+                struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+                explosion->oGraphYOffset += 100.0f;
+
+                obj_mark_for_deletion(o);
+            }
             break;
     }
 
@@ -115,4 +122,54 @@ void bhv_pushing_wall_slip_loop(void) {
         }
     }
 
+}
+
+void bhv_door_key_loop(void) {
+//    o->oFaceAngleRoll += 0x200;
+    o->oFaceAngleYaw -= 0x400;
+    cur_obj_scale(2.0f);
+
+    if (obj_check_if_collided_with_object(o, gMarioObject)) {
+        cur_obj_disable_rendering();
+        cur_obj_become_intangible();
+
+        spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+        play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+        if (gMarioState->numKeys == -1) {
+            gMarioState->numKeys = (gMarioState->numKeys + 1);
+        }
+        gMarioState->numKeys = (gMarioState->numKeys + 1);
+    }
+
+
+    if (gMarioState->numKeys == -1) {
+        cur_obj_enable_rendering();
+        cur_obj_unhide();
+        cur_obj_become_tangible();
+    }
+
+}
+
+void bhv_key_door_loop(void) {
+//    o->oFaceAngleRoll += 0x200;
+    o->oDistanceToMario = dist_between_objects(o, gMarioObject);
+
+    if ((o->oDistanceToMario <= 500.0f) && (gMarioState->numKeys >= 1) && (o->oAction == DOOR_IDLE)) {
+        cur_obj_disable_rendering();
+        cur_obj_become_intangible();
+
+        spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+
+        gMarioState->numKeys = (gMarioState->numKeys - 1);
+
+        o->oAction = DOOR_OPEN;
+    }
+
+    if (gMarioState->numKeys == -1) {
+        cur_obj_enable_rendering();
+        cur_obj_unhide();
+        cur_obj_become_tangible();
+        load_object_collision_model();
+        o->oAction = DOOR_IDLE;
+    }
 }

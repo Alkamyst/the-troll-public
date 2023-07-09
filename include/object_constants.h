@@ -1380,6 +1380,11 @@ enum oBehParams1stByteSlidingPlatform { // collisionDataIndex
     #define ARROW_LIFT_ACT_MOVING_AWAY                      0x1
     #define ARROW_LIFT_ACT_MOVING_BACK                      0x2
 
+/* Key Door */
+    /* oAction */
+    #define DOOR_IDLE                                    0x0
+    #define DOOR_OPEN                                    0x1
+
 /* Toad */
 enum animIDsToad {
     TOAD_ANIM_WEST_WAVE_THEN_TURN, // 1 frame

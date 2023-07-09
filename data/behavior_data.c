@@ -3918,9 +3918,9 @@ const BehaviorScript bhvExplosion[] = {
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     BILLBOARD(),
     SET_INTERACT_TYPE(INTERACT_DAMAGE),
-    SET_INT(oDamageOrCoinValue, 2),
+    SET_INT(oDamageOrCoinValue, 8),
     SET_INT(oIntangibleTimer, 0),
-    SET_HITBOX_WITH_OFFSET(/*Radius*/ 150, /*Height*/ 150, /*Downwards offset*/ 150),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 450, /*Height*/ 450, /*Downwards offset*/ 450),
     SET_INT(oAnimState, OBJ_ANIM_STATE_INIT_ANIM),
     CALL_NATIVE(bhv_explosion_init),
     BEGIN_LOOP(),
@@ -6176,5 +6176,30 @@ const BehaviorScript bhvPushingWallSlip1[] = {
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_pushing_wall_slip_loop),
         CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_door_key_loop();
+const BehaviorScript bhvDoorKey[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 50),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_door_key_loop),
+    END_LOOP(),
+};
+
+extern void bhv_key_door_loop();
+const BehaviorScript bhvKeyDoor[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_key_door_loop),
     END_LOOP(),
 };

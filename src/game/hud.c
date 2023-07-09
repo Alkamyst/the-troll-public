@@ -442,7 +442,7 @@ void render_hud_keys(void) {
     s16 i;
 
     for (i = 0; i < gHudDisplay.keys; i++) {
-        print_text((i * 16) + 220, 142, "|"); // unused glyph - beta key
+        print_text((i * (-16)) + (GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 32), 185, "|"); // unused glyph - beta key
     }
 }
 

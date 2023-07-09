@@ -546,5 +546,7 @@ extern const BehaviorScript bhvLuigimanGoldenChestnut[];
 extern const BehaviorScript bhvHiddenCage[];
 extern const BehaviorScript bhvMovingPlatformSlip1[];
 extern const BehaviorScript bhvPushingWallSlip1[];
+extern const BehaviorScript bhvDoorKey[];
+extern const BehaviorScript bhvKeyDoor[];
 
 #endif // BEHAVIOR_DATA_H

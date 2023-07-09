@@ -1864,7 +1864,7 @@ void init_mario_from_save_file(void) {
 
     gMarioState->numCoins = 0;
     gMarioState->numStars = save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1);
-    gMarioState->numKeys = 0;
+    gMarioState->numKeys = -1;
 
 #ifdef SAVE_NUM_LIVES
     s8 savedLives = save_file_get_num_lives();

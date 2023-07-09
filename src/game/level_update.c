@@ -316,6 +316,8 @@ void set_mario_initial_action(struct MarioState *m, u32 spawnType, u32 actionArg
 #endif
 
     set_mario_initial_cap_powerup(m);
+
+    m->numKeys = -1;
 }
 
 void init_mario_after_warp(void) {

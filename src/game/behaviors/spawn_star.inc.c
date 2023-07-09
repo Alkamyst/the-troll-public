@@ -25,8 +25,6 @@ void bhv_collect_star_init(void) {
     } else {
         o->header.gfx.sharedChild = gLoadedGraphNodes[MODEL_STAR];
     }
-    // Don't have stars kick Mario out of the level
-    o->oInteractionSubtype |= INT_SUBTYPE_NO_EXIT;
 
     obj_set_hitbox(o, &sCollectStarHitbox);
 }

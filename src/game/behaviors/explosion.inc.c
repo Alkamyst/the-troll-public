@@ -24,7 +24,7 @@ void bhv_explosion_loop(void) {
 
     o->oOpacity -= 14;
 
-    cur_obj_scale((f32) o->oTimer / 9.0f + 1.0f);
+    cur_obj_scale((f32) ((o->oTimer / 9.0f + 1.0f) * 3));
 }
 
 void bhv_bobomb_bully_death_smoke_init(void) {
