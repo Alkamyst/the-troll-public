@@ -507,7 +507,7 @@
 #define MODEL_FISH_SHADOW                 0xBA        // fish_shadow_geo - fish with shadow, unused
 #define MODEL_BUTTERFLY                   0xBB        // butterfly_geo
 #define MODEL_BLACK_BOBOMB                0xBC        // black_bobomb_geo
-// find me
+#define MODEL_THE_TROLL                   0xBD        // the_troll_geo  
 #define MODEL_KOOPA_SHELL                 0xBE        // koopa_shell_geo
 #define MODEL_KOOPA_WITHOUT_SHELL         0xBF        // koopa_without_shell_geo
 #define MODEL_GOOMBA                      0xC0        // goomba_geo

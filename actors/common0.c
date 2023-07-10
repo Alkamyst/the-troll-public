@@ -79,3 +79,7 @@ UNUSED static const u64 binid_17 = 17;
 
 #include "koopa_shell/model.inc.c"
 UNUSED static const u64 binid_18 = 18;
+
+#include "the_troll/model.inc.c"
+#include "the_troll/anims/data.inc.c"
+#include "the_troll/anims/table.inc.c"

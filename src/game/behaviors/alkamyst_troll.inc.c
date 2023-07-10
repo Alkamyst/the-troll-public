@@ -511,3 +511,61 @@ void bhv_throw_shell_loop(void) {
 
     o->oInteractStatus = INT_STATUS_NONE;
 }
+
+// Troll Interact
+
+void bhv_troll_interact_int(void) {
+    o->oGravity = 2.5f;
+    o->oFriction = 0.8f;
+    o->oBuoyancy = 1.3f;
+    o->oInteractionSubtype = INT_SUBTYPE_NPC;
+}
+
+void bhv_troll_interact_loop(void) {
+    switch (o->oAction) {
+        case BOBOMB_BUDDY_ACT_IDLE:
+
+            vec3f_copy(&o->oBobombBuddyPosCopyVec, &o->oPosVec);
+
+            object_step();
+
+            if (o->oDistanceToMario < 1000.0f) {
+                o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x500);
+            }
+
+            if (o->oInteractStatus == INT_STATUS_INTERACTED) {
+                o->oAction = BOBOMB_BUDDY_ACT_TURN_TO_TALK;
+            }
+            break;
+
+        case BOBOMB_BUDDY_ACT_TURN_TO_TALK:
+
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x1000);
+
+            if ((s16) o->oMoveAngleYaw == (s16) o->oAngleToMario) {
+                o->oAction = BOBOMB_BUDDY_ACT_TALK;
+            }
+
+            cur_obj_play_sound_2(SOUND_ACTION_READ_SIGN);
+            break;
+
+        case BOBOMB_BUDDY_ACT_TALK:
+            if (set_mario_npc_dialog(MARIO_DIALOG_LOOK_FRONT) == MARIO_DIALOG_STATUS_SPEAK) {
+                o->activeFlags |= ACTIVE_FLAG_INITIATED_TIME_STOP;
+
+                        if (cutscene_object_with_dialog(CUTSCENE_DIALOG, o, o->oBehParams2ndByte)
+                            != BOBOMB_BUDDY_BP_STYPE_GENERIC) {
+                            set_mario_npc_dialog(MARIO_DIALOG_STOP);
+
+                            o->activeFlags &= ~ACTIVE_FLAG_INITIATED_TIME_STOP;
+                            o->oBobombBuddyHasTalkedToMario = BOBOMB_BUDDY_HAS_TALKED;
+                            o->oInteractStatus = INT_STATUS_NONE;
+                            o->oAction = BOBOMB_BUDDY_ACT_IDLE;
+                }
+            }
+            break;
+    }
+
+    set_object_visibility(o, 3000);
+    o->oInteractStatus = INT_STATUS_NONE;
+}

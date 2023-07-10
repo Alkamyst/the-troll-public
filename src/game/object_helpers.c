@@ -445,8 +445,6 @@ struct Object *spawn_object_relative(s16 behaviorParam, s16 relativePosX, s16 re
     obj->oBehParams2ndByte = behaviorParam;
     SET_BPARAM2(obj->oBehParams, behaviorParam);
 
-    spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner); // spawn puffs when object spawns
-
     return obj;
 }
 
