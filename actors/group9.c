@@ -19,9 +19,6 @@ UNUSED static const u64 binid_1 = 1;
 #include "chair/anims/table.inc.c"
 UNUSED static const u64 binid_2 = 2;
 
-#include "small_key/model.inc.c"
-UNUSED static const u64 binid_3 = 3;
-
 #include "mad_piano/model.inc.c"
 #include "mad_piano/anims/data.inc.c"
 #include "mad_piano/anims/table.inc.c"

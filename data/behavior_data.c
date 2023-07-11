@@ -6209,8 +6209,10 @@ extern void bhv_troll_final_boss_loop();
 const BehaviorScript bhvFinalBoss[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, the_troll_final_boss_anims),
+    ANIMATE(0),
     SET_HOME(),
-    SET_HITBOX(/*Radius*/ 200, /*Height*/ 200),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 550, /*Height*/ 800, /*Downwards offset*/ 300),
     SET_INTERACT_TYPE(INTERACT_DAMAGE),
     SET_INT(oDamageOrCoinValue, 2),
     SET_INT(oHealth, 3),

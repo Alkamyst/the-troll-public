@@ -199,4 +199,16 @@ extern const Collision unknown_seg8_collision_080262F8[];
 
 
 #include "the_troll/anim_header.h"
+#include "the_troll_final_boss/geo_header.h"
+
+
+#include "the_troll_final_boss/anim_header.h"
+
+// small_key
+extern const GeoLayout small_key_geo[];
+extern const Gfx small_key_seg5_dl_05006700[];
+extern const Gfx small_key_seg5_dl_05006A08[];
+extern const Gfx small_key_seg5_dl_05006A28[];
+extern const Gfx small_key_seg5_dl_05006A48[];
+extern const Gfx small_key_seg5_dl_05006A68[];
 #endif

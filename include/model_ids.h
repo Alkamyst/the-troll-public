@@ -364,7 +364,7 @@
 
 // group 9
 #define MODEL_BOO                         0x54        // boo_geo
-#define MODEL_BETA_BOO_KEY                0x55        // small_key_geo
+// find me
 #define MODEL_HAUNTED_CHAIR               0x56        // haunted_chair_geo
 #define MODEL_MAD_PIANO                   0x57        // mad_piano_geo
 #define MODEL_BOOKEND_PART                0x58        // bookend_part_geo
@@ -458,7 +458,7 @@
 #define MODEL_DIRT_ANIMATION              0x8A        // dirt_animation_geo
 #define MODEL_CARTOON_STAR                0x8B        // cartoon_star_geo
 #define MODEL_BLUE_COIN_SWITCH            0x8C        // blue_coin_switch_geo
-// find me
+#define MODEL_BETA_BOO_KEY                0x8D        // small_key_geo
 #define MODEL_MIST                        0x8E        // mist_geo
 #define MODEL_SPARKLES_ANIMATION          0x8F        // sparkles_animation_geo
 #define MODEL_RED_FLAME                   0x90        // red_flame_geo
@@ -514,7 +514,7 @@
 #define MODEL_SEAWEED                     0xC1        // seaweed_geo
 #define MODEL_AMP                         0xC2        // dAmpGeo
 #define MODEL_BOBOMB_BUDDY                0xC3        // bobomb_buddy_geo
-// find me
+#define MODEL_THE_TROLL_FINAL_BOSS        0xC4        // the_troll_final_boss_geo  
 // find me
 // find me
 #define MODEL_SSL_TOX_BOX                 0xC7        // ssl_geo_000630

@@ -83,3 +83,8 @@ UNUSED static const u64 binid_18 = 18;
 #include "the_troll/model.inc.c"
 #include "the_troll/anims/data.inc.c"
 #include "the_troll/anims/table.inc.c"
+#include "the_troll_final_boss/model.inc.c"
+#include "the_troll_final_boss/anims/data.inc.c"
+#include "the_troll_final_boss/anims/table.inc.c"
+
+#include "small_key/model.inc.c"

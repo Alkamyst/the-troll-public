@@ -29,3 +29,5 @@
 #include "koopa_shell/geo.inc.c"
 
 #include "the_troll/geo.inc.c"
+#include "the_troll_final_boss/geo.inc.c"
+#include "small_key/geo.inc.c"

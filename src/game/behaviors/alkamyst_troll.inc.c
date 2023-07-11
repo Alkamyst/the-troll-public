@@ -156,7 +156,7 @@ void bhv_key_door_loop(void) {
 //    o->oFaceAngleRoll += 0x200;
     o->oDistanceToMario = dist_between_objects(o, gMarioObject);
 
-    if ((o->oDistanceToMario <= 500.0f) && (gMarioState->numKeys >= 1) && (o->oAction == DOOR_IDLE)) {
+    if ((o->oDistanceToMario <= ((o->oBehParams2ndByte == 1) ? 1500.0f : 500.0f)) && (gMarioState->numKeys >= 1) && (o->oAction == DOOR_IDLE)) {
         cur_obj_disable_rendering();
         cur_obj_become_intangible();
 
@@ -199,13 +199,20 @@ void bhv_troll_final_boss_init(void) {
 
 void bhv_troll_final_boss_loop(void) {
     struct Object *shellObj;
+    struct Object *keyDoor;
 
     shellObj = cur_obj_nearest_object_with_behavior(bhvThrowShell);
+    keyDoor = cur_obj_nearest_object_with_behavior(bhvKeyDoor);
 
     switch (o->oAction) {
         case 0:
-            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x150);
-            o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 0x8);
+            o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0xA0);
+            if (o->oPosY >= 200.0f) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 0x8);
+            } else if (gMarioObject->oPosY > o->oPosY) {
+                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 0x8);
+            }
+            
             
             if ((shellObj != NULL) && (dist_between_objects(o, shellObj) < 400.0f)) {
                 shellObj->oInteractStatus |= INT_STATUS_HIT_MINE;
@@ -219,9 +226,14 @@ void bhv_troll_final_boss_loop(void) {
 
             if (o->oHealth <= 0) {
 
-                o->oPosY = approach_f32_symmetric(o->oPosY, o->oHomeY, 0x5);
+                o->oPosY = approach_f32_symmetric(o->oPosY, 0, 0x5);
 
-                if (o->oPosY == o->oHomeY) {
+                if (o->oFaceAnglePitch >= -6000.0f) {
+                o->oFaceAnglePitch -= 100.0f;
+                o->oFaceAngleRoll -= 100.0f;
+                }
+
+                if (o->oPosY == 0) {
 
                     seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
                     o->oBreakableBoxSmallFramesSinceReleased = 0;
@@ -231,7 +243,7 @@ void bhv_troll_final_boss_loop(void) {
 
                         if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
                             DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_163)) {
-                            spawn_object_relative(0, 0, 500, 1000, o, MODEL_BETA_BOO_KEY, bhvDoorKey);
+                            spawn_object_relative(0, 0, 500, 2000, keyDoor, MODEL_BETA_BOO_KEY, bhvDoorKey);
                             seq_player_unlower_volume(SEQ_PLAYER_LEVEL, 60);
                             seq_player_fade_out(SEQ_PLAYER_LEVEL, 1);
                             o->oAction = 2;
@@ -257,9 +269,7 @@ void bhv_troll_final_boss_loop(void) {
 
         case 2:
 
-            if (gMarioState->numKeys == 1) {
-                struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
-                explosion->oGraphYOffset += 100.0f;
+            if (gMarioState->numKeys == 0) {
                 o->oAction = 3;
             }
 
@@ -267,7 +277,14 @@ void bhv_troll_final_boss_loop(void) {
 
         case 3:
 
-            obj_mark_for_deletion(o);
+            o->oPosY = (o->oPosY - (2.5f * (o->oTimer)));
+
+            if (o->oPosY <= -900.0f) {
+                struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+                explosion->oGraphYOffset += 100.0f;
+                spawn_default_star(0.0f, 350.0f, -1300.0f);
+                obj_mark_for_deletion(o);
+            }
 
             break;
     }
@@ -282,7 +299,7 @@ void bhv_troll_final_boss_loop(void) {
 
 void final_boss_bullet_bill_act_0(void) {
 
-
+    cur_obj_hide();
     cur_obj_become_tangible();
     o->oForwardVel = 0.0f;
     o->oFaceAnglePitch = 0;
@@ -294,7 +311,7 @@ void final_boss_bullet_bill_act_0(void) {
 
 void final_boss_bullet_bill_act_1(void) {
     s16 sp1E = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
-    if (sp1E < 0x2000 && 400.0f < o->oDistanceToMario && o->oDistanceToMario < 1500.0f) {
+    if (sp1E < 0x2000 && 400.0f < o->oDistanceToMario && o->oDistanceToMario < 4500.0f) {
         o->oAction = 2;
     }
 }
@@ -307,16 +324,29 @@ void final_boss_bullet_bill_act_2(void) {
             o->oForwardVel = -3.0f;
         }
     } else {
-        if (o->oTimer > 70) {
+        if (o->oTimer > 55) {
             cur_obj_update_floor_and_walls();
+            o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
         }
 
         spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
         o->oForwardVel = 50.0f;
 
-        if (o->oDistanceToMario > 300.0f) {
-            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x50);
+    struct Object *finalBoss;
+    finalBoss = cur_obj_nearest_object_with_behavior(bhvFinalBoss);
+
+        if ((finalBoss->oHealth== 3) && (o->oDistanceToMario > 300.0f)) {
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0xF0);
         }
+
+        if ((finalBoss->oHealth== 2) && (o->oDistanceToMario > 300.0f)) {
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x1A0);
+        }
+
+        if ((finalBoss->oHealth== 1)) {
+            cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x200);
+        }
+
 
         if (o->oTimer == 50) {
             cur_obj_play_sound_2(SOUND_OBJ_POUNDING_CANNON);
@@ -332,10 +362,19 @@ void final_boss_bullet_bill_act_2(void) {
 }
 
 void final_boss_bullet_bill_act_3(void) {
-    o->oAction = 0;
+    struct Object *finalBoss;
+    finalBoss = cur_obj_nearest_object_with_behavior(bhvFinalBoss);
+
+    cur_obj_hide();
+    cur_obj_become_intangible();
+
+    if (finalBoss->oAction == 0) {
+        o->oAction = 0;
+    }
 }
 
 void final_boss_bullet_bill_act_4(void) {
+
     if (o->oTimer == 0) {
         o->oForwardVel = -30.0f;
         cur_obj_become_intangible();
@@ -346,7 +385,7 @@ void final_boss_bullet_bill_act_4(void) {
     o->oPosY += 20.0f;
 
     if (o->oTimer > 90) {
-        o->oAction = 0;
+        o->oAction = 3;
     }
 }
 
@@ -362,17 +401,24 @@ void bhv_final_boss_bullet_bill_loop(void) {
     struct Object *finalBoss;
     finalBoss = cur_obj_nearest_object_with_behavior(bhvFinalBoss);
 
+    if (finalBoss->oAction == 1) {
+        o->oAction = 3;
+    }
+
+    if (finalBoss->oHealth== 1) {
+        cur_obj_scale(0.5);
+    }
+
     cur_obj_call_action_function(sFinalBossBulletBillActions);
+
     if (cur_obj_check_interacted()) {
         o->oAction = 4;
     }
 
     if (!((o->oAction == 2) && ((o->oTimer >= 50)))) {
         o->oMoveAngleYaw = finalBoss->oMoveAngleYaw;
-        o->oPosY = finalBoss->oPosY;
+        o->oPosY = ((finalBoss->oPosY) - 50.0f);
     }
-
-    o->header.gfx.node.flags = finalBoss->header.gfx.node.flags;
 
     if (finalBoss->oAction == 2) {
         obj_mark_for_deletion(o);
@@ -469,16 +515,20 @@ void throw_shell_idle_loop(void) {
 }
 
 void throw_shell_get_dropped(void) {
+    o->oGravity = 2.5f;
+    o->oFriction = 0.99f;
+    o->oBuoyancy = 1.4f;
     cur_obj_become_tangible();
     cur_obj_enable_rendering();
     cur_obj_get_dropped();
     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
     o->oHeldState = HELD_FREE;
-    o->oBreakableBoxSmallReleased = TRUE;
-    o->oBreakableBoxSmallFramesSinceReleased = 0;
 }
 
 void throw_shell_get_thrown(void) {
+    o->oGravity = 0.0f;
+    o->oFriction = 0.0f;
+    o->oBuoyancy = 0.0f;
     cur_obj_become_tangible();
 
     cur_obj_enable_rendering();
