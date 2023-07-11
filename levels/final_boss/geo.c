@@ -15,3 +15,5 @@
 
 
 #include "levels/final_boss/geo.inc.c"
+
+#include "levels/final_boss/DoorFloor1/geo.inc.c"

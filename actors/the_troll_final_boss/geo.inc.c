@@ -3,7 +3,7 @@
 const GeoLayout the_troll_final_boss_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 153, -1, the_troll_final_boss_Ship_mesh_layer_1),
+		GEO_ANIMATED_PART(LAYER_OPAQUE, 0, -302, -1, the_troll_final_boss_Ship_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, the_troll_final_boss_Ship_mesh_layer_5),
 			GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 240, 0, the_troll_final_boss_Body_mesh_layer_1),

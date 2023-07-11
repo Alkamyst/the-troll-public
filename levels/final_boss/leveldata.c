@@ -12,3 +12,6 @@
 
 
 #include "levels/final_boss/leveldata.inc.c"
+
+#include "levels/final_boss/DoorFloor1/collision.inc.c"
+#include "levels/final_boss/DoorFloor1/model.inc.c"

@@ -32,6 +32,7 @@ const LevelScript level_final_boss_entry[] = {
 	MARIO(MODEL_MARIO, 0x00000001, bhvMario), 
 	JUMP_LINK(script_func_global_1), 
 	JUMP_LINK(script_func_global_2), 
+	LOAD_MODEL_FROM_GEO(MODEL_DOORFLOOR1, DoorFloor1_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -42,7 +43,7 @@ const LevelScript level_final_boss_entry[] = {
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_THE_TROLL_FINAL_BOSS, 28, 786, -37, 0, -180, 0, 0x00000000, bhvFinalBoss),
 		OBJECT(MODEL_BULLET_BILL, 28, 786, -37, 0, -180, 0, 0x00000000, bhvFinalBossBulletBill),
-		OBJECT(MODEL_METAL_BOX, 28, -201, -37, 0, -180, 0, (1 << 16), bhvKeyDoor),
+		OBJECT(MODEL_DOORFLOOR1, 28, -201, -37, 0, -180, 0, (1 << 16), bhvKeyDoorFloor1),
 		OBJECT(MODEL_KOOPA_SHELL, 1021, 0, -1808, 0, 0, 0, 0x00000000, bhvThrowShell),
 		OBJECT(MODEL_KOOPA_SHELL, -956, 0, -1808, 0, 0, 0, 0x00000000, bhvThrowShell),
 		OBJECT(MODEL_KOOPA_SHELL, 1629, 0, -1074, 0, 0, 0, 0x00000000, bhvThrowShell),

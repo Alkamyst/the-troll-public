@@ -202,7 +202,7 @@ void bhv_troll_final_boss_loop(void) {
     struct Object *keyDoor;
 
     shellObj = cur_obj_nearest_object_with_behavior(bhvThrowShell);
-    keyDoor = cur_obj_nearest_object_with_behavior(bhvKeyDoor);
+    keyDoor = cur_obj_nearest_object_with_behavior(bhvKeyDoorFloor1);
 
     switch (o->oAction) {
         case 0:
@@ -226,6 +226,7 @@ void bhv_troll_final_boss_loop(void) {
 
             if (o->oHealth <= 0) {
 
+                cur_obj_init_animation(1);
                 o->oPosY = approach_f32_symmetric(o->oPosY, 0, 0x5);
 
                 if (o->oFaceAnglePitch >= -6000.0f) {

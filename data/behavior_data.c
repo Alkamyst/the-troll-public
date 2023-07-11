@@ -6274,3 +6274,17 @@ const BehaviorScript bhvTrollInteract[] = {
         CALL_NATIVE(bhv_troll_interact_loop),
     END_LOOP(),
 };
+
+extern void bhv_key_door_loop();
+extern const Collision DoorFloor1_collision[];
+const BehaviorScript bhvKeyDoorFloor1[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(DoorFloor1_collision),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_key_door_loop),
+    END_LOOP(),
+};

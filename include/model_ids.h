@@ -573,6 +573,7 @@
 #define MODEL_CASTLE_GROUNDS_WARP_PIPE            MODEL_LEVEL_GEOMETRY_16   // warp_pipe_geo
 
 #define MODEL_CAGE 0x37
+#define MODEL_DOORFLOOR1 0x38
 
 
 #endif // MODEL_IDS_H
