@@ -6218,6 +6218,7 @@ const BehaviorScript bhvFinalBoss[] = {
     SET_INT(oHealth, 3),
     SET_INT(oIntangibleTimer, 0),
     SET_FLOAT(oDrawingDistance, 20000),
+    CALL_NATIVE(bhv_troll_final_boss_init),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_troll_final_boss_loop),
     END_LOOP(),

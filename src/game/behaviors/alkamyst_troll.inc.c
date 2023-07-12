@@ -181,20 +181,11 @@ void bhv_key_door_loop(void) {
 
 // final boss
 
-static struct ObjectHitbox sFinalBossHitbox = {
-    /* interactType:      */ INTERACT_DAMAGE,
-    /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 2,
-    /* health:            */ 3,
-    /* numLootCoins:      */ 1,
-    /* radius:            */ 200,
-    /* height:            */ 200,
-    /* hurtboxRadius:     */ 0,
-    /* hurtboxHeight:     */ 0,
-};
-
 void bhv_troll_final_boss_init(void) {
-    obj_set_hitbox(o, &sFinalBossHitbox);
+    o->oAction = 4;
+}
+
+void bhv_troll_final_boss_start(void) {
 }
 
 void bhv_troll_final_boss_loop(void) {
@@ -242,7 +233,7 @@ void bhv_troll_final_boss_loop(void) {
                     cur_obj_enable_rendering();
                     o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
 
-                        if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+                        if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_FRONT,
                             DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_163)) {
                             spawn_object_relative(0, 0, 500, 2000, keyDoor, MODEL_BETA_BOO_KEY, bhvDoorKey);
                             seq_player_unlower_volume(SEQ_PLAYER_LEVEL, 60);
@@ -285,6 +276,17 @@ void bhv_troll_final_boss_loop(void) {
                 explosion->oGraphYOffset += 100.0f;
                 spawn_default_star(0.0f, 350.0f, -1300.0f);
                 obj_mark_for_deletion(o);
+            }
+
+            break;
+
+        case 4:
+
+            o->oPosY = approach_f32_symmetric(o->oPosY, 800.0f, 0x8);
+
+            if (gMarioState->numKeys == -2) {
+                gMarioState->numKeys = -1;
+                o->oAction = 0;
             }
 
             break;
@@ -402,7 +404,7 @@ void bhv_final_boss_bullet_bill_loop(void) {
     struct Object *finalBoss;
     finalBoss = cur_obj_nearest_object_with_behavior(bhvFinalBoss);
 
-    if (finalBoss->oAction == 1) {
+    if ((finalBoss->oAction == 1) || (finalBoss->oAction == 4)) {
         o->oAction = 3;
     }
 

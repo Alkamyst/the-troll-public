@@ -694,6 +694,7 @@ u32 take_damage_from_interact_object(struct MarioState *m) {
         play_sound(SOUND_MENU_ENTER_PIPE, m->marioObj->header.gfx.cameraToObject);
         m->flags &= ~MARIO_SPECIAL_CAPS;
         spawn_mist_particles();
+        m->squishTimer = 0x00;
     }
 
     return damage;

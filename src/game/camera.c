@@ -3303,8 +3303,8 @@ void init_camera(struct Camera *c) {
                 gSecondCameraFocus->oBowserCamAct = BOWSER_CAM_ACT_END;
             }
             break;
-        case LEVEL_BOWSER_2:
-            start_cutscene(c, CUTSCENE_ENTER_BOWSER_ARENA);
+        case LEVEL_FINAL_BOSS:
+            start_cutscene(c, CUTSCENE_ENTER_FINAL_ARENA);
             break;
         case LEVEL_BOWSER_3:
             start_cutscene(c, CUTSCENE_ENTER_BOWSER_ARENA);
@@ -7953,12 +7953,11 @@ void cutscene_bowser_arena_dialog(struct Camera *c) {
  * End the bowser arena cutscene.
  */
 void cutscene_bowser_arena_end(struct Camera *c) {
+    gMarioState->numKeys = -2;
     cutscene_stop_dialog(c);
     c->cutscene = 0;
     transition_next_state(c, 20);
-    sStatusFlags |= CAM_FLAG_UNUSED_CUTSCENE_ACTIVE;
     sModeOffsetYaw = sMarioCamState->faceAngle[1] + DEGREES(90);
-    gSecondCameraFocus->oBowserCamAct = BOWSER_CAM_ACT_END;
 }
 
 /**
@@ -7983,6 +7982,38 @@ void cutscene_bowser_arena(struct Camera *c) {
         cutscene_event(cutscene_shake_explosion, c, 109, 109);
         cutscene_event(cutscene_shake_explosion, c, 127, 127);
     }
+}
+
+void cutscene_final_init(struct Camera *c) {
+
+    Vec3f pos = { -1000.0f, 1300.0f, -1000.0f };
+    Vec3f sDMPos = { 0, 0, -1500.0f };
+
+    vec3f_copy(c->pos, pos);
+    vec3f_copy(c->focus, sDMPos);
+}
+
+void cutscene_final_arena(struct Camera *c) {
+
+    Vec3f pos = { -1000.0f, 1300.0f, -1000.0f };
+    Vec3f sDMPos = { 0, 800.0f, 0 };
+
+    vec3f_copy(c->pos, pos);
+    vec3f_copy(c->focus, sDMPos);
+    // approach_vec3f_asymptotic(c->pos, pos, 0.1f, 0.1f, 0.1f);
+    // c->yaw = 90.0f;
+
+    if (gCutsceneTimer == (4 * 30)) {
+        create_dialog_box(DIALOG_093);
+        // gCutsceneTimer = CUTSCENE_STOP;
+        // c->cutscene = 0;
+    }
+
+    if ((gCutsceneTimer > (4 * 30)) && (get_dialog_id() == DIALOG_NONE)) {
+        gCutsceneTimer = CUTSCENE_LOOP;
+    }
+
+    // gCutsceneTimer = cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_FRONT);
 }
 
 void cutscene_star_spawn_store_info(struct Camera *c) {
@@ -8739,7 +8770,7 @@ void cutscene_dialog_create_dialog_box(struct Camera *c) {
  */
 void cutscene_dialog(struct Camera *c) {
     cutscene_event(cutscene_dialog_start, c, 0, 0);
-    cutscene_event(cutscene_dialog_move_mario_shoulder, c, 0, -1);
+    // cutscene_event(cutscene_dialog_move_mario_shoulder, c, 0, -1);
     cutscene_event(cutscene_dialog_create_dialog_box, c, 10, 10);
     sStatusFlags |= CAM_FLAG_SMOOTH_MOVEMENT;
 
@@ -10376,6 +10407,17 @@ struct Cutscene sCutsceneEnterBowserArena[] = {
     { cutscene_bowser_arena_end, 0 }
 };
 
+/**
+ * Cutscene that plays when entering bowser's arenas.
+ */
+struct Cutscene sCutsceneEnterFinalArena[] = {
+    { cutscene_final_init, 1 },
+    { cutscene_mario_dialog, CUTSCENE_LOOP },
+    { cutscene_final_arena, CUTSCENE_LOOP },
+    // { cutscene_bowser_arena_dialog, CUTSCENE_LOOP },
+    { cutscene_bowser_arena_end, 0 }
+};
+
 // The dance cutscenes are automatically stopped since reset_camera() is called after Mario warps.
 
 /**
@@ -10917,6 +10959,7 @@ void play_cutscene(struct Camera *c) {
         CUTSCENE(CUTSCENE_UNUSED_EXIT,          sCutsceneUnusedExit)
         CUTSCENE(CUTSCENE_INTRO_PEACH,          sCutsceneIntroPeach)
         CUTSCENE(CUTSCENE_ENTER_BOWSER_ARENA,   sCutsceneEnterBowserArena)
+        CUTSCENE(CUTSCENE_ENTER_FINAL_ARENA,    sCutsceneEnterFinalArena)
         CUTSCENE(CUTSCENE_DANCE_ROTATE,         sCutsceneDanceDefaultRotate)
         CUTSCENE(CUTSCENE_DANCE_DEFAULT,        sCutsceneDanceDefaultRotate)
         CUTSCENE(CUTSCENE_DANCE_FLY_AWAY,       sCutsceneDanceFlyAway)

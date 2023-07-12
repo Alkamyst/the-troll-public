@@ -1447,14 +1447,10 @@ s32 act_crouch_slide(struct MarioState *m) {
     }
 
     if (m->input & INPUT_B_PRESSED) {
-        if (!(m->flags & MARIO_METAL_CAP)) {
-            if (m->forwardVel >= 10.0f) {
-                return set_mario_action(m, ACT_SLIDE_KICK, 0);
-            } else {
-                return set_mario_action(m, ACT_MOVE_PUNCHING, 0x9);
-            }
+        if (m->forwardVel >= 10.0f) {
+            return set_mario_action(m, ACT_SLIDE_KICK, 0);
         } else {
-            spawn_object_relative(0, 0, 0, 0, m->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShell);
+            return set_mario_action(m, ACT_MOVE_PUNCHING, 0x9);
         }
     }
 

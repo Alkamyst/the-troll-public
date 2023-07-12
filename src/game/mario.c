@@ -1165,6 +1165,7 @@ s32 set_water_plunge_action(struct MarioState *m) {
         play_sound(SOUND_MENU_ENTER_PIPE, m->marioObj->header.gfx.cameraToObject);
         m->flags &= ~MARIO_SPECIAL_CAPS;
         spawn_mist_particles();
+        m->squishTimer = 0x00;
     }
 
     return set_mario_action(m, ACT_WATER_PLUNGE, 0);
@@ -1335,6 +1336,7 @@ void update_mario_geometry_inputs(struct MarioState *m) {
                 play_sound(SOUND_MENU_ENTER_PIPE, m->marioObj->header.gfx.cameraToObject);
                 m->flags &= ~MARIO_SPECIAL_CAPS;
                 spawn_mist_particles();
+                m->squishTimer = 0x00;
             }
         }
 
@@ -1618,6 +1620,7 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
     }
 
     if (m->flags & MARIO_METAL_CAP) {
+        m->squishTimer = 0x30;
     }
 
     //! (Pause buffered hitstun) Since the global timer increments while paused,
