@@ -19,3 +19,6 @@
 #include "levels/bob/areas/1/geo.inc.c"
 
 #include "levels/bob/geo.inc.c"
+
+#include "levels/bob/mushroom_troll_1/geo.inc.c"
+#include "levels/bob/pushy_wall_1/geo.inc.c"

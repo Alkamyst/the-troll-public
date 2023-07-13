@@ -30,15 +30,15 @@ void bhv_moving_platform_slip(void) {
         f32 dz = o->oPosZ - o->oHomeZ;
         f32 distToHome = sqrtf(sqr(dx) + sqr(dz));
 
-        if (floorType == SURFACE_INTERACTION) {
+        if ((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) {
             if (distToHome < 800.0f) {
-                o->oPosX += 100.0f;
+                o->oPosX -= 100.0f;
             }
         }
 
-        if (floorType != SURFACE_INTERACTION) {
+        if ((floorType != SURFACE_INTERACTION) && (floorType != SURFACE_INTERACTION_DEATH)) {
             if (distToHome > 0.0f) {
-                o->oPosX -= 100.0f;
+                o->oPosX += 100.0f;
             }
         }
     }
@@ -65,7 +65,7 @@ void bhv_pushing_wall_slip_loop(void) {
 
         case BOMP_ACT_POKE_OUT:
             if (distToHome <= 120.0f) {
-                o->oPosX = (o->oPosX + 25.0f);
+                o->oPosZ = (o->oPosZ + 25.0f);
             }
 
             if (o->oTimer == 15) {
@@ -76,7 +76,7 @@ void bhv_pushing_wall_slip_loop(void) {
 
         case BOMP_ACT_EXTEND:
             if (distToHome <= 500.0f) {
-                o->oPosX = (o->oPosX + ((floorType == SURFACE_INTERACTION) ? 80.0f : 40.0f));
+                o->oPosZ = (o->oPosZ + ((floorType == SURFACE_INTERACTION) ? 80.0f : 40.0f));
             }
 
             if (o->oTimer == 60) {
@@ -86,8 +86,8 @@ void bhv_pushing_wall_slip_loop(void) {
             break;
 
         case BOMP_ACT_RETRACT:
-            if (o->oPosX > o->oHomeX) {
-                o->oPosX = (o->oPosX - 10.0f);
+            if (o->oPosZ > o->oHomeZ) {
+                o->oPosZ = (o->oPosZ - 10.0f);
             }
 
             if (o->oTimer == 90) {
@@ -96,7 +96,7 @@ void bhv_pushing_wall_slip_loop(void) {
             break;
         
         case BOMP_ACT_LAUNCH:
-            o->oPosX = (o->oPosX + 100.0f);
+            o->oPosZ = (o->oPosZ + 60.0f);
 
             if (distToHome >= 3000.0f) {
                 struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);

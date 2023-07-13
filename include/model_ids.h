@@ -574,6 +574,7 @@
 
 #define MODEL_CAGE 0x37
 #define MODEL_DOORFLOOR1 0x38
-
+#define MODEL_MUSHROOM_1 0x39
+#define MODEL_PUSHYWALL1 0x3A
 
 #endif // MODEL_IDS_H

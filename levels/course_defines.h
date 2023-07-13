@@ -11,6 +11,7 @@
  *      4: Default, used for 100 coin stars, 8 red coin stars in bowser levels, and secret stars
  */
 DEFINE_COURSE(COURSE_NONE, 0x44444440) // (0)  Course Hub (Castle Grounds)
+DEFINE_COURSE(COURSE_BOB, 0x44444440) // (1)  Bob Omb Battlefield
 DEFINE_COURSE(COURSE_TROLL_TEST, 0x44444440) 
 DEFINE_COURSE(COURSE_FINAL_BOSS, 0x44444440) 
 DEFINE_COURSE(COURSE_JRB, 0x22222240) // (3)  Jolly Rodger's Bay
@@ -26,7 +27,6 @@ DEFINE_COURSE(COURSE_TTM, 0x00000040) // (12) Tall Tall Mountain
 DEFINE_COURSE(COURSE_THI, 0x11112140) // (13) Tiny Huge Island
 DEFINE_COURSE(COURSE_TTC, 0x22222240) // (14) Tick Tock Clock
 DEFINE_COURSE(COURSE_RR, 0x00000040) // (15) Rainbow Ride
-DEFINE_COURSE(COURSE_BOB, 0x00022240) // (1)  Bob Omb Battlefield
 DEFINE_COURSE(COURSE_WF, 0x00002040) // (2)  Whomp's Fortress
 DEFINE_COURSES_END()
 DEFINE_BONUS_COURSE(COURSE_BITDW, 0x34444440) // (16) Bowser in the Dark World

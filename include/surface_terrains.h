@@ -99,7 +99,7 @@ enum SurfaceTypes {
     SURFACE_INTERACTION3,               // 0x007F // Surface that activates events when Mario is over it
     SURFACE_INTERACTION4,               // 0x0080 // Surface that activates events when Mario is over it
     SURFACE_INTERACTION5,               // 0x0081 // Surface that activates events when Mario is over it
-    SURFACE_0082,                       // 0x0082 // Unused
+    SURFACE_INTERACTION_DEATH,          // 0x0082 // Unused
     SURFACE_0083,                       // 0x0083 // Unused
     SURFACE_0084,                       // 0x0084 // Unused
     SURFACE_0085,                       // 0x0085 // Unused

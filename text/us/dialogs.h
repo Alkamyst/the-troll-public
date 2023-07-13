@@ -24,11 +24,33 @@ Each jump you do will be\n\
 @FF0000FFhigher than the last one@--------\n\
 if done right."))
 
-DEFINE_DIALOG(DIALOG_001, 1, 4, 30, 200, _("\
-If you want to go far,\n\
-perform a @FF0000FFLong Jump!@--------\n\
-Run, press [Z] to crouch,\n\
-then [A] to jump!"))
+DEFINE_DIALOG(DIALOG_001, 1, 6, 30, 200, _("\
+I trusted you, plumber.\n\
+You could have been a\n\
+great star. Yet, you\n\
+decided to go after\n\
+my @FFFF00FF★@--------.\n\
+\n\
+After your actions tonight,\n\
+you should be BANNED\n\
+from this establishment.\n\
+Lucky for you, however,\n\
+our audience is begging\n\
+for an @FF0000FFENCORE!@--------\n\
+Now, I'm a host. I give\n\
+the people what they want.\n\
+Using the @FFFF00FFStar Power,@--------\n\
+I will give them\n\
+@FF0000FFthe greatest show@-------- of\n\
+all time.\n\
+Now, people of all ages,\n\
+spaces, and places,\n\
+@00FF00FFTHE TROLL☆@-------- is proud to\n\
+present to you one\n\
+last performance.\n\
+\n\
+The last performance...\n\
+OF @FF0000FFTHIS PLUMBER'S LIFE.@--------"))
 
 DEFINE_DIALOG(DIALOG_002, 1, 5, 30, 200, _("\
 To gain extra height near\n\
