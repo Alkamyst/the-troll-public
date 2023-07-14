@@ -393,6 +393,9 @@ s32 mario_get_floor_class(struct MarioState *m) {
         switch (m->floor->type) {
             case SURFACE_NOT_SLIPPERY:
             case SURFACE_HARD_NOT_SLIPPERY:
+            case SURFACE_INTERACTION:
+            case SURFACE_INTERACTION2:
+            case SURFACE_INTERACTION3:
             case SURFACE_SWITCH:
                 floorClass = SURFACE_CLASS_NOT_SLIPPERY;
                 break;

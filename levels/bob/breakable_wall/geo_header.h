@@ -1,0 +1,15 @@
+extern const GeoLayout breakable_wall_geo[];
+extern u8 breakable_wall__5EBF00FA552CFA3E87841A02707C16FF_ci4[];
+extern u8 breakable_wall__5EBF00FA552CFA3E87841A02707C16FF_ci4_pal_rgba16[];
+extern u8 breakable_wall__0E010410_ia8[];
+extern Vtx breakable_wall_Breakable_Wall_mesh_layer_5_vtx_0[4];
+extern Gfx breakable_wall_Breakable_Wall_mesh_layer_5_tri_0[];
+extern Vtx breakable_wall_Breakable_Wall_mesh_layer_4_vtx_0[4];
+extern Gfx breakable_wall_Breakable_Wall_mesh_layer_4_tri_0[];
+extern Gfx mat_breakable_wall_Breakable[];
+extern Gfx mat_revert_breakable_wall_Breakable[];
+extern Gfx mat_breakable_wall_Crack[];
+extern Gfx mat_revert_breakable_wall_Crack[];
+extern Gfx breakable_wall_Breakable_Wall_mesh_layer_5[];
+extern Gfx breakable_wall_Breakable_Wall_mesh_layer_4[];
+extern Gfx breakable_wall_material_revert_render_settings[];

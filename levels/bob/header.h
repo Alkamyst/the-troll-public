@@ -46,4 +46,16 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/hidden_cage/geo_header.h"
 
+#include "levels/bob/dynamite/collision_header.h"
+
+#include "levels/bob/dynamite/geo_header.h"
+
+#include "levels/bob/dynamite_rope/collision_header.h"
+
+#include "levels/bob/dynamite_rope/geo_header.h"
+
+#include "levels/bob/breakable_wall/collision_header.h"
+
+#include "levels/bob/breakable_wall/geo_header.h"
+
 #endif

@@ -1,0 +1,19 @@
+const Collision breakable_wall_collision[] = {
+	COL_INIT(),
+	COL_VERTEX_INIT(8),
+	COL_VERTEX(0, 747, 459),
+	COL_VERTEX(0, 0, 459),
+	COL_VERTEX(0, 0, -450),
+	COL_VERTEX(0, 747, -450),
+	COL_VERTEX(6, 634, 381),
+	COL_VERTEX(6, 0, 381),
+	COL_VERTEX(6, 0, -390),
+	COL_VERTEX(6, 634, -390),
+	COL_TRI_INIT(SURFACE_DEFAULT, 4),
+	COL_TRI(0, 1, 2),
+	COL_TRI(0, 2, 3),
+	COL_TRI(4, 5, 6),
+	COL_TRI(4, 6, 7),
+	COL_TRI_STOP(),
+	COL_END()
+};

@@ -652,8 +652,11 @@ void bhv_dynamite_trail_loop(void) {
         obj_mark_for_deletion(o);
     }
 
-    if ((obj_check_if_collided_with_object(o, gMarioObject) == TRUE) && (gMarioState->action == ACT_BURNING_GROUND)) {
-        obj_mark_for_deletion(o);
+    if (gMarioState->floor != NULL) {
+        s32 floorType = gMarioState->floor->type;
+        if ((floorType == SURFACE_INTERACTION3) && (gMarioState->action == ACT_BURNING_GROUND)) {
+            obj_mark_for_deletion(o);
+        }
     }
 
     cur_obj_become_tangible();

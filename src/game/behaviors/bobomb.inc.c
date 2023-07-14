@@ -159,9 +159,26 @@ void stationary_bobomb_free_loop(void) {
 
     bobomb_check_interactions();
 
-    if (o->oBobombFuseTimer > 150) {
+    if (o->oBobombFuseTimer > 10) {
         o->oAction = 3;
     }
+
+    s16 animFrame = o->header.gfx.animInfo.animFrame;
+
+    // vec3f_copy(&o->oBobombBuddyPosCopyVec, &o->oPosVec);
+
+    object_step();
+
+    if (animFrame == 5 || animFrame == 16) {
+        cur_obj_play_sound_2(SOUND_OBJ_BOBOMB_WALK);
+    }
+
+    if (o->oDistanceToMario < 1000.0f) {
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x140);
+    }
+
+
+
 }
 
 void bobomb_free_loop(void) {
@@ -178,7 +195,7 @@ void bobomb_held_loop(void) {
     cur_obj_set_pos_relative(gMarioObject, 0.0f, 60.0f, 100.0f);
 
     o->oBobombFuseLit = TRUE;
-    if (o->oBobombFuseTimer > 150) {
+    if (o->oBobombFuseTimer > 10) {
         //! Although the Bob-omb's action is set to explode when the fuse timer expires,
         //  bobomb_act_explode() will not execute until the bob-omb's held state changes.
         //  This allows the Bob-omb to be regrabbed indefinitely.

@@ -23,3 +23,6 @@
 #include "levels/bob/mushroom_troll_1/geo.inc.c"
 #include "levels/bob/pushy_wall_1/geo.inc.c"
 #include "levels/bob/hidden_cage/geo.inc.c"
+#include "levels/bob/dynamite/geo.inc.c"
+#include "levels/bob/dynamite_rope/geo.inc.c"
+#include "levels/bob/breakable_wall/geo.inc.c"

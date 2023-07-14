@@ -6308,7 +6308,7 @@ extern void bhv_dynamite_wall_loop();
 const BehaviorScript bhvDynamiteWall[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    LOAD_COLLISION_DATA(breakable_wall_collision),
     SET_FLOAT(oDrawingDistance, 20000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_dynamite_wall_loop),
@@ -6318,9 +6318,9 @@ const BehaviorScript bhvDynamiteWall[] = {
 
 extern void bhv_dynamite_trail_loop();
 const BehaviorScript bhvDynamiteTrail[] = {
-    BEGIN(OBJ_LIST_GENACTOR),
+    BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    LOAD_COLLISION_DATA(dynamite_rope_collision),
     SET_FLOAT(oDrawingDistance, 20000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_dynamite_trail_loop),
