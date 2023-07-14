@@ -6139,11 +6139,10 @@ const BehaviorScript bhvLuigimanGoldenChestnut[] = {
 };
 
 extern void bhv_hidden_cage_loop();
-extern const Collision cage_collision[];
 const BehaviorScript bhvHiddenCage[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(cage_collision),
+    LOAD_COLLISION_DATA(hidden_cage_collision),
     SET_FLOAT(oCollisionDistance, 300),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_cage_loop),
@@ -6287,5 +6286,44 @@ const BehaviorScript bhvKeyDoorFloor1[] = {
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_key_door_loop),
+    END_LOOP(),
+};
+
+extern void bhv_dynamite_loop();
+const BehaviorScript bhvDynamite[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
+    SET_INTERACT_TYPE(INTERACT_DAMAGE),
+    SET_INT(oDamageOrCoinValue, 8),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_dynamite_loop),
+    END_LOOP(),
+};
+
+extern void bhv_dynamite_wall_loop();
+const BehaviorScript bhvDynamiteWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_dynamite_wall_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_dynamite_trail_loop();
+const BehaviorScript bhvDynamiteTrail[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_dynamite_trail_loop),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

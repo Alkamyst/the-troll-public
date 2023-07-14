@@ -36,6 +36,7 @@ const LevelScript level_bob_entry[] = {
 	JUMP_LINK(script_func_global_1), 
 	LOAD_MODEL_FROM_GEO(MODEL_MUSHROOM_1, mushroom_troll_1_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_PUSHYWALL1, pushy_wall_1_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CAGE, hidden_cage_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -44,8 +45,10 @@ const LevelScript level_bob_entry[] = {
 		WARP_NODE(0x0A, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF0, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		OBJECT(MODEL_CAGE, -519, 313, -5020, 0, 0, 0, 0x00000000, bhvHiddenCage),
 		OBJECT(MODEL_PUSHYWALL1, 2556, 313, 22, 0, 0, 0, 0x00000000, bhvPushingWallSlip1),
 		OBJECT(MODEL_MUSHROOM_1, 283, -2645, -7632, 0, 0, 0, 0x00000000, bhvMovingPlatformSlip1),
+		OBJECT(MODEL_PURPLE_SWITCH, -519, 313, -5020, 0, -180, 0, 0x00000000, bhvFloorSwitchHiddenObjects),
 		OBJECT(MODEL_NONE, 0, 200, -10885, 0, 0, 0, 0x000A0000, bhvSpinAirborneWarp),
 		MARIO_POS(0x01, 0, 0, 200, -10885),
 		TERRAIN(bob_area_1_collision),

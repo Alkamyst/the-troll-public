@@ -42,4 +42,8 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/pushy_wall_1/geo_header.h"
 
+#include "levels/bob/hidden_cage/collision_header.h"
+
+#include "levels/bob/hidden_cage/geo_header.h"
+
 #endif

@@ -23,7 +23,7 @@ extern Vtx bob_dl_Main_mesh_layer_1_vtx_2[12];
 extern Gfx bob_dl_Main_mesh_layer_1_tri_2[];
 extern Vtx bob_dl_Main_mesh_layer_1_vtx_3[38];
 extern Gfx bob_dl_Main_mesh_layer_1_tri_3[];
-extern Vtx bob_dl_Main_mesh_layer_1_vtx_4[4];
+extern Vtx bob_dl_Main_mesh_layer_1_vtx_4[8];
 extern Gfx bob_dl_Main_mesh_layer_1_tri_4[];
 extern Vtx bob_dl_Main_mesh_layer_1_vtx_5[42];
 extern Gfx bob_dl_Main_mesh_layer_1_tri_5[];

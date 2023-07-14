@@ -76,7 +76,7 @@ void bhv_pushing_wall_slip_loop(void) {
 
         case BOMP_ACT_EXTEND:
             if (distToHome <= 500.0f) {
-                o->oPosZ = (o->oPosZ + ((floorType == SURFACE_INTERACTION) ? 80.0f : 40.0f));
+                o->oPosZ = (o->oPosZ + (((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) ? 80.0f : 40.0f));
             }
 
             if (o->oTimer == 60) {
@@ -109,7 +109,7 @@ void bhv_pushing_wall_slip_loop(void) {
 
     if (gMarioState->floor != NULL) {
 
-        if ((floorType == SURFACE_INTERACTION) && (o->oAction != BOMP_ACT_LAUNCH)) {
+        if (((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) && (o->oAction != BOMP_ACT_LAUNCH)) {
             o->oTimer = 15;
             o->oAction = BOMP_ACT_EXTEND;
 
@@ -621,4 +621,40 @@ void bhv_troll_interact_loop(void) {
 
     set_object_visibility(o, 3000);
     o->oInteractStatus = INT_STATUS_NONE;
+}
+
+void bhv_dynamite_loop(void) {
+    struct Object *dynamiteTrailObj;
+    dynamiteTrailObj = cur_obj_nearest_object_with_behavior(bhvDynamiteTrail);
+
+    if ((obj_check_if_collided_with_object(o, gMarioObject) == TRUE) || (dynamiteTrailObj == NULL)) {
+        struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        explosion->oGraphYOffset += 100.0f;
+        obj_mark_for_deletion(o);
+    }
+}
+
+void bhv_dynamite_wall_loop(void) {
+    struct Object *dynamiteObj;
+    dynamiteObj = cur_obj_nearest_object_with_behavior(bhvDynamite);
+
+    if (dynamiteObj == NULL){
+        obj_mark_for_deletion(o);
+    }
+    cur_obj_become_tangible();
+}
+
+void bhv_dynamite_trail_loop(void) {
+    struct Object *dynamiteObj;
+    dynamiteObj = cur_obj_nearest_object_with_behavior(bhvDynamite);
+
+    if (dynamiteObj == NULL){
+        obj_mark_for_deletion(o);
+    }
+
+    if ((obj_check_if_collided_with_object(o, gMarioObject) == TRUE) && (gMarioState->action == ACT_BURNING_GROUND)) {
+        obj_mark_for_deletion(o);
+    }
+
+    cur_obj_become_tangible();
 }

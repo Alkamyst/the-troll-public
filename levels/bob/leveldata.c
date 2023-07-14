@@ -32,3 +32,5 @@
 #include "levels/bob/mushroom_troll_1/model.inc.c"
 #include "levels/bob/pushy_wall_1/collision.inc.c"
 #include "levels/bob/pushy_wall_1/model.inc.c"
+#include "levels/bob/hidden_cage/collision.inc.c"
+#include "levels/bob/hidden_cage/model.inc.c"

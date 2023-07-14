@@ -2,7 +2,7 @@ extern const GeoLayout pushy_wall_1_geo[];
 extern u8 pushy_wall_1_MarioParty_CB06F12D_2_0_ci_ci4[];
 extern u8 pushy_wall_1_MarioParty_CB06F12D_2_0_ci_ci4_pal_rgba16[];
 extern u8 pushy_wall_1__0E029850_rgba16[];
-extern Vtx pushy_wall_1_Cube_mesh_layer_1_vtx_0[20];
+extern Vtx pushy_wall_1_Cube_mesh_layer_1_vtx_0[24];
 extern Gfx pushy_wall_1_Cube_mesh_layer_1_tri_0[];
 extern Vtx pushy_wall_1_Cube_mesh_layer_4_vtx_0[16];
 extern Gfx pushy_wall_1_Cube_mesh_layer_4_tri_0[];
