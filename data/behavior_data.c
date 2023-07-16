@@ -1770,6 +1770,7 @@ const BehaviorScript bhvFloorSwitchHardcodedModel[] = {
     // Floor switch - common:
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(purple_switch_seg8_collision_0800C7A8),
+    SET_FLOAT(oDrawingDistance, 20000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_purple_switch_loop),
         CALL_NATIVE(load_object_collision_model),
@@ -6178,6 +6179,20 @@ const BehaviorScript bhvPushingWallSlip1[] = {
     END_LOOP(),
 };
 
+extern void bhv_cannon_wall_slip_loop();
+const BehaviorScript bhvMovingPlatformSlip2[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(cannon_wall_collision),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cannon_wall_slip_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 extern void bhv_door_key_loop();
 const BehaviorScript bhvDoorKey[] = {
     BEGIN(OBJ_LIST_LEVEL),
@@ -6324,6 +6339,43 @@ const BehaviorScript bhvDynamiteTrail[] = {
     SET_FLOAT(oDrawingDistance, 20000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_dynamite_trail_loop),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_fire_flower();
+const BehaviorScript bhvFireFlower[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HITBOX(/*Radius*/ 80, /*Height*/ 50),
+    SET_INTERACT_TYPE(INTERACT_FLAME),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_fire_flower),
+    END_LOOP(),
+};
+
+extern void bhv_cloud_troll_loop();
+const BehaviorScript bhvCloudTroll[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HITBOX(/*Radius*/ 500, /*Height*/ 100),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_cloud_troll_loop),
+    END_LOOP(),
+};
+
+extern void bhv_falling_ground_loop();
+const BehaviorScript bhvFallingGround[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(falling_ground_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_falling_ground_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

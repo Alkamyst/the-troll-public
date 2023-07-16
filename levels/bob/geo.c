@@ -26,3 +26,8 @@
 #include "levels/bob/dynamite/geo.inc.c"
 #include "levels/bob/dynamite_rope/geo.inc.c"
 #include "levels/bob/breakable_wall/geo.inc.c"
+#include "levels/bob/fire_flower/geo.inc.c"
+#include "levels/bob/cannon_wall/geo.inc.c"
+#include "levels/bob/mushroom_troll_2/geo.inc.c"
+#include "levels/bob/cloud_troll/geo.inc.c"
+#include "levels/bob/falling_ground/geo.inc.c"

@@ -8,6 +8,8 @@
  */
 
 void bhv_purple_switch_loop(void) {
+    s32 switch_bparam1 = GET_BPARAM1(o->oBehParams);
+    
     switch (o->oAction) {
         /**
          * Set the switch's model and scale. If Mario is standing near the
@@ -30,8 +32,16 @@ void bhv_purple_switch_loop(void) {
          * Immediately transition to the ticking state.
          */
         case PURPLE_SWITCH_ACT_PRESSED:
+
+        if (switch_bparam1 == 1) {
+            cur_obj_scale_over_time(SCALE_AXIS_Y, 3, 1.5f, 8.0f);
+        } else {
             cur_obj_scale_over_time(SCALE_AXIS_Y, 3, 1.5f, 0.2f);
+        }
             if (o->oTimer == 3) {
+                if (switch_bparam1 == 1) {
+                    obj_mark_for_deletion(o);
+                }
                 cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
                 o->oAction = PURPLE_SWITCH_ACT_TICKING;
                 cur_obj_shake_screen(SHAKE_POS_SMALL);

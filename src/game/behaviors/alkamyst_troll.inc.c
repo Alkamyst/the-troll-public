@@ -24,23 +24,42 @@ void bhv_hidden_cage_loop(void) {
 
 void bhv_moving_platform_slip(void) {
 
-    if (gMarioState->floor != NULL) {
-        s32 floorType = gMarioState->floor->type;
-        f32 dx = o->oPosX - o->oHomeX;
-        f32 dz = o->oPosZ - o->oHomeZ;
-        f32 distToHome = sqrtf(sqr(dx) + sqr(dz));
+    switch (o->oBehParams2ndByte) {
+        case 0:
+            if (gMarioState->floor != NULL) {
+                s32 floorType = gMarioState->floor->type;
+                f32 dx = o->oPosX - o->oHomeX;
+                f32 dz = o->oPosZ - o->oHomeZ;
+                f32 distToHome = sqrtf(sqr(dx) + sqr(dz));
 
-        if ((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) {
-            if (distToHome < 800.0f) {
-                o->oPosX -= 100.0f;
-            }
-        }
+                if ((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) {
+                    if (distToHome < 800.0f) {
+                        o->oPosX -= 100.0f;
+                    }
+                }
 
-        if ((floorType != SURFACE_INTERACTION) && (floorType != SURFACE_INTERACTION_DEATH)) {
-            if (distToHome > 0.0f) {
-                o->oPosX += 100.0f;
+                if ((floorType != SURFACE_INTERACTION) && (floorType != SURFACE_INTERACTION_DEATH)) {
+                    if (distToHome > 0.0f) {
+                        o->oPosX += 100.0f;
+                    }
+                }
             }
-        }
+        break;
+
+        case 1:
+            if (gMarioState->floor != NULL) {
+                s32 floorType = gMarioState->floor->type;
+
+                if (floorType == SURFACE_INTERACTION5) {
+                    if (o->header.gfx.scale[1] > 0.5f) {
+                        o->header.gfx.scale[1] = (o->header.gfx.scale[1] - 0.02f);
+                    }
+                }
+            }
+
+            obj_set_collision_data(o, mushroom_troll_2_collision);
+        break;
+
     }
 
     load_object_collision_model();
@@ -75,8 +94,16 @@ void bhv_pushing_wall_slip_loop(void) {
             break;
 
         case BOMP_ACT_EXTEND:
-            if (distToHome <= 500.0f) {
-                o->oPosZ = (o->oPosZ + (((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) ? 80.0f : 40.0f));
+            if (o->oBehParams2ndByte == 0) {
+                if (distToHome <= 500.0f) {
+                    o->oPosZ = (o->oPosZ + (((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) ? 80.0f : 40.0f));
+                }
+            }
+
+            if (o->oBehParams2ndByte == 1) {
+                if (distToHome <= 500.0f) {
+                    o->oPosZ = (o->oPosZ + 40.0f);
+                }
             }
 
             if (o->oTimer == 60) {
@@ -107,6 +134,7 @@ void bhv_pushing_wall_slip_loop(void) {
             break;
     }
 
+if (o->oBehParams2ndByte == 0) { 
     if (gMarioState->floor != NULL) {
 
         if (((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) && (o->oAction != BOMP_ACT_LAUNCH)) {
@@ -121,7 +149,28 @@ void bhv_pushing_wall_slip_loop(void) {
 
         }
     }
+}
 
+}
+
+void bhv_cannon_wall_slip_loop(void) {
+
+    if (gMarioState->floor != NULL) {
+        s32 floorType = gMarioState->floor->type;
+        f32 distToHome = o->oHomeY - o->oPosY;
+
+        if (floorType == SURFACE_INTERACTION4) {
+            if (distToHome < 1000.0f) {
+                o->oPosY -= 100.0f;
+            }
+        }
+
+        if (floorType != SURFACE_INTERACTION4) {
+            if (distToHome > 0.0f) {
+                o->oPosY += 100.0f;
+            }
+        }
+    }
 }
 
 // keys
@@ -624,13 +673,35 @@ void bhv_troll_interact_loop(void) {
 }
 
 void bhv_dynamite_loop(void) {
+    struct Object *switchObj;
     struct Object *dynamiteTrailObj;
     dynamiteTrailObj = cur_obj_nearest_object_with_behavior(bhvDynamiteTrail);
 
-    if ((obj_check_if_collided_with_object(o, gMarioObject) == TRUE) || (dynamiteTrailObj == NULL)) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         explosion->oGraphYOffset += 100.0f;
         obj_mark_for_deletion(o);
+    }
+
+
+    if (o->oBehParams2ndByte == 0) {
+        if (dynamiteTrailObj == NULL) {
+        struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
+        explosion->oGraphYOffset += 100.0f;
+        obj_mark_for_deletion(o);
+        }
+    }
+
+    if (o->oBehParams2ndByte == 1) {
+            cur_obj_disable_rendering();
+            cur_obj_become_intangible();
+            switchObj = cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
+
+            if (switchObj == NULL) {
+                cur_obj_enable_rendering();
+                cur_obj_become_tangible();
+                cur_obj_unhide();
+            }
     }
 }
 
@@ -660,4 +731,44 @@ void bhv_dynamite_trail_loop(void) {
     }
 
     cur_obj_become_tangible();
+}
+
+void bhv_fire_flower(void) {
+    o->oFaceAngleYaw -= 0x400;
+    struct Object *sparkleObj = spawn_object(o, MODEL_SPARKLES_ANIMATION, bhvSparkle);
+    obj_translate_xyz_random(sparkleObj, 135.0f);
+    obj_scale_random(sparkleObj, 1.0f, 0.0f);
+    cur_obj_become_tangible();
+
+    if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+        o->oInteractStatus = INT_STATUS_NONE;
+    }
+}
+
+void bhv_cloud_troll_loop(void) {
+    if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
+        spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+        obj_mark_for_deletion(o);
+    }
+}
+
+void bhv_falling_ground_loop(void) {
+    s32 floorType = gMarioState->floor->type;
+
+    switch (o->oAction) {
+        case 0:
+            o->oTimer = 0;
+            
+            if (floorType == SURFACE_INTERACTION2) {
+                o->oAction = 1;
+            }
+            
+        break;
+
+        case 1:
+            if (o->oTimer > 30) {
+                o->oPosY -= 100.0f;
+            }
+        break;
+    }
 }

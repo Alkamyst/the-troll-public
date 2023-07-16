@@ -1,0 +1,15 @@
+extern const GeoLayout mushroom_troll_2_geo[];
+extern u8 mushroom_troll_2_Texture0574_RGB_ci8[];
+extern u8 mushroom_troll_2_Texture0574_RGB_ci8_pal_rgba16[];
+extern u8 mushroom_troll_2_Texture0575_RGB_ci4[];
+extern u8 mushroom_troll_2_Texture0575_RGB_ci4_pal_rgba16[];
+extern Vtx mushroom_troll_2_Main_002_mesh_layer_1_vtx_0[12];
+extern Gfx mushroom_troll_2_Main_002_mesh_layer_1_tri_0[];
+extern Vtx mushroom_troll_2_Main_002_mesh_layer_1_vtx_1[38];
+extern Gfx mushroom_troll_2_Main_002_mesh_layer_1_tri_1[];
+extern Gfx mat_mushroom_troll_2_Mushroom_Bottom[];
+extern Gfx mat_revert_mushroom_troll_2_Mushroom_Bottom[];
+extern Gfx mat_mushroom_troll_2_Mushroom_Top[];
+extern Gfx mat_revert_mushroom_troll_2_Mushroom_Top[];
+extern Gfx mushroom_troll_2_Main_002_mesh_layer_1[];
+extern Gfx mushroom_troll_2_material_revert_render_settings[];

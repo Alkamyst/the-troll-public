@@ -1450,7 +1450,7 @@ u32 interact_koopa_shell(struct MarioState *m, UNUSED u32 interactType, struct O
 u32 check_object_grab_mario(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
     if ((!(m->action & (ACT_FLAG_AIR | ACT_FLAG_INVULNERABLE | ACT_FLAG_ATTACKING)) || !sInvulnerable)
         && (obj->oInteractionSubtype & INT_SUBTYPE_GRABS_MARIO)) {
-        if (object_facing_mario(m, obj, DEGREES(60))) {
+//        if (object_facing_mario(m, obj, DEGREES(60))) {
             mario_stop_riding_and_holding(m);
             obj->oInteractStatus = INT_STATUS_INTERACTED | INT_STATUS_GRABBED_MARIO;
 
@@ -1464,7 +1464,7 @@ u32 check_object_grab_mario(struct MarioState *m, UNUSED u32 interactType, struc
             queue_rumble_data(5, 80);
 #endif
             return set_mario_action(m, ACT_GRABBED, 0);
-        }
+//        }
     }
 
     push_mario_out_of_object(m, obj, -5.0f);
@@ -1674,9 +1674,9 @@ u32 check_read_sign(struct MarioState *m, struct Object *obj) {
     ) {
 #ifdef DIALOG_INDICATOR
         if (obj->behavior == segmented_to_virtual(bhvSignOnWall)) {
-            spawn_object_relative(ORANGE_NUMBER_A, 0, 180, 32, obj, MODEL_NUMBER, bhvOrangeNumber);
+            spawn_object_relative(ORANGE_NUMBER_B, 0, 180, 32, obj, MODEL_NUMBER, bhvOrangeNumber);
         } else {
-            spawn_object_relative(ORANGE_NUMBER_A, 0, 160,  8, obj, MODEL_NUMBER, bhvOrangeNumber);
+            spawn_object_relative(ORANGE_NUMBER_B, 0, 160,  8, obj, MODEL_NUMBER, bhvOrangeNumber);
         }
 #endif
         if (m->input & READ_MASK) {
@@ -1709,19 +1709,27 @@ u32 check_npc_talk(struct MarioState *m, struct Object *obj) {
     ) {
 #ifdef DIALOG_INDICATOR
         if (obj->behavior == segmented_to_virtual(bhvYoshi)) {
-            spawn_object_relative(ORANGE_NUMBER_A, 0, 256, 64, obj, MODEL_NUMBER, bhvOrangeNumber);
+            spawn_object_relative(ORANGE_NUMBER_B, 0, 256, 64, obj, MODEL_NUMBER, bhvOrangeNumber);
         } else if (obj->behavior == segmented_to_virtual(bhvTrollInteract)) {
-            spawn_object_relative(ORANGE_NUMBER_A, 0, 306, 0, obj, MODEL_NUMBER, bhvOrangeNumber);
-        } else {
-            spawn_object_relative(ORANGE_NUMBER_A, 0, 160,  0, obj, MODEL_NUMBER, bhvOrangeNumber);
+            spawn_object_relative(ORANGE_NUMBER_B, 0, 306, 0, obj, MODEL_NUMBER, bhvOrangeNumber);
+        } else if (!(obj->behavior == segmented_to_virtual(bhvBobombBuddyOpensCannon))) {
+            spawn_object_relative(ORANGE_NUMBER_B, 0, 160,  0, obj, MODEL_NUMBER, bhvOrangeNumber);
         }
 #endif
-        if (m->input & READ_MASK) {
+        if ((m->input & READ_MASK) && (!(obj->behavior == segmented_to_virtual(bhvBobombBuddyOpensCannon)))) {
 #else
     if ((m->input & READ_MASK) && mario_can_talk(m, 1)) {
         s16 facingDYaw = mario_obj_angle_to_object(m, obj) - m->faceAngle[1];
         if (facingDYaw >= -SIGN_RANGE && facingDYaw <= SIGN_RANGE) {
 #endif
+            obj->oInteractStatus = INT_STATUS_INTERACTED;
+
+            m->interactObj = obj;
+            m->usedObj     = obj;
+
+            push_mario_out_of_object(m, obj, -10.0f);
+            return set_mario_action(m, ACT_WAITING_FOR_DIALOG, 0);
+        } else if (m->input & INPUT_B_PRESSED) {
             obj->oInteractStatus = INT_STATUS_INTERACTED;
 
             m->interactObj = obj;

@@ -58,4 +58,20 @@ extern const LevelScript level_bob_entry[];
 
 #include "levels/bob/breakable_wall/geo_header.h"
 
+#include "levels/bob/fire_flower/geo_header.h"
+
+#include "levels/bob/cannon_wall/geo_header.h"
+
+#include "levels/bob/cannon_wall/collision_header.h"
+
+#include "levels/bob/mushroom_troll_2/geo_header.h"
+
+#include "levels/bob/mushroom_troll_2/collision_header.h"
+
+#include "levels/bob/cloud_troll/geo_header.h"
+
+#include "levels/bob/falling_ground/collision_header.h"
+
+#include "levels/bob/falling_ground/geo_header.h"
+
 #endif
