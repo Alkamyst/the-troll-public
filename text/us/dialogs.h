@@ -25,7 +25,7 @@ Each jump you do will be\n\
 if done right."))
 
 DEFINE_DIALOG(DIALOG_001, 1, 6, 30, 200, _("\
-I trusted you, plumber.\n\
+I trusted you, @FF0000FFplumber.@--------\n\
 You could have been a\n\
 great star. Yet, you\n\
 decided to go after\n\
@@ -53,43 +53,93 @@ The last performance...\n\
 OF @FF0000FFTHIS PLUMBER'S LIFE.@--------"))
 
 DEFINE_DIALOG(DIALOG_002, 1, 5, 30, 200, _("\
-To gain extra height near\n\
-a wall, you can perform a\n\
-@FF0000FFWall Jump!@--------\n\
-Jump at a wall and press\n\
-[A] jump away from it.\n\
-When long jumping at a\n\
-wall, a Wall Jump can\n\
-still be done if [A] is\n\
-pressed right when you\n\
-hit the wall!"))
+The following text contains\n\
+some @FF0000FFVERY IMPORTANT,@--------\n\
+information, so please\n\
+don't skip through it!\n\
+\n\
+First, I have had a name\n\
+change! I used to go by\n\
+the name @00FF00FFLuigiman04,@--------\n\
+but now I have changed\n\
+name to @FFFF00FFAlkamyst.@--------\n\
+Second, which is part of\n\
+reason why I changed my\n\
+name, has to do with my\n\
+YouTube channel.\n\
+\n\
+This is not meant to be an\n\
+advertisement or anything.\n\
+I am just trying to spread\n\
+info. My previous YouTube\n\
+channel has been @FF0000FFdeleted.@--------\n\
+Pretty much what happened\n\
+was I got a lot of\n\
+copyright strikes at once\n\
+for extending music\n\
+(Thanks Capcom).\n\
+I have created a new\n\
+YouTube channel with my\n\
+new name, but I have no\n\
+way of properly\n\
+communicating that info.\n\
+So! That is the point of.\n\
+this I just want people to\n\
+know that what happened.\n\
+I'm sorry if this came off\n\
+as selfless promoting.\n\
+I hope you enjoy the hack!\n\
+I have spent every day\n\
+working on it to create\n\
+my ambitious vision.\n\
+I hope it pays off!"))
 
 DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
-Thank you, Mario! The Big\n\
-Bob-omb is nothing but a\n\
-big dud now! But the\n\
-battle for the castle has\n\
-just begun.\n\
-Other enemies are holding\n\
-the other Power Stars. If\n\
-you recover more Stars,\n\
-you can open new doors\n\
-that lead to new worlds!\n\
-My Bob-omb Buddies are\n\
-waiting for you. Be sure\n\
-to talk to them--they'll\n\
-set up cannons for you."))
+This hack was created for\n\
+@FF0000FFSimpleFlips's 2023 Troll\n\
+Competition.@--------\n\
+\n\
+\n\
+This hack was created by\n\
+@FFFF00FFAlkamyst.@-------- This includes\n\
+models, level design,\n\
+music ports, coding...\n\
+etc.\n\
+Thank you to everyone\n\
+who worked on HackerSM64\n\
+and made several patches\n\
+for it and in general.\n\
+"))
 
-DEFINE_DIALOG(DIALOG_004, 1, 3, 95, 200, _("\
-We're peace-loving\n\
-Bob-ombs, so we don't use\n\
-cannons.\n\
-But if you'd like\n\
-to blast off, we don't\n\
-mind. Help yourself.\n\
-We'll prepare all of the\n\
-cannons in this course for\n\
-you to use. Bon Voyage!"))
+DEFINE_DIALOG(DIALOG_004, 1, 4, 95, 200, _("\
+Hey @FF0000FFMario!@-------- I'm so glad\n\
+you came! I heard that\n\
+you were looking for\n\
+@FFFF00FFPower Stars.@--------\n\
+Well, I recieved this\n\
+pamphlet in the mail the\n\
+other day.\n\
+Here's what it says:\n\
+『Dear people of all ages,\n\
+spaces, and places!\n\
+You are invited to\n\
+@00FF00FFTHE TROLL☆!@--------\n\
+You can win a @FFFF00FFshiny ★!@--------\n\
+No tricks! No funnys!\n\
+Come on down today!』\n\
+\n\
+You see that @FF0000FFMario?@--------\n\
+There is a Power Star\n\
+at this @00FF00FFTHE TROLL☆@-------- place.\n\
+\n\
+The thing is, the address\n\
+on the back leads... to\n\
+this mountain up ahead.\n\
+\n\
+I'm unsure what lies up\n\
+there, @FF0000FFMario,@-------- but if\n\
+anybody can get that\n\
+@FFFF00FFStar,@-------- it's you!"))
 
 DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
 Hey, Mario! Is it true\n\
@@ -1274,19 +1324,9 @@ Marker.』 When you collect\n\
 all 8 Red Coins, the Star\n\
 will appear here."))
 
-DEFINE_DIALOG(DIALOG_105, 1, 3, 95, 200, _("\
-Ready for blastoff! Come\n\
-on, hop into the cannon!\n\
-\n\
-You can reach the Star on\n\
-the floating island by\n\
-using the four cannons.\n\
-Use the Control Stick to\n\
-aim, then press [A] to fire.\n\
-\n\
-If you're handy, you can\n\
-grab on to trees or poles\n\
-to land."))
+DEFINE_DIALOG(DIALOG_105, 1, 2, 95, 200, _("\
+Hi! I'll prepare the\n\
+cannon for you!"))
 
 DEFINE_DIALOG(DIALOG_106, 1, 2, 95, 200, _("\
 Ready for blastoff! Come\n\

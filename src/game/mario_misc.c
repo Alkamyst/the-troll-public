@@ -103,32 +103,34 @@ Gfx *geo_draw_mario_head_goddard(s32 callContext, struct GraphNode *node, UNUSED
 #endif
 
 static void toad_message_faded(void) {
-    if (o->oDistanceToMario > 700.0f) {
-        o->oToadMessageRecentlyTalked = FALSE;
-    }
-    if (!o->oToadMessageRecentlyTalked && o->oDistanceToMario < 600.0f) {
-        o->oToadMessageState = TOAD_MESSAGE_OPACIFYING;
-    }
-}
-
-static void toad_message_opaque(void) {
-    if (o->oDistanceToMario > 700.0f) {
-        o->oToadMessageState = TOAD_MESSAGE_FADING;
-    } else if (!o->oToadMessageRecentlyTalked) {
         o->oInteractionSubtype = INT_SUBTYPE_NPC;
         if (o->oInteractStatus & INT_STATUS_INTERACTED) {
             o->oInteractStatus = INT_STATUS_NONE;
             o->oToadMessageState = TOAD_MESSAGE_TALKING;
             play_toads_jingle();
         }
-    }
+
+//    if (o->oDistanceToMario > 700.0f) {
+//        o->oToadMessageRecentlyTalked = FALSE;
+//    }
+//    if (!o->oToadMessageRecentlyTalked && o->oDistanceToMario < 600.0f) {
+//        o->oToadMessageState = TOAD_MESSAGE_OPAQUE;
+//    }
+}
+
+static void toad_message_opaque(void) {
+        o->oInteractionSubtype = INT_SUBTYPE_NPC;
+        if (o->oInteractStatus & INT_STATUS_INTERACTED) {
+            o->oInteractStatus = INT_STATUS_NONE;
+            o->oToadMessageState = TOAD_MESSAGE_TALKING;
+            play_toads_jingle();
+        }
 }
 
 static void toad_message_talking(void) {
     if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_DOWN,
         DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, o->oToadMessageDialogId)) {
-        o->oToadMessageRecentlyTalked = TRUE;
-        o->oToadMessageState = TOAD_MESSAGE_FADING;
+        o->oToadMessageState = TOAD_MESSAGE_FADED;
         switch (o->oToadMessageDialogId) {
             case TOAD_STAR_1_DIALOG:
                 o->oToadMessageDialogId = TOAD_STAR_1_DIALOG_AFTER;
@@ -215,7 +217,7 @@ void bhv_toad_message_init(void) {
         o->oToadMessageDialogId = dialogId;
         o->oToadMessageRecentlyTalked = FALSE;
         o->oToadMessageState = TOAD_MESSAGE_FADED;
-        o->oOpacity = 81;
+        o->oOpacity = 255;
     } else {
         obj_mark_for_deletion(o);
     }

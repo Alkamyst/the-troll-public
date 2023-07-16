@@ -2002,19 +2002,19 @@ s32 render_pause_courses_and_castle(void) {
             play_sound(SOUND_MENU_PAUSE_OPEN, gGlobalSoundSource);
             gPauseTimer =  300;
 
-            if (gCurrCourseNum >= COURSE_MIN
-             && gCurrCourseNum <= COURSE_MAX) {
+//            if (gCurrCourseNum >= COURSE_MIN
+//             && gCurrCourseNum <= COURSE_MAX) {
                 change_dialog_camera_angle();
                 gDialogBoxState = DIALOG_STATE_VERTICAL;
-            } else {
-                highlight_last_course_complete_stars();
-                gDialogBoxState = DIALOG_STATE_HORIZONTAL;
-            }
+//            } else {
+//                highlight_last_course_complete_stars();
+//                gDialogBoxState = DIALOG_STATE_HORIZONTAL;
+//           }
             break;
 
         case DIALOG_STATE_VERTICAL:
             shade_screen();
-            render_pause_my_score_coins();
+//            render_pause_my_score_coins();
             render_pause_red_coins();
             if (gPauseTimer > (-10)) {
                 gPauseTimer--;

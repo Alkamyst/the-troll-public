@@ -108,7 +108,7 @@ void chuckya_act_1(void) {
         if (cur_obj_init_animation_and_check_if_near_end(0)) {
             o->oSubAction++;
         }
-        o->oChuckyaSubActionTimer = random_float() * 30.0f + 10.0f;
+        //o->oChuckyaSubActionTimer = random_float() * 30.0f + 10.0f;
         o->oChuckyaNumPlayerEscapeActions = 0;
         o->oForwardVel = 0.0f;
     } else {
@@ -121,10 +121,16 @@ void chuckya_act_1(void) {
                 o->oInteractStatus &= ~INT_STATUS_GRABBED_MARIO;
             } else {
                 cur_obj_init_animation_with_sound(1);
-                o->oMoveAngleYaw += INT_STATUS_GRABBED_MARIO;
-                if (o->oChuckyaSubActionTimer-- < 0
-                 && (check_if_moving_over_floor(50.0f, 150.0f) || o->oChuckyaSubActionTimer < -16)) {
-                    o->oSubAction++;
+                if (o->oMoveAngleYaw >= 1000.0f) {
+                    o->oMoveAngleYaw -= INT_STATUS_GRABBED_MARIO;
+                }
+                if (o->oMoveAngleYaw < 1000.0f) {
+                    o->oMoveAngleYaw += INT_STATUS_GRABBED_MARIO;
+                }
+                if (o->oMoveAngleYaw >= 0.0f) {
+                    if (o->oMoveAngleYaw <= 3000.0f) {
+                        o->oSubAction++;
+                    }
                 }
             }
         } else {
