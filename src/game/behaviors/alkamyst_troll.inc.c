@@ -173,6 +173,30 @@ void bhv_cannon_wall_slip_loop(void) {
     }
 }
 
+void bhv_grate_troll(void) {
+
+    if (gMarioState->floor != NULL) {
+        s32 floorType = gMarioState->floor->type;
+        f32 distToHome = o->oPosY - o->oHomeY;
+
+        if (floorType == SURFACE_INTERACTION4) {
+            cur_obj_enable_rendering();
+            cur_obj_unhide();
+            if (distToHome < 1000.0f) {
+                o->oPosY += 100.0f;
+            }
+        }
+
+        if (floorType != SURFACE_INTERACTION4) {
+            cur_obj_disable_rendering();
+            cur_obj_hide();
+            if (distToHome > 0.0f) {
+                o->oPosY -= 100.0f;
+            }
+        }
+    }
+}
+
 // keys
 
 void bhv_door_key_loop(void) {
@@ -197,6 +221,23 @@ void bhv_door_key_loop(void) {
         cur_obj_enable_rendering();
         cur_obj_unhide();
         cur_obj_become_tangible();
+    }
+
+    if (o->oBehParams2ndByte == 1) {
+        s32 floorType = gMarioState->floor->type;
+        f32 distToHome = o->oPosY - o->oHomeY;
+
+        if (floorType == SURFACE_INTERACTION_DEATH) {
+            if (distToHome < 1000.0f) {
+                o->oPosY += 200.0f;
+            }
+        }
+
+        if (floorType != SURFACE_INTERACTION_DEATH) {
+            if (distToHome > 0.0f) {
+                o->oPosY -= 200.0f;
+            }
+        }
     }
 
 }
@@ -680,7 +721,12 @@ void bhv_dynamite_loop(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
         struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         explosion->oGraphYOffset += 100.0f;
-        obj_mark_for_deletion(o);
+            if (o->oBehParams2ndByte == 2) {
+                cur_obj_disable_rendering();
+                cur_obj_become_intangible();
+            } else {
+                obj_mark_for_deletion(o);
+            }
     }
 
 
@@ -688,7 +734,6 @@ void bhv_dynamite_loop(void) {
         if (dynamiteTrailObj == NULL) {
         struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         explosion->oGraphYOffset += 100.0f;
-        obj_mark_for_deletion(o);
         }
     }
 
@@ -702,6 +747,36 @@ void bhv_dynamite_loop(void) {
                 cur_obj_become_tangible();
                 cur_obj_unhide();
             }
+    }
+
+    if (o->oBehParams2ndByte == 2) {
+        s32 floorType = gMarioState->floor->type;
+        f32 distToHome = o->oPosY - o->oHomeY;
+
+        if (floorType == SURFACE_INTERACTION_DEATH) {
+            if (distToHome < 1000.0f) {
+                o->oPosY += 200.0f;
+            }
+        }
+
+        if ((floorType != SURFACE_INTERACTION_DEATH) && (floorType != SURFACE_INTERACTION4)) {
+            if (distToHome > 0.0f) {
+                o->oPosY -= 200.0f;
+            }
+        }
+
+        if (floorType == SURFACE_INTERACTION4) {
+            if (distToHome < 1000.0f) {
+                o->oPosY += 100.0f;
+            }
+        }
+
+
+        if (gMarioState->numKeys == -1) {
+            cur_obj_enable_rendering();
+            cur_obj_unhide();
+            cur_obj_become_tangible();
+        }
     }
 }
 

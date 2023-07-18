@@ -67,3 +67,13 @@
 #include "levels/wf/areas/1/collision.inc.c"
 #include "levels/wf/areas/1/macro.inc.c"
 #include "levels/wf/areas/1/movtext.inc.c"
+
+#include "levels/wf/leveldata.inc.c"
+
+#include "levels/wf/dynamite_wf/model.inc.c"
+#include "levels/wf/DoorFloor2/model.inc.c"
+#include "levels/wf/DoorFloor2/collision.inc.c"
+#include "levels/wf/KeyDoor1/collision.inc.c"
+#include "levels/wf/KeyDoor1/model.inc.c"
+#include "levels/wf/Grate_Troll/model.inc.c"
+#include "levels/wf/Grate_Troll/collision.inc.c"

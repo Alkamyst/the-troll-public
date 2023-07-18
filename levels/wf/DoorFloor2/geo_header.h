@@ -1,0 +1,15 @@
+extern const GeoLayout DoorFloor2_geo[];
+extern u8 DoorFloor2_Material3_ci4[];
+extern u8 DoorFloor2_Material3_ci4_pal_rgba16[];
+extern u8 DoorFloor2_Lock_ci8[];
+extern u8 DoorFloor2_Lock_ci8_pal_rgba16[];
+extern Vtx DoorFloor2_Main_mesh_layer_1_vtx_0[20];
+extern Gfx DoorFloor2_Main_mesh_layer_1_tri_0[];
+extern Vtx DoorFloor2_Main_mesh_layer_1_vtx_1[4];
+extern Gfx DoorFloor2_Main_mesh_layer_1_tri_1[];
+extern Gfx mat_DoorFloor2_f3dlite_material_002[];
+extern Gfx mat_revert_DoorFloor2_f3dlite_material_002[];
+extern Gfx mat_DoorFloor2_f3dlite_material_004[];
+extern Gfx mat_revert_DoorFloor2_f3dlite_material_004[];
+extern Gfx DoorFloor2_Main_mesh_layer_1[];
+extern Gfx DoorFloor2_material_revert_render_settings[];

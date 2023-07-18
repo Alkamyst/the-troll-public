@@ -41,3 +41,10 @@
 #include "levels/wf/kickable_board/geo.inc.c"
 #include "levels/wf/tower_door/geo.inc.c"
 #include "levels/wf/areas/1/geo.inc.c"
+
+#include "levels/wf/geo.inc.c"
+
+#include "levels/wf/dynamite_wf/geo.inc.c"
+#include "levels/wf/DoorFloor2/geo.inc.c"
+#include "levels/wf/KeyDoor1/geo.inc.c"
+#include "levels/wf/Grate_Troll/geo.inc.c"

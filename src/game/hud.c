@@ -442,7 +442,7 @@ void render_hud_keys(void) {
     s16 i;
 
     for (i = 0; i < gHudDisplay.keys; i++) {
-        print_text((i * (-16)) + (GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 32), 185, "|"); // unused glyph - beta key
+        print_text((i * (-16)) + (GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 32), 209, "|"); // unused glyph - beta key
     }
 }
 
@@ -575,11 +575,10 @@ void render_hud(void) {
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_STAR_COUNT) {
             render_hud_stars();
         }
-
+*/
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_KEYS) {
             render_hud_keys();
         }
-*/
 
 #ifdef BREATH_METER
         if (hudDisplayFlags & HUD_DISPLAY_FLAG_BREATH_METER) render_hud_breath_meter();

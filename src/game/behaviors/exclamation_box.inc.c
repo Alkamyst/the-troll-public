@@ -28,7 +28,7 @@ struct ExclamationBoxContents sExclamationBoxContents[] = {
     { EXCLAMATION_BOX_BP_COINS_1,          0, 0, MODEL_YELLOW_COIN,      bhvSingleCoinGetsSpawned },
     { EXCLAMATION_BOX_BP_COINS_3,          0, 0, MODEL_NONE,             bhvThreeCoinsSpawn       },
     { EXCLAMATION_BOX_BP_COINS_10,         0, 0, MODEL_NONE,             bhvTenCoinsSpawn         },
-    { EXCLAMATION_BOX_BP_1UP_WALKING,      0, 0, MODEL_1UP,              bhv1upWalking            },
+    { EXCLAMATION_BOX_BP_1UP_WALKING,      0, 0, MODEL_BETA_BOO_KEY,     bhvDoorKey               },
     { EXCLAMATION_BOX_BP_STAR_1,           0, 0, MODEL_STAR,             bhvSpawnedStar           },
     { EXCLAMATION_BOX_BP_1UP_RUNNING_AWAY, 0, 0, MODEL_1UP,              bhv1upRunningAway        },
     { EXCLAMATION_BOX_BP_STAR_2,           0, 1, MODEL_STAR,             bhvSpawnedStar           },
@@ -46,23 +46,8 @@ void bhv_rotating_exclamation_mark_loop(void) {
 }
 
 void exclamation_box_act_init(void) {
-    if (o->oBehParams2ndByte < EXCLAMATION_BOX_BP_KOOPA_SHELL) {
-        o->oAnimState = o->oBehParams2ndByte;
-#ifdef UNLOCK_ALL
-        u8 tangible = TRUE;
-#else
-        u8 tangible = ((save_file_get_flags() & sCapSaveFlags[o->oBehParams2ndByte])
-                    || (GET_BPARAM1(o->oBehParams) != EXCLAMATION_BOX_BP1_NEEDS_SWITCH));
-#endif
-        if (tangible) {
-            o->oAction = EXCLAMATION_BOX_ACT_ACTIVE;
-        } else {
-            o->oAction = EXCLAMATION_BOX_ACT_OUTLINE;
-        }
-    } else {
-        o->oAnimState = EXCLAMATION_BOX_ANIM_STATE_YELLOW;
-        o->oAction = EXCLAMATION_BOX_ACT_ACTIVE;
-    }
+    o->oAnimState = EXCLAMATION_BOX_ANIM_STATE_YELLOW;
+    o->oAction = EXCLAMATION_BOX_ACT_ACTIVE;
 }
 
 void exclamation_box_act_outline(void) {

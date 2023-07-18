@@ -6193,6 +6193,20 @@ const BehaviorScript bhvMovingPlatformSlip2[] = {
     END_LOOP(),
 };
 
+extern void bhv_grate_troll();
+const BehaviorScript bhvGrateTroll[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(Grate_Troll_collision),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_grate_troll),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
 extern void bhv_door_key_loop();
 const BehaviorScript bhvDoorKey[] = {
     BEGIN(OBJ_LIST_LEVEL),
@@ -6200,6 +6214,7 @@ const BehaviorScript bhvDoorKey[] = {
     SET_FLOAT(oDrawingDistance, 20000),
     SET_HOME(),
     SET_HITBOX(/*Radius*/ 80, /*Height*/ 50),
+    SET_INT(oIntangibleTimer, 0),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_door_key_loop),
     END_LOOP(),
@@ -6209,7 +6224,7 @@ extern void bhv_key_door_loop();
 const BehaviorScript bhvKeyDoor[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    LOAD_COLLISION_DATA(KeyDoor1_collision),
     //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
     SET_FLOAT(oDrawingDistance, 20000),
     SET_HOME(),
@@ -6304,6 +6319,19 @@ const BehaviorScript bhvKeyDoorFloor1[] = {
     END_LOOP(),
 };
 
+extern void bhv_key_door_loop();
+const BehaviorScript bhvKeyDoorFloor2[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(DoorFloor2_collision),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_key_door_loop),
+    END_LOOP(),
+};
+
 extern void bhv_dynamite_loop();
 const BehaviorScript bhvDynamite[] = {
     BEGIN(OBJ_LIST_GENACTOR),
@@ -6313,8 +6341,8 @@ const BehaviorScript bhvDynamite[] = {
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
     SET_INTERACT_TYPE(INTERACT_DAMAGE),
     SET_INT(oDamageOrCoinValue, 8),
+    SET_HOME(),
     BEGIN_LOOP(),
-        SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_dynamite_loop),
     END_LOOP(),
 };

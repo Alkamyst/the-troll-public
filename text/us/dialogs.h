@@ -89,7 +89,7 @@ know that what happened.\n\
 I'm sorry if this came off\n\
 as selfless promoting.\n\
 I hope you enjoy the hack!\n\
-I have spent every day\n\
+I've spent all my free time\n\
 working on it to create\n\
 my ambitious vision.\n\
 I hope it pays off!"))
