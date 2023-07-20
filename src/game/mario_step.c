@@ -12,7 +12,7 @@
 
 #include "config.h"
 
-static s16 sMovingSandSpeeds[] = { 12, 8, 4, 0 };
+static s16 sMovingSandSpeeds[] = { 72, 120, 12, 0 }; // Moving Sand Speeds
 
 struct Surface gWaterSurfacePseudoFloor = {
     SURFACE_VERY_SLIPPERY,      // type
@@ -145,7 +145,6 @@ u32 mario_update_quicksand(struct MarioState *m, f32 sinkingSpeed) {
                 break;
 
             case SURFACE_QUICKSAND:
-            case SURFACE_MOVING_QUICKSAND:
                 if ((m->quicksandDepth += sinkingSpeed) >= 60.0f) {
                     m->quicksandDepth = 60.0f;
                 }

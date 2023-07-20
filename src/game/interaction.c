@@ -722,6 +722,13 @@ u32 take_damage_and_knock_back(struct MarioState *m, struct Object *obj) {
         return drop_and_set_mario_action(m, determine_knockback_action(m, obj->oDamageOrCoinValue), damage);
     }
 
+    if (obj->oInteractionSubtype & INT_SUBTYPE_TWIRL_BOUNCE) {
+        bounce_off_object(m, obj, 100.0f);
+        reset_mario_pitch(m);
+        play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
+        return drop_and_set_mario_action(m, ACT_TWIRLING, 0);
+    }
+
     return FALSE;
 }
 
@@ -1316,10 +1323,14 @@ u32 interact_hit_from_below(struct MarioState *m, UNUSED u32 interactType, struc
 
         if (interaction & INT_HIT_FROM_ABOVE) {
             if (obj->oInteractionSubtype & INT_SUBTYPE_TWIRL_BOUNCE) {
-                bounce_off_object(m, obj, 80.0f);
-                reset_mario_pitch(m);
-                play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
-                return drop_and_set_mario_action(m, ACT_TWIRLING, 0);
+                m->hurtCounter += 32;
+                play_sound(SOUND_MARIO_ON_FIRE, m->marioObj->header.gfx.cameraToObject);
+                update_mario_sound_and_camera(m);
+                return drop_and_set_mario_action(m, ACT_LAVA_BOOST, 1);
+                //bounce_off_object(m, obj, 80.0f);
+                //reset_mario_pitch(m);
+                //play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
+                //return drop_and_set_mario_action(m, ACT_TWIRLING, 0);
             } else {
                 bounce_off_object(m, obj, 30.0f);
             }
@@ -1348,10 +1359,14 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
 
         if (interaction & INT_HIT_FROM_ABOVE) {
             if (obj->oInteractionSubtype & INT_SUBTYPE_TWIRL_BOUNCE) {
-                bounce_off_object(m, obj, 80.0f);
-                reset_mario_pitch(m);
-                play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
-                return drop_and_set_mario_action(m, ACT_TWIRLING, 0);
+                m->hurtCounter += 32;
+                play_sound(SOUND_MARIO_ON_FIRE, m->marioObj->header.gfx.cameraToObject);
+                update_mario_sound_and_camera(m);
+                return drop_and_set_mario_action(m, ACT_LAVA_BOOST, 1);
+                //bounce_off_object(m, obj, 80.0f);
+                //reset_mario_pitch(m);
+                //play_sound(SOUND_MARIO_TWIRL_BOUNCE, m->marioObj->header.gfx.cameraToObject);
+                //return drop_and_set_mario_action(m, ACT_TWIRLING, 0);
             } else {
                 bounce_off_object(m, obj, 30.0f);
             }
@@ -1834,7 +1849,7 @@ void check_death_barrier(struct MarioState *m) {
 
 void check_lava_boost(struct MarioState *m) {
     if (!(m->action & ACT_FLAG_RIDING_SHELL) && m->pos[1] < m->floorHeight + 10.0f) {
-        m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
+        m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 32 : 32;
 
         update_mario_sound_and_camera(m);
         drop_and_set_mario_action(m, ACT_LAVA_BOOST, 0);

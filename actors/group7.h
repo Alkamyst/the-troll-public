@@ -43,22 +43,16 @@ extern const Gfx snowman_seg5_dl_0500CCB0[];
 extern const Gfx snowman_seg5_dl_0500CCE8[];
 extern const struct Animation *const snowman_seg5_anims_0500D118[];
 
-// spindrift
-extern const GeoLayout spindrift_geo[];
-extern const Gfx spindrift_seg5_dl_050002A0[];
-extern const Gfx spindrift_seg5_dl_05000328[];
-extern const Gfx spindrift_seg5_dl_05002710[];
-extern const Gfx spindrift_seg5_dl_05002748[];
-extern const Gfx spindrift_seg5_dl_050027F8[];
-extern const Gfx spindrift_seg5_dl_05002830[];
-extern const Gfx spindrift_seg5_dl_050028D0[];
-extern const Gfx spindrift_seg5_dl_05002900[];
-extern const Gfx spindrift_seg5_dl_050029C8[];
-extern const Gfx spindrift_seg5_dl_05002A20[];
-extern const Gfx spindrift_seg5_dl_05002AD8[];
-extern const Gfx spindrift_seg5_dl_05002B30[];
-extern const Gfx spindrift_seg5_dl_05002C98[];
-extern const Gfx spindrift_seg5_dl_05002D08[];
-extern const struct Animation *const spindrift_seg5_anims_05002D68[];
+// yoshi_egg
+extern const GeoLayout yoshi_egg_geo[];
+extern const Gfx yoshi_egg_seg5_dl_050097B8[];
+extern const Gfx yoshi_egg_seg5_dl_05009820[];
+extern const Gfx yoshi_egg_seg5_dl_05009838[];
+extern const Gfx yoshi_egg_seg5_dl_05009850[];
+extern const Gfx yoshi_egg_seg5_dl_05009868[];
+extern const Gfx yoshi_egg_seg5_dl_05009880[];
+extern const Gfx yoshi_egg_seg5_dl_05009898[];
+extern const Gfx yoshi_egg_seg5_dl_050098B0[];
+extern const Gfx yoshi_egg_seg5_dl_050098C8[];
 
 #endif

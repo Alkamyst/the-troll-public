@@ -6,9 +6,7 @@
 #include "types.h"
 #include "make_const_nonconst.h"
 
-#include "spindrift/model.inc.c"
-#include "spindrift/anims/data.inc.c"
-#include "spindrift/anims/table.inc.c"
+#include "yoshi_egg/model.inc.c"
 UNUSED static const u64 binid_0 = 0;
 
 #include "penguin/model.inc.c"

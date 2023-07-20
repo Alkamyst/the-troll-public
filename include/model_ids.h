@@ -316,7 +316,7 @@
 #define MODEL_BULLET_BILL                 0x54        // bullet_bill_geo
 #define MODEL_YELLOW_SPHERE               0x55        // yellow_sphere_geo
 #define MODEL_HOOT                        0x56        // hoot_geo
-#define MODEL_YOSHI_EGG                   0x57        // yoshi_egg_geo
+#define MODEL_SPINDRIFT                   0x57        // spindrift_geo
 #define MODEL_THWOMP                      0x58        // thwomp_geo
 #define MODEL_HEAVE_HO                    0x59        // heave_ho_geo
 
@@ -352,7 +352,7 @@
 #define MODEL_FWOOSH                      0x57        // fwoosh_geo
 
 // group 7
-#define MODEL_SPINDRIFT                   0x54        // spindrift_geo
+#define MODEL_YOSHI_EGG                   0x54        // yoshi_egg_geo
 #define MODEL_MR_BLIZZARD_HIDDEN          0x55        // mr_blizzard_hidden_geo
 #define MODEL_MR_BLIZZARD                 0x56        // mr_blizzard_geo
 #define MODEL_PENGUIN                     0x57        // penguin_geo
@@ -594,5 +594,12 @@
 #define MODEL_DOORFLOOR2 0x3C
 #define MODEL_KEYDOOR1 0x3D
 #define MODEL_GRATE_TROLL 0x3E
+
+// stage_2
+
+#define MODEL_TARGET 0x40
+#define MODEL_SHELLDOOR 0x41
+#define MODEL_FALLING_STAGE_1 0x42
+#define MODEL_FALLING_STAGE_2 0x43
 
 #endif // MODEL_IDS_H

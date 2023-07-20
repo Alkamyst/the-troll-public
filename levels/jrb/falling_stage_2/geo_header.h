@@ -1,0 +1,14 @@
+extern const GeoLayout falling_stage_2_geo[];
+extern u8 falling_stage_2__0E004810_i8[];
+extern u8 falling_stage_2_ci4_nat_metal_ci4[];
+extern u8 falling_stage_2_ci4_nat_metal_ci4_pal_rgba16[];
+extern Vtx falling_stage_2_Fall_002_mesh_layer_1_vtx_0[224];
+extern Gfx falling_stage_2_Fall_002_mesh_layer_1_tri_0[];
+extern Vtx falling_stage_2_Fall_002_mesh_layer_1_vtx_1[24];
+extern Gfx falling_stage_2_Fall_002_mesh_layer_1_tri_1[];
+extern Gfx mat_falling_stage_2_Wall_001[];
+extern Gfx mat_revert_falling_stage_2_Wall_001[];
+extern Gfx mat_falling_stage_2_Floor_001[];
+extern Gfx mat_revert_falling_stage_2_Floor_001[];
+extern Gfx falling_stage_2_Fall_002_mesh_layer_1[];
+extern Gfx falling_stage_2_material_revert_render_settings[];

@@ -562,5 +562,10 @@ extern const BehaviorScript bhvDynamiteTrail[];
 extern const BehaviorScript bhvFireFlower[];
 extern const BehaviorScript bhvCloudTroll[];
 extern const BehaviorScript bhvFallingGround[];
+extern const BehaviorScript bhvInstantBulletBill[];
+extern const BehaviorScript bhvTarget[];
+extern const BehaviorScript bhvTargetFall[];
+extern const BehaviorScript bhvFallingStage1[];
+extern const BehaviorScript bhvFallingStage2[];
 
 #endif // BEHAVIOR_DATA_H

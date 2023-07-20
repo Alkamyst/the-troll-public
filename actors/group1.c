@@ -14,7 +14,9 @@ UNUSED static const u64 binid_0 = 0;
 #include "hoot/anims/table.inc.c"
 UNUSED static const u64 binid_1 = 1;
 
-#include "yoshi_egg/model.inc.c"
+#include "spindrift/model.inc.c"
+#include "spindrift/anims/data.inc.c"
+#include "spindrift/anims/table.inc.c"
 UNUSED static const u64 binid_2 = 2;
 
 #include "thwomp/model.inc.c"

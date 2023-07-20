@@ -244,17 +244,34 @@ void bhv_door_key_loop(void) {
 
 void bhv_key_door_loop(void) {
 //    o->oFaceAngleRoll += 0x200;
-    o->oDistanceToMario = dist_between_objects(o, gMarioObject);
 
-    if ((o->oDistanceToMario <= ((o->oBehParams2ndByte == 1) ? 1500.0f : 500.0f)) && (gMarioState->numKeys >= 1) && (o->oAction == DOOR_IDLE)) {
-        cur_obj_disable_rendering();
-        cur_obj_become_intangible();
+    if (o->oBehParams2ndByte <= 1) {
+        o->oDistanceToMario = dist_between_objects(o, gMarioObject);
 
-        spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+        if ((o->oDistanceToMario <= ((o->oBehParams2ndByte == 1) ? 1500.0f : 500.0f)) && (gMarioState->numKeys >= 1) && (o->oAction == DOOR_IDLE)) {
+            cur_obj_disable_rendering();
+            cur_obj_become_intangible();
 
-        gMarioState->numKeys = (gMarioState->numKeys - 1);
+            spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
 
-        o->oAction = DOOR_OPEN;
+            gMarioState->numKeys = (gMarioState->numKeys - 1);
+
+            o->oAction = DOOR_OPEN;
+        }
+    }
+
+    if (o->oBehParams2ndByte == 2) {
+
+        struct Object *targetShellObj;
+        targetShellObj = cur_obj_nearest_object_with_behavior(bhvTarget);
+
+        if (targetShellObj->oAction == 0) {
+            cur_obj_disable_rendering();
+            cur_obj_become_intangible();
+
+            o->oAction = DOOR_OPEN;
+        }
+    
     }
     
     if (o->oAction == DOOR_IDLE) {
@@ -296,6 +313,7 @@ void bhv_troll_final_boss_loop(void) {
             
             
             if ((shellObj != NULL) && (dist_between_objects(o, shellObj) < 400.0f)) {
+                create_sound_spawner(SOUND_GENERAL_WALL_EXPLOSION);
                 shellObj->oInteractStatus |= INT_STATUS_HIT_MINE;
                 o->oHealth--;
                 o->oAction = 1;
@@ -568,7 +586,6 @@ void throw_shell_act_move(void) {
 
     if (o->oInteractStatus & INT_STATUS_HIT_MINE) {
         spawn_mist_particles();
-        create_sound_spawner(SOUND_ACTION_METAL_BONK);
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 
@@ -585,7 +602,7 @@ void throw_shell_released_loop(void) {
 
     // Despawn, and create a corkbox respawner
     if (o->oBreakableBoxSmallFramesSinceReleased > 900) {
-        create_respawner(MODEL_BREAKABLE_BOX, bhvThrowShell, 3000);
+        create_respawner(MODEL_KOOPA_SHELL, bhvThrowShell, 3000);
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 }
@@ -602,7 +619,7 @@ void throw_shell_idle_loop(void) {
 
         case OBJ_ACT_DEATH_PLANE_DEATH:
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
-            create_respawner(MODEL_BREAKABLE_BOX, bhvThrowShell, 3000);
+            create_respawner(MODEL_KOOPA_SHELL, bhvThrowShell, 3000);
             break;
     }
 }
@@ -734,6 +751,7 @@ void bhv_dynamite_loop(void) {
         if (dynamiteTrailObj == NULL) {
         struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);
         explosion->oGraphYOffset += 100.0f;
+        obj_mark_for_deletion(o);
         }
     }
 
@@ -844,6 +862,241 @@ void bhv_falling_ground_loop(void) {
             if (o->oTimer > 30) {
                 o->oPosY -= 100.0f;
             }
+        break;
+    }
+}
+
+// instant bullet bill
+
+void bhv_instant_bullet_bill_init(void) {
+    o->oBulletBillInitialMoveYaw = o->oMoveAngleYaw;
+}
+
+void instant_bullet_bill_act_0(void) {
+    cur_obj_become_tangible();
+    o->oForwardVel = 0.0f;
+    o->oMoveAngleYaw = o->oBulletBillInitialMoveYaw;
+    o->oFaceAnglePitch = 0;
+    o->oFaceAngleRoll = 0;
+    o->oMoveFlags = OBJ_MOVE_NONE;
+    cur_obj_set_pos_to_home();
+    o->oAction = 1;
+}
+
+void instant_bullet_bill_act_1(void) {
+    s16 sp1E = abs_angle_diff(o->oAngleToMario, o->oMoveAngleYaw);
+    if (sp1E < 0x2000 && 400.0f < o->oDistanceToMario && o->oDistanceToMario < 500.0f) {
+        o->oAction = 2;
+    }
+}
+
+void instant_bullet_bill_act_2(void) {
+        if (o->oTimer > 20) {
+            cur_obj_update_floor_and_walls();
+        }
+
+        spawn_object(o, MODEL_SMOKE, bhvWhitePuffSmoke);
+        o->oForwardVel = 50.0f;
+
+        cur_obj_rotate_yaw_toward(o->oAngleToMario, 0x500);
+
+        if (o->oTimer == 0) {
+            cur_obj_play_sound_2(SOUND_OBJ_POUNDING_CANNON);
+            cur_obj_shake_screen(SHAKE_POS_SMALL);
+        }
+
+        if (o->oTimer > 50 || o->oMoveFlags & OBJ_MOVE_HIT_WALL) {
+            o->oAction = 3;
+            spawn_mist_particles();
+        }
+}
+
+void instant_bullet_bill_act_3(void) {
+    o->oAction = 0;
+}
+
+void instant_bullet_bill_act_4(void) {
+    if (o->oTimer == 0) {
+        o->oForwardVel = -30.0f;
+        cur_obj_become_intangible();
+    }
+
+    o->oFaceAnglePitch += 0x1000;
+    o->oFaceAngleRoll += 0x1000;
+    o->oPosY += 20.0f;
+
+    if (o->oTimer > 90) {
+        o->oAction = 0;
+    }
+}
+
+ObjActionFunc sInstantBulletBillActions[] = {
+    instant_bullet_bill_act_0,
+    instant_bullet_bill_act_1,
+    instant_bullet_bill_act_2,
+    instant_bullet_bill_act_3,
+    instant_bullet_bill_act_4,
+};
+
+void bhv_instant_bullet_bill_loop(void) {
+    cur_obj_call_action_function(sInstantBulletBillActions);
+    if (cur_obj_check_interacted()) {
+        o->oAction = 4;
+    }
+}
+
+void bhv_target(void) {
+    struct Object *shellObj;
+
+    shellObj = cur_obj_nearest_object_with_behavior(bhvThrowShell);
+
+    switch (o->oAction) {
+        case 0:
+
+            if (gMarioState->numKeys == -1) {
+                cur_obj_enable_rendering();
+                cur_obj_unhide();
+                cur_obj_become_tangible();
+                load_object_collision_model();
+
+                o->oAction = 1;
+            }
+
+        break;
+
+        case 1:
+
+            if (dist_between_objects(o, shellObj) < 245.0f) {
+
+                gMarioState->numKeys = 0;
+
+                cur_obj_disable_rendering();
+                cur_obj_become_intangible();
+
+                spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+
+                create_sound_spawner(SOUND_GENERAL_WALL_EXPLOSION);
+
+                vec3f_copy(&shellObj->oPosVec, &shellObj->oHomeVec);
+
+                o->oAction = 0;
+            }
+
+            if (o->oBehParams2ndByte == 1) {
+                f32 dx = o->oPosX - o->oHomeX;
+                f32 dz = o->oPosZ - o->oHomeZ;
+                f32 distToHome = sqrtf(sqr(dx) + sqr(dz));
+
+                if (dist_between_objects(o, shellObj) <= 800.0f) {
+                    if (distToHome < 400.0f) {
+                        o->oPosZ -= 100.0f;
+                    }
+                }
+
+                if (dist_between_objects(o, shellObj) > 800.0f) {
+                    if (distToHome > 0.0f) {
+                        o->oPosZ += 100.0f;
+                    }
+                }
+            }
+
+        break;
+    }
+}
+
+void bhv_target_fall(void) {
+    struct Object *shellObj;
+
+    shellObj = cur_obj_nearest_object_with_behavior(bhvThrowShell);
+
+    switch (o->oAction) {
+        case 0:
+
+            if (gMarioState->numKeys == -1) {
+                cur_obj_enable_rendering();
+                cur_obj_unhide();
+                cur_obj_become_tangible();
+                load_object_collision_model();
+
+                o->oAction = 1;
+            }
+
+        break;
+
+        case 1:
+
+            if (dist_between_objects(o, shellObj) < 245.0f) {
+
+                gMarioState->numKeys = 0;
+
+                cur_obj_disable_rendering();
+                cur_obj_become_intangible();
+
+                spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+
+                create_sound_spawner(SOUND_GENERAL_WALL_EXPLOSION);
+
+                vec3f_copy(&shellObj->oPosVec, &shellObj->oHomeVec);
+
+                o->oAction = 0;
+            }
+
+        break;
+    }
+
+    if (o->oBehParams2ndByte == 1) {
+        cur_obj_scale(0.7);
+    }
+}
+
+void bhv_falling_stage_loop(void) {
+
+    struct Object *targetShellObj;
+
+    if (o->oBehParams2ndByte == 0) {
+        targetShellObj = cur_obj_nearest_object_with_behavior(bhvTarget);
+    } else {
+        targetShellObj = cur_obj_nearest_object_with_behavior(bhvTargetFall);
+    }
+
+    switch (o->oAction) {
+        case 0:           
+
+            load_object_collision_model();
+
+            o->oTimer = 0;
+
+            cur_obj_set_pos_to_home();
+
+            if (targetShellObj->oAction == 0) {
+                o->oAction = 1;
+            }
+
+        break;
+
+        case 1:
+
+            if (o->oTimer < 30) {
+                o->oPosY -= 100.0f;
+            } else {
+                cur_obj_disable_rendering();
+                cur_obj_become_intangible();
+                cur_obj_hide();  
+                o->oAction = 2;
+            }
+
+        break;
+
+        case 2:        
+            
+            if (targetShellObj->oAction == 1) {
+                cur_obj_set_pos_to_home();
+                cur_obj_enable_rendering();
+                cur_obj_unhide();
+                cur_obj_become_tangible();
+                o->oAction = 0;
+            }  
+
         break;
     }
 }

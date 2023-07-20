@@ -3,9 +3,9 @@
 struct ObjectHitbox sSpindriftHitbox = {
     /* interactType:      */ INTERACT_BOUNCE_TOP,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 2,
-    /* health:            */ 1,
-    /* numLootCoins:      */ 3,
+    /* damageOrCoinValue: */ 0,
+    /* health:            */ 0,
+    /* numLootCoins:      */ 0,
     /* radius:            */ 90,
     /* height:            */ 80,
     /* hurtboxRadius:     */ 80,
@@ -15,9 +15,11 @@ struct ObjectHitbox sSpindriftHitbox = {
 void bhv_spindrift_loop(void) {
     o->activeFlags |= ACTIVE_FLAG_IGNORE_ENV_BOXES;
 
-    if (cur_obj_set_hitbox_and_die_if_attacked(&sSpindriftHitbox, SOUND_OBJ_DYING_ENEMY1, 0)) {
-        cur_obj_change_action(1);
-    }
+    obj_set_hitbox(o, &sSpindriftHitbox);
+
+//    if (cur_obj_set_hitbox_and_die_if_attacked(&sSpindriftHitbox, SOUND_OBJ_DYING_ENEMY1, 0)) {
+//        cur_obj_change_action(1);
+//    }
     cur_obj_update_floor_and_walls();
 
     switch (o->oAction) {
@@ -42,5 +44,6 @@ void bhv_spindrift_loop(void) {
             break;
     }
 
+    o->oInteractStatus = INT_STATUS_NONE;
     cur_obj_move_standard(-60);
 }

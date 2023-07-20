@@ -21,3 +21,10 @@
 #include "levels/jrb/wooden_ship/geo.inc.c"
 #include "levels/jrb/areas/1/geo.inc.c"
 #include "levels/jrb/areas/2/geo.inc.c"
+
+#include "levels/jrb/geo.inc.c"
+
+#include "levels/jrb/Target/geo.inc.c"
+#include "levels/jrb/ShellDoor/geo.inc.c"
+#include "levels/jrb/falling_stage_1/geo.inc.c"
+#include "levels/jrb/falling_stage_2/geo.inc.c"

@@ -132,7 +132,7 @@ void exclamation_box_act_explode(void) {
     spawn_mist_particles_variable(0, 0, 46.0f);
     spawn_triangle_break_particles(20, MODEL_CARTOON_STAR, 0.3f, o->oAnimState);
     create_sound_spawner(SOUND_GENERAL_BREAK_BOX);
-    if (o->oBehParams2ndByte < EXCLAMATION_BOX_BP_COINS_1) {
+    if ((o->oBehParams2ndByte != EXCLAMATION_BOX_BP_COINS_1) && (o->oBehParams2ndByte != EXCLAMATION_BOX_BP_1UP_WALKING) && (o->oBehParams2ndByte != EXCLAMATION_BOX_BP_COINS_10)) {
         o->oAction = EXCLAMATION_BOX_ACT_WAIT_FOR_RESPAWN;
         cur_obj_hide();
     } else {
@@ -148,7 +148,7 @@ void exclamation_box_act_wait_for_respawn(void) {
 
 void exclamation_box_act_kill(void) {
     load_object_collision_model();
-    if (o->oPosY <= 400) {
+    if (o->oPosY <= 5200) {
         o->oInteractType = INTERACT_DAMAGE;
         o->hitboxDownOffset = 1;
         o->hurtboxRadius = 120;
@@ -157,7 +157,7 @@ void exclamation_box_act_kill(void) {
 //    cur_obj_scale_over_time(SCALE_AXIS_Z, 2, 1.0f, 3.0f);
     o->oVelY += -4.0f;
     o->oPosY += o->oVelY;
-    if (o->oPosY <= 110) {
+    if (o->oPosY <= 5000) {
         cur_obj_become_intangible();
         o->oExclamationBoxScaleAngle = 0x4000;
         o->oVelY = 30.0f;

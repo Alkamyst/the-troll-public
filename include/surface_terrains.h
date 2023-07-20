@@ -100,7 +100,7 @@ enum SurfaceTypes {
     SURFACE_INTERACTION4,               // 0x0080 // Surface that activates events when Mario is over it
     SURFACE_INTERACTION5,               // 0x0081 // Surface that activates events when Mario is over it
     SURFACE_INTERACTION_DEATH,          // 0x0082 // Unused
-    SURFACE_0083,                       // 0x0083 // Unused
+    SURFACE_NO_JUMP,                    // 0x0083 // Unused
     SURFACE_0084,                       // 0x0084 // Unused
     SURFACE_0085,                       // 0x0085 // Unused
     SURFACE_0086,                       // 0x0086 // Unused
@@ -228,7 +228,7 @@ enum SurfaceTypes {
 };
 
 #define SURFACE_IS_NEW_WATER(cmd)               (((cmd) == SURFACE_NEW_WATER) || ((cmd) == SURFACE_NEW_WATER_BOTTOM))
-#define SURFACE_IS_QUICKSAND(cmd)               ((((cmd) >= SURFACE_SHALLOW_QUICKSAND) && ((cmd) <= SURFACE_MOVING_QUICKSAND)) || ((cmd) == SURFACE_INSTANT_MOVING_QUICKSAND))
+#define SURFACE_IS_QUICKSAND(cmd)               ((((cmd) >= SURFACE_SHALLOW_QUICKSAND) && ((cmd) <= SURFACE_QUICKSAND)) || ((cmd) == SURFACE_INSTANT_MOVING_QUICKSAND))
 #define SURFACE_IS_NOT_HARD(cmd)                (((cmd) != SURFACE_HARD) && !((cmd) >= SURFACE_HARD_SLIPPERY && ((cmd) <= SURFACE_HARD_NOT_SLIPPERY)))
 #define SURFACE_IS_PAINTING_WOBBLE(cmd)         (((cmd) >= SURFACE_PAINTING_WOBBLE_A6) && ((cmd) <= SURFACE_PAINTING_WOBBLE_D2))
 #define SURFACE_IS_PAINTING_WOBBLE_LEFT(cmd)    ((((cmd) - SURFACE_PAINTING_WOBBLE_A6) % 3) == 0)
