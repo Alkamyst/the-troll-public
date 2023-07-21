@@ -3,9 +3,9 @@
 const GeoLayout jrb_area_1_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -17, 0, 0, 0, -180, 0, jrb_dl_Main_mesh_layer_1),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, -17, 0, 0, 0, -180, 0, jrb_dl_Main_NoCol_mesh_layer_1),
-		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 352, 0, 3578, 0, -180, 0, jrb_dl_Street_Lamp_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 3698, 0, 1455, 0, -180, 0, jrb_dl_Main_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 3698, 0, 1455, 0, -180, 0, jrb_dl_Main_NoCol_mesh_layer_1),
+		GEO_TRANSLATE_ROTATE_WITH_DL(LAYER_OPAQUE, 4068, 0, 5032, 0, -180, 0, jrb_dl_Street_Lamp_mesh_layer_1),
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, jrb_dl_Street_Lamp_mesh_layer_5),
 		GEO_CLOSE_NODE(),

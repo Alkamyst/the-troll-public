@@ -6299,6 +6299,7 @@ const BehaviorScript bhvTrollInteract[] = {
     ANIMATE(0),
     SET_HOME(),
     CALL_NATIVE(bhv_troll_interact_int),
+    SET_FLOAT(oDrawingDistance, 20000),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_troll_interact_loop),

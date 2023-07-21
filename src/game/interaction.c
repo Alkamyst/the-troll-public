@@ -1850,7 +1850,6 @@ void check_death_barrier(struct MarioState *m) {
 void check_lava_boost(struct MarioState *m) {
     if (!(m->action & ACT_FLAG_RIDING_SHELL) && m->pos[1] < m->floorHeight + 10.0f) {
         m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 32 : 32;
-
         update_mario_sound_and_camera(m);
         drop_and_set_mario_action(m, ACT_LAVA_BOOST, 0);
     }

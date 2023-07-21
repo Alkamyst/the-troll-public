@@ -726,7 +726,6 @@ void bhv_troll_interact_loop(void) {
             break;
     }
 
-    set_object_visibility(o, 3000);
     o->oInteractStatus = INT_STATUS_NONE;
 }
 
