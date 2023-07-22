@@ -602,4 +602,11 @@
 #define MODEL_FALLING_STAGE_1 0x42
 #define MODEL_FALLING_STAGE_2 0x43
 
+// final_boss
+
+#define MODEL_ROTATE_FINAL 0x39
+#define MODEL_CAGE_LIP 0x3A
+#define MODEL_DISAPPEAR_PLAT 0x3B
+#define MODEL_FINAL_SLIP 0x3C
+
 #endif // MODEL_IDS_H

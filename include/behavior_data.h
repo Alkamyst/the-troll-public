@@ -568,5 +568,9 @@ extern const BehaviorScript bhvTarget[];
 extern const BehaviorScript bhvTargetFall[];
 extern const BehaviorScript bhvFallingStage1[];
 extern const BehaviorScript bhvFallingStage2[];
+extern const BehaviorScript bhvRotateFinal[];
+extern const BehaviorScript bhvCageLip[];
+extern const BehaviorScript bhvDisappearPlat[];
+extern const BehaviorScript bhvFinalSlip[];
 
 #endif // BEHAVIOR_DATA_H

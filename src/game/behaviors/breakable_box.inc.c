@@ -15,12 +15,7 @@ struct ObjectHitbox sBreakableBoxHitbox = {
 void breakable_box_init(void) {
     o->oHiddenObjectSwitchObj = NULL;
     o->oAnimState = BREAKABLE_BOX_ANIM_STATE_CORK_BOX;
-    switch (o->oBehParams2ndByte) {
-        case BREAKABLE_BOX_BP_NO_COINS: o->oNumLootCoins = 0; break;
-        case BREAKABLE_BOX_BP_3_COINS:  o->oNumLootCoins = 3; break;
-        case BREAKABLE_BOX_BP_5_COINS:  o->oNumLootCoins = 5; break;
-        case BREAKABLE_BOX_BP_LARGE:    cur_obj_scale(1.5f);  break;
-    }
+    o->oNumLootCoins = 0;
 }
 
 void hidden_breakable_box_actions(void) {
@@ -52,6 +47,14 @@ void hidden_breakable_box_actions(void) {
                 spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, TINY_DIRT_PARTICLE_ANIM_STATE_YELLOW);
                 o->oAction = BREAKABLE_BOX_ACT_BROKEN;
                 cur_obj_play_sound_2(SOUND_GENERAL_BREAK_BOX);
+            }
+            if (o->oBehParams2ndByte == 1) {
+                if (dist_between_objects(o, gMarioObject) <= 400.0f) {
+                    spawn_mist_particles();
+                    spawn_triangle_break_particles(30, MODEL_DIRT_ANIMATION, 3.0f, TINY_DIRT_PARTICLE_ANIM_STATE_YELLOW);
+                    o->oAction = BREAKABLE_BOX_ACT_BROKEN;
+                    cur_obj_play_sound_2(SOUND_GENERAL_BREAK_BOX);
+                }
             }
             load_object_collision_model();
             break;
@@ -93,11 +96,7 @@ void hidden_unbreakable_box_actions(void) {
 }
 
 void bhv_hidden_object_loop(void) {
-    if (o->oBehParams2ndByte == BREAKABLE_BOX_BP_NO_COINS) {
-        hidden_breakable_box_actions();
-    } else {
-        hidden_unbreakable_box_actions();
-    }
+    hidden_breakable_box_actions();
 }
 
 void bhv_breakable_box_loop(void) {

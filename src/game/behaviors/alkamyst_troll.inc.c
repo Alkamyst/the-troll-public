@@ -60,6 +60,27 @@ void bhv_moving_platform_slip(void) {
             obj_set_collision_data(o, mushroom_troll_2_collision);
         break;
 
+        case 2:
+            if (gMarioState->floor != NULL) {
+                s32 floorType = gMarioState->floor->type;
+                f32 dx = o->oPosX - o->oHomeX;
+                f32 dz = o->oPosZ - o->oHomeZ;
+                f32 distToHome = sqrtf(sqr(dx) + sqr(dz));
+
+                if (floorType == SURFACE_INTERACTION) {
+                    if (distToHome < 600.0f) {
+                        o->oPosZ += 100.0f;
+                    }
+                }
+
+                if (floorType != SURFACE_INTERACTION) {
+                    if (distToHome > 0.0f) {
+                        o->oPosZ -= 100.0f;
+                    }
+                }
+            }
+        break;
+
     }
 
     load_object_collision_model();
@@ -306,9 +327,9 @@ void bhv_troll_final_boss_loop(void) {
         case 0:
             o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0xA0);
             if (o->oPosY >= 200.0f) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 0x8);
+                o->oPosY = approach_f32_symmetric(o->oPosY, (gMarioObject->oPosY) + 200.0f, 0xF);
             } else if (gMarioObject->oPosY > o->oPosY) {
-                o->oPosY = approach_f32_symmetric(o->oPosY, gMarioObject->oPosY, 0x8);
+                o->oPosY = approach_f32_symmetric(o->oPosY, (gMarioObject->oPosY) + 200.0f, 0xF);
             }
             
             
@@ -326,14 +347,15 @@ void bhv_troll_final_boss_loop(void) {
             if (o->oHealth <= 0) {
 
                 cur_obj_init_animation(1);
-                o->oPosY = approach_f32_symmetric(o->oPosY, 0, 0x5);
 
                 if (o->oFaceAnglePitch >= -6000.0f) {
-                o->oFaceAnglePitch -= 100.0f;
-                o->oFaceAngleRoll -= 100.0f;
+                    o->oFaceAnglePitch -= 100.0f;
+                    o->oFaceAngleRoll -= 100.0f;
+                    o->oBreakableBoxSmallFramesSinceReleased++;
+                    COND_BIT((o->oBreakableBoxSmallFramesSinceReleased & 0x2), o->header.gfx.node.flags, GRAPH_RENDER_INVISIBLE);
                 }
 
-                if (o->oPosY == 0) {
+                if (o->oPosY <= 0) {
 
                     seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
                     o->oBreakableBoxSmallFramesSinceReleased = 0;
@@ -343,13 +365,15 @@ void bhv_troll_final_boss_loop(void) {
 
                         if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_FRONT,
                             DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_163)) {
-                            spawn_object_relative(0, 0, 500, 2000, keyDoor, MODEL_BETA_BOO_KEY, bhvDoorKey);
+                            spawn_object_relative(0, 0, 500, 1500, keyDoor, MODEL_BETA_BOO_KEY, bhvDoorKey);
                             seq_player_unlower_volume(SEQ_PLAYER_LEVEL, 60);
                             seq_player_fade_out(SEQ_PLAYER_LEVEL, 1);
                             o->oAction = 2;
                     }
+                } else {
+                    o->oPosY = (o->oPosY - (1.5f * (o->oTimer)));
                 }
-            }
+            } else {
 
             o->oBreakableBoxSmallFramesSinceReleased++;
 
@@ -363,6 +387,8 @@ void bhv_troll_final_boss_loop(void) {
                 cur_obj_enable_rendering();
                 o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
                 o->oAction = 0;
+            }
+
             }
 
             break;
@@ -1097,5 +1123,44 @@ void bhv_falling_stage_loop(void) {
             }  
 
         break;
+    }
+}
+
+void bhv_rotate_final(void) {
+    o->oMoveAngleYaw += 0x30;
+}
+
+void bhv_cage_lip(void) {
+    s32 floorType = gMarioState->floor->type;
+
+    if (floorType == SURFACE_INTERACTION5) {
+        play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+        spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+        obj_mark_for_deletion(o);
+    }
+}
+
+void bhv_disappear_plat(void) {
+    struct Object *switchObj;
+    switch (o->oAction) {
+        case BREAKABLE_BOX_ACT_HIDDEN:
+            cur_obj_enable_rendering();
+            cur_obj_unhide();
+            cur_obj_become_tangible();
+            load_object_collision_model();
+            if (o->oHiddenObjectSwitchObj == NULL) {
+                o->oHiddenObjectSwitchObj = cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
+            }
+            switchObj = o->oHiddenObjectSwitchObj;
+            if ((switchObj != NULL) && (switchObj->oAction == PURPLE_SWITCH_ACT_TICKING)) {
+                o->oAction = BREAKABLE_BOX_ACT_ACTIVE;
+                cur_obj_disable_rendering();
+                cur_obj_hide();
+            }
+            break;
+        case BREAKABLE_BOX_ACT_ACTIVE:
+            if (cur_obj_wait_then_blink(360, 20)) o->oAction = BREAKABLE_BOX_ACT_HIDDEN;
+            cur_obj_become_intangible();
+            break;
     }
 }

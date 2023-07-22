@@ -15,3 +15,11 @@
 
 #include "levels/final_boss/DoorFloor1/collision.inc.c"
 #include "levels/final_boss/DoorFloor1/model.inc.c"
+#include "levels/final_boss/rotate_final/collision.inc.c"
+#include "levels/final_boss/rotate_final/model.inc.c"
+#include "levels/final_boss/cage_lip/collision.inc.c"
+#include "levels/final_boss/cage_lip/model.inc.c"
+#include "levels/final_boss/disappear_plat/model.inc.c"
+#include "levels/final_boss/disappear_plat/collision.inc.c"
+#include "levels/final_boss/final_slip/collision.inc.c"
+#include "levels/final_boss/final_slip/model.inc.c"

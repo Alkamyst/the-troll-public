@@ -1901,6 +1901,14 @@ void mario_handle_special_floors(struct MarioState *m) {
             case SURFACE_TIMER_END:
                 pss_end_slide(m);
                 break;
+
+            case SURFACE_INTERACTION5: // Makes Mario lose a special cap
+                if (m->flags & MARIO_SPECIAL_CAPS) { 
+                    m->flags &= ~MARIO_SPECIAL_CAPS;
+                    spawn_mist_particles();
+                    m->squishTimer = 0x00;
+                }
+                break;
         }
 
         if (!(m->action & (ACT_FLAG_AIR | ACT_FLAG_SWIMMING))) {

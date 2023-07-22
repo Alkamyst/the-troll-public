@@ -17,3 +17,7 @@
 #include "levels/final_boss/geo.inc.c"
 
 #include "levels/final_boss/DoorFloor1/geo.inc.c"
+#include "levels/final_boss/rotate_final/geo.inc.c"
+#include "levels/final_boss/cage_lip/geo.inc.c"
+#include "levels/final_boss/disappear_plat/geo.inc.c"
+#include "levels/final_boss/final_slip/geo.inc.c"

@@ -16,6 +16,11 @@ void bhv_purple_switch_loop(void) {
          * switch's middle section, transition to the pressed state.
          */
         case PURPLE_SWITCH_ACT_IDLE:
+            cur_obj_enable_rendering();
+            cur_obj_unhide();
+            cur_obj_become_tangible();
+            load_object_collision_model();
+
             cur_obj_set_model(MODEL_PURPLE_SWITCH);
             cur_obj_scale(1.5f);
             if (
@@ -70,6 +75,16 @@ void bhv_purple_switch_loop(void) {
                     }
                 }
             }
+
+            if (switch_bparam1 == 2) {
+                if (o->oTimer == 0) {
+                    cur_obj_wait_then_blink(360, 20);
+                }
+                cur_obj_disable_rendering();
+                cur_obj_hide();
+                cur_obj_become_intangible();
+            }
+
             break;
 
         /**

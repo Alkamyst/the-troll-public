@@ -44,7 +44,7 @@ I will give them\n\
 @FF0000FFthe greatest show@-------- of\n\
 all time.\n\
 Now, people of all ages,\n\
-spaces, and places,\n\
+places, and wages,\n\
 @00FF00FFTHE TROLL☆@-------- is proud to\n\
 present to you one\n\
 last performance.\n\
@@ -121,7 +121,7 @@ pamphlet in the mail the\n\
 other day.\n\
 Here's what it says:\n\
 『Dear people of all ages,\n\
-spaces, and places!\n\
+places, and wages!\n\
 You are invited to\n\
 @00FF00FFTHE TROLL☆!@--------\n\
 You can win a @FFFF00FFshiny ★!@--------\n\

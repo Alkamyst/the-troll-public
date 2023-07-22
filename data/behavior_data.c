@@ -1773,7 +1773,6 @@ const BehaviorScript bhvFloorSwitchHardcodedModel[] = {
     SET_FLOAT(oDrawingDistance, 20000),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_purple_switch_loop),
-        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
 
@@ -6271,7 +6270,7 @@ const BehaviorScript bhvFinalBossBulletBill[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     SET_HOME(),
-    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 50, /*Downwards offset*/ 50),
+    SET_HITBOX_WITH_OFFSET(/*Radius*/ 50, /*Height*/ 100, /*Downwards offset*/ 100),
     SET_INTERACT_TYPE(INTERACT_DAMAGE),
     SET_INT(oDamageOrCoinValue, 2),
     SCALE(/*Unused*/ 0, /*Field*/ 40),
@@ -6487,5 +6486,60 @@ const BehaviorScript bhvFallingStage2[] = {
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_falling_stage_loop),
+    END_LOOP(),
+};
+
+extern void bhv_rotate_final();
+extern const Collision rotate_final_collision[];
+const BehaviorScript bhvRotateFinal[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE  | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(rotate_final_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_rotate_final),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_cage_lip();
+extern const Collision cage_lip_collision[];
+const BehaviorScript bhvCageLip[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE  | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(cage_lip_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_cage_lip),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_disappear_plat();
+extern const Collision disappear_plat_collision[];
+const BehaviorScript bhvDisappearPlat[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE  | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(disappear_plat_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_disappear_plat),
+    END_LOOP(),
+};
+
+extern void bhv_moving_platform_slip();
+extern const Collision final_slip_collision[];
+const BehaviorScript bhvFinalSlip[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(final_slip_collision),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_moving_platform_slip),
     END_LOOP(),
 };

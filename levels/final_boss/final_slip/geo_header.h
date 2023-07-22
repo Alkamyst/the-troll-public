@@ -1,0 +1,14 @@
+extern const GeoLayout final_slip_geo[];
+extern u8 final_slip__0E004810_i8[];
+extern u8 final_slip_ci4_nat_metal_ci4[];
+extern u8 final_slip_ci4_nat_metal_ci4_pal_rgba16[];
+extern Vtx final_slip_Final_Slip_mesh_layer_1_vtx_0[78];
+extern Gfx final_slip_Final_Slip_mesh_layer_1_tri_0[];
+extern Vtx final_slip_Final_Slip_mesh_layer_1_vtx_1[8];
+extern Gfx final_slip_Final_Slip_mesh_layer_1_tri_1[];
+extern Gfx mat_final_slip_Wall_008[];
+extern Gfx mat_revert_final_slip_Wall_008[];
+extern Gfx mat_final_slip_f3dlite_material_025[];
+extern Gfx mat_revert_final_slip_f3dlite_material_025[];
+extern Gfx final_slip_Final_Slip_mesh_layer_1[];
+extern Gfx final_slip_material_revert_render_settings[];

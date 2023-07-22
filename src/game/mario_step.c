@@ -259,7 +259,7 @@ s32 stationary_ground_step(struct MarioState *m) {
         stepResult = perform_ground_step(m);
     } else {
         // Hackersm64: this condition fixes potential downwarps
-        if (m->pos[1] <= m->floorHeight + 160.0f) {
+        if (m->pos[1] <= m->floorHeight + m->marioObj->hitboxHeight) {
             m->pos[1] = m->floorHeight;
         }
 
@@ -297,7 +297,7 @@ static s32 perform_ground_quarter_step(struct MarioState *m, Vec3f nextPos) {
     }
 
     if (nextPos[1] > floorHeight + 100.0f) {
-        if (nextPos[1] + 160.0f >= ceilHeight) {
+        if (nextPos[1] + m->marioObj->hitboxHeight >= ceilHeight) {
             return GROUND_STEP_HIT_WALL_STOP_QSTEPS;
         }
 
@@ -306,7 +306,7 @@ static s32 perform_ground_quarter_step(struct MarioState *m, Vec3f nextPos) {
         return GROUND_STEP_LEFT_GROUND;
     }
 
-    if (floorHeight + 160.0f >= ceilHeight) {
+    if (floorHeight + m->marioObj->hitboxHeight >= ceilHeight) {
         return GROUND_STEP_HIT_WALL_STOP_QSTEPS;
     }
 
@@ -490,7 +490,7 @@ s32 perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepAr
 
     //! This check uses f32, but findFloor uses short (overflow jumps)
     if (nextPos[1] <= floorHeight) {
-        if (ceilHeight - floorHeight > 160.0f) {
+        if (ceilHeight - floorHeight > m->marioObj->hitboxHeight) {
             m->pos[0] = nextPos[0];
             m->pos[2] = nextPos[2];
             set_mario_floor(m, floor, floorHeight);
@@ -503,7 +503,7 @@ s32 perform_air_quarter_step(struct MarioState *m, Vec3f intendedPos, u32 stepAr
         return AIR_STEP_LANDED;
     }
 
-    if (nextPos[1] + 160.0f > ceilHeight) {
+    if (nextPos[1] + m->marioObj->hitboxHeight > ceilHeight) {
         if (m->vel[1] >= 0.0f) {
             m->vel[1] = 0.0f;
 

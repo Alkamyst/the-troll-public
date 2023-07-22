@@ -1,0 +1,14 @@
+extern const GeoLayout disappear_plat_geo[];
+extern u8 disappear_plat__0E004810_i8[];
+extern u8 disappear_plat_ci4_nat_metal_ci4[];
+extern u8 disappear_plat_ci4_nat_metal_ci4_pal_rgba16[];
+extern Vtx disappear_plat_Disappear_mesh_layer_1_vtx_0[75];
+extern Gfx disappear_plat_Disappear_mesh_layer_1_tri_0[];
+extern Vtx disappear_plat_Disappear_mesh_layer_1_vtx_1[12];
+extern Gfx disappear_plat_Disappear_mesh_layer_1_tri_1[];
+extern Gfx mat_disappear_plat_Wall_007[];
+extern Gfx mat_revert_disappear_plat_Wall_007[];
+extern Gfx mat_disappear_plat_f3dlite_material_020[];
+extern Gfx mat_revert_disappear_plat_f3dlite_material_020[];
+extern Gfx disappear_plat_Disappear_mesh_layer_1[];
+extern Gfx disappear_plat_material_revert_render_settings[];
