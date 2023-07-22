@@ -46,7 +46,6 @@
 #include "levels/jrb/target/collision.inc.c"
 #include "levels/jrb/ShellDoor/collision.inc.c"
 #include "levels/jrb/ShellDoor/model.inc.c"
-#include "levels/wf/KeyDoor1/collision.inc.c"
 #include "levels/jrb/falling_stage_1/collision.inc.c"
 #include "levels/jrb/falling_stage_1/model.inc.c"
 #include "levels/jrb/falling_stage_2/collision.inc.c"

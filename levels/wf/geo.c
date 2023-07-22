@@ -45,6 +45,6 @@
 #include "levels/wf/geo.inc.c"
 
 #include "levels/wf/dynamite_wf/geo.inc.c"
-#include "levels/wf/DoorFloor2/geo.inc.c"
 #include "levels/wf/KeyDoor1/geo.inc.c"
+#include "levels/wf/DoorFloor2/geo.inc.c"
 #include "levels/wf/Grate_Troll/geo.inc.c"

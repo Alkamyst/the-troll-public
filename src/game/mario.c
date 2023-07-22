@@ -1626,6 +1626,7 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
 
     if (m->flags & MARIO_METAL_CAP) {
         m->squishTimer = 0x30;
+        m->marioObj->hitboxHeight = 70.0f;
     }
 
     //! (Pause buffered hitstun) Since the global timer increments while paused,
@@ -1655,7 +1656,9 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
     if (m->action & ACT_FLAG_SHORT_HITBOX) {
         m->marioObj->hitboxHeight = 100.0f;
     } else {
-        m->marioObj->hitboxHeight = 160.0f;
+        if (!(m->flags & MARIO_METAL_CAP)) {
+            m->marioObj->hitboxHeight = 160.0f;
+        }
     }
 
     if ((m->flags & MARIO_TELEPORTING) && (m->fadeWarpOpacity != MODEL_STATE_MASK)) {

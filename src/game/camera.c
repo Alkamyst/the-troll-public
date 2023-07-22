@@ -8067,7 +8067,7 @@ void cutscene_stage_dialog_1(struct Camera *c) {
 
 void cutscene_stage_contestant(struct Camera *c) {
 
-    Vec3f pos = { 4166.0f, 309.0f, 1275.0f };
+    Vec3f pos = { 4166.0f, 309.0f, 1175.0f };
     Vec3f sDMPos = { 3715.0f, 136.0f, 1455.0f };
 
     vec3f_copy(c->pos, pos);

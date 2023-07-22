@@ -515,7 +515,7 @@
 #define MODEL_AMP                         0xC2        // dAmpGeo
 #define MODEL_BOBOMB_BUDDY                0xC3        // bobomb_buddy_geo
 #define MODEL_THE_TROLL_FINAL_BOSS        0xC4        // the_troll_final_boss_geo  
-// find me
+#define MODEL_PIPE_NEW                    0xC5        // pipe_new_geo
 // find me
 #define MODEL_SSL_TOX_BOX                 0xC7        // ssl_geo_000630
 #define MODEL_BOWSER_KEY_CUTSCENE         0xC8        // bowser_key_cutscene_geo

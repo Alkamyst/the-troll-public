@@ -185,6 +185,7 @@ const LevelScript script_func_global_1[] = {
     LOAD_MODEL_FROM_DL( MODEL_EXCLAMATION_POINT,       exclamation_box_outline_seg8_dl_exclamation_point, LAYER_OCCLUDE_SILHOUETTE_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_THE_TROLL,               the_troll_geo),
     LOAD_MODEL_FROM_GEO(MODEL_THE_TROLL_FINAL_BOSS,    the_troll_final_boss_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_PIPE_NEW,                pipe_new_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BETA_BOO_KEY,               small_key_geo),
     LOAD_MODEL_FROM_GEO(MODEL_KOOPA_SHELL,             koopa_shell_geo),
     LOAD_MODEL_FROM_GEO(MODEL_METAL_BOX,               metal_box_geo),

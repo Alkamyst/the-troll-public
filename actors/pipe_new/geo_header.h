@@ -1,0 +1,13 @@
+extern const GeoLayout pipe_new_geo[];
+extern Lights1 pipe_new_Black_lights;
+extern u8 pipe_new_Material28_ci8[];
+extern u8 pipe_new_Material28_ci8_pal_rgba16[];
+extern Vtx pipe_new_Pipe_mesh_layer_1_vtx_0[77];
+extern Gfx pipe_new_Pipe_mesh_layer_1_tri_0[];
+extern Vtx pipe_new_Pipe_mesh_layer_1_vtx_1[53];
+extern Gfx pipe_new_Pipe_mesh_layer_1_tri_1[];
+extern Gfx mat_pipe_new_f3dlite_material_016[];
+extern Gfx mat_revert_pipe_new_f3dlite_material_016[];
+extern Gfx mat_pipe_new_Black[];
+extern Gfx pipe_new_Pipe_mesh_layer_1[];
+extern Gfx pipe_new_material_revert_render_settings[];

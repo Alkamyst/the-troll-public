@@ -30,3 +30,5 @@
 #include "src/s2d_engine/config.h"
 #include FONT_C_FILE
 #endif
+#include "pipe_new/collision.inc.c"
+#include "pipe_new/model.inc.c"

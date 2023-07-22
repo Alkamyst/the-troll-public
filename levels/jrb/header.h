@@ -74,8 +74,6 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/ShellDoor/geo_header.h"
 
-#include "levels/wf/KeyDoor1/collision_header.h"
-
 #include "levels/jrb/falling_stage_1/collision_header.h"
 
 #include "levels/jrb/falling_stage_1/geo_header.h"
