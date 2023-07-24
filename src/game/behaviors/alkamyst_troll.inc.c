@@ -1164,3 +1164,32 @@ void bhv_disappear_plat(void) {
             break;
     }
 }
+
+void bhv_troll_engage_loop(void) {
+
+    o->oDistanceToMario = dist_between_objects(o, gMarioObject);
+
+    switch (o->oAction) {
+        case 0:
+
+        if (o->oDistanceToMario < 500.0f) {
+            seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
+            o->oAction = 1;
+        }
+
+        break;
+
+        case 1:
+
+        o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x500);
+
+        if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_FRONT,
+            DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_163)) {
+            initiate_warp(LEVEL_JRB, EXIT_COURSE_AREA, 0x0A, 0);
+            fade_into_special_warp(0, 0);
+        }
+
+        break;
+    }
+
+}
