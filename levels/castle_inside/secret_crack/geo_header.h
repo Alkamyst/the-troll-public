@@ -1,0 +1,14 @@
+extern const GeoLayout secret_crack_geo[];
+extern u8 secret_crack_Material3_i8[];
+extern u8 secret_crack__0E010410_ia8[];
+extern Vtx secret_crack_Crack_001_mesh_layer_1_vtx_0[4];
+extern Gfx secret_crack_Crack_001_mesh_layer_1_tri_0[];
+extern Vtx secret_crack_Crack_001_mesh_layer_5_vtx_0[4];
+extern Gfx secret_crack_Crack_001_mesh_layer_5_tri_0[];
+extern Gfx mat_secret_crack_sm64_material_003[];
+extern Gfx mat_revert_secret_crack_sm64_material_003[];
+extern Gfx mat_secret_crack_f3dlite_material_045[];
+extern Gfx mat_revert_secret_crack_f3dlite_material_045[];
+extern Gfx secret_crack_Crack_001_mesh_layer_1[];
+extern Gfx secret_crack_Crack_001_mesh_layer_5[];
+extern Gfx secret_crack_material_revert_render_settings[];

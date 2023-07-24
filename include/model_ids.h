@@ -609,4 +609,9 @@
 #define MODEL_DISAPPEAR_PLAT 0x3B
 #define MODEL_FINAL_SLIP 0x3C
 
+// inside_castle
+
+#define MODEL_GRATE_BREAK 0x40
+#define MODEL_SECRET_CRACK 0x41
+
 #endif // MODEL_IDS_H

@@ -1,15 +1,19 @@
 #include "src/game/envfx_snow.h"
 
-const GeoLayout castle_inside_area_1_geo[] = {
+const GeoLayout castle_inside_area_2_geo[] = {
 	GEO_NODE_START(),
 	GEO_OPEN_NODE(),
-		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_Interior1_mesh_layer_1),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, castle_inside_dl_Interior1_mesh_layer_5),
-		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_inside_dl_Interior1_mesh_layer_6),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_inside_dl_Interior1_001_mesh_layer_1),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT, castle_inside_dl_Interior1_001_mesh_layer_5),
+		GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_inside_dl_Interior1_001_mesh_layer_6),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_OPAQUE, 28, 100, -37, castle_inside_dl_Interior2_001_mesh_layer_1),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, castle_inside_dl_Interior2_001_mesh_layer_5),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };
-const GeoLayout castle_inside_area_1[] = {
+const GeoLayout castle_inside_area_2[] = {
 	GEO_NODE_SCREEN_AREA(10, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
 	GEO_OPEN_NODE(),
 		GEO_ZBUFFER(0),
@@ -25,7 +29,7 @@ const GeoLayout castle_inside_area_1[] = {
 			GEO_OPEN_NODE(),
 				GEO_CAMERA(CAMERA_MODE_8_DIRECTIONS, 0, 0, 0, 0, -100, 0, geo_camera_main),
 				GEO_OPEN_NODE(),
-					GEO_BRANCH(1, castle_inside_area_1_geo),
+					GEO_BRANCH(1, castle_inside_area_2_geo),
 					GEO_RENDER_OBJ(),
 					GEO_ASM(ENVFX_MODE_NONE, geo_envfx_main),
 				GEO_CLOSE_NODE(),

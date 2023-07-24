@@ -24,3 +24,6 @@
 #include "levels/castle_inside/areas/3/geo.inc.c"
 
 #include "levels/castle_inside/geo.inc.c"
+
+#include "levels/castle_inside/grate_break/geo.inc.c"
+#include "levels/castle_inside/secret_crack/geo.inc.c"

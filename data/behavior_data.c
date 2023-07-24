@@ -1810,6 +1810,7 @@ const BehaviorScript bhvPushableMetalBox[] = {
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
     SET_FLOAT(oCollisionDistance, 500),
+    SCALE(/*Unused*/ 0, /*Field*/ 130),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_pushable_loop),
@@ -6558,5 +6559,33 @@ const BehaviorScript bhvTrollEngage[] = {
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         CALL_NATIVE(bhv_troll_engage_loop),
+    END_LOOP(),
+};
+
+extern void bhv_target();
+const BehaviorScript bhvGrateBreak[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(grate_break_collision),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_target),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern void bhv_target();
+const BehaviorScript bhvSecretCrack[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    LOAD_COLLISION_DATA(secret_crack_collision),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_target),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

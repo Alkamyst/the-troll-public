@@ -184,7 +184,7 @@ void beh_yellow_background_menu_init(void) { // ROTATES BACKGROUND OBJECT FOR FI
  * Properly scales the background in the main menu.
  */
 void beh_yellow_background_menu_loop(void) {
-    //cur_obj_scale(9.0f);
+    cur_obj_scale(3.0f);
 }
 
 /**

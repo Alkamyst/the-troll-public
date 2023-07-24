@@ -87,3 +87,8 @@
 #include "levels/castle_inside/areas/3/movtext.inc.c"
 
 #include "levels/castle_inside/leveldata.inc.c"
+
+#include "levels/castle_inside/grate_break/model.inc.c"
+#include "levels/castle_inside/grate_break/collision.inc.c"
+#include "levels/castle_inside/secret_crack/model.inc.c"
+#include "levels/castle_inside/secret_crack/collision.inc.c"

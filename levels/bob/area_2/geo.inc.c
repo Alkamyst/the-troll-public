@@ -11,6 +11,10 @@ const GeoLayout bob_area_2_geo[] = {
 		GEO_OPEN_NODE(),
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, bob_dl_Main_NoCol_001_mesh_layer_6),
 		GEO_CLOSE_NODE(),
+		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT, 0, -135, 0, bob_dl_Plane_mesh_layer_5),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, bob_dl_Plane_mesh_layer_1),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

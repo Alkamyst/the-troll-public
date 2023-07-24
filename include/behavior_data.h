@@ -573,5 +573,7 @@ extern const BehaviorScript bhvCageLip[];
 extern const BehaviorScript bhvDisappearPlat[];
 extern const BehaviorScript bhvFinalSlip[];
 extern const BehaviorScript bhvTrollEngage[];
+extern const BehaviorScript bhvGrateBreak[];
+extern const BehaviorScript bhvSecretCrack[];
 
 #endif // BEHAVIOR_DATA_H

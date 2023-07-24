@@ -1743,6 +1743,8 @@ void render_file_select_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
     
     print_generic_string(x + 10, y - 2, LANGUAGE_ARRAY(textMarioA));
+    print_small_text(300, 10, "MADE BY", PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_OUTLINE);
+    print_small_text(300, 18, "ALKAMYST", PRINT_TEXT_ALIGN_RIGHT, PRINT_ALL, FONT_OUTLINE);
     // print_generic_string(x + 10, y - 17, LANGUAGE_ARRAY(textMarioB));
     // print_generic_string(x + 10, y - 32, LANGUAGE_ARRAY(textMarioC));
 
@@ -2095,7 +2097,7 @@ s32 render_file_select_menu(void) {
 
         case DIALOG_STATE_VERTICAL:
 
-            render_file_select_options(0, 47, &gDialogLineNum, 15);
+            render_file_select_options(20, 47, &gDialogLineNum, 15);
 
                 if (gPlayer3Controller->buttonPressed & (A_BUTTON | START_BUTTON)) {
                 level_set_transition(0, NULL);

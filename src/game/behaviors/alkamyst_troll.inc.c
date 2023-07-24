@@ -1004,6 +1004,10 @@ void bhv_target(void) {
 
                 vec3f_copy(&shellObj->oPosVec, &shellObj->oHomeVec);
 
+                if (o->oBehParams2ndByte == 2) {
+                    obj_mark_for_deletion(o);
+                }
+
                 o->oAction = 0;
             }
 
