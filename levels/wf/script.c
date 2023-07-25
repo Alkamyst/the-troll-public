@@ -83,7 +83,7 @@ const LevelScript level_wf_entry[] = {
 		WARP_NODE(0xF0, LEVEL_WF, 0x01, 0x0B, WARP_NO_CHECKPOINT),
 		WARP_NODE(0xF1, LEVEL_WF, 0x01, 0x0B, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x0B, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
-		WARP_NODE(0x0C, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
+		WARP_NODE(0x0C, LEVEL_CASTLE, 0x02, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_EXCLAMATION_BOX, -528, 423, 2023, 0, -180, 0, (7 << 16), bhvExclamationBox),
 		OBJECT(MODEL_BETA_BOO_KEY, 322, 312, 4091, 0, -180, 0, 0x00000000, bhvDoorKey),
 		OBJECT(MODEL_BETA_BOO_KEY, 3574, 2842, -6240, 0, -90, 0, 0x00000000, bhvDoorKey),
@@ -110,7 +110,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_PIPE_NEW, 5277, 2496, 2454, 0, 0, 0, 0x000C0000, bhvWarpPipe),
 		TERRAIN(wf_area_1_collision),
 		MACRO_OBJECTS(wf_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x00, SEQ_LEVEL_GRASS),
+		SET_BACKGROUND_MUSIC(0x26, SEQ_CRESCENT_MOON_VILLAGE),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */

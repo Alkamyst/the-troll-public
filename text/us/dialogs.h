@@ -31,9 +31,9 @@ great star. Yet, you\n\
 decided to go after\n\
 my @FFFF00FF★@--------.\n\
 \n\
-After your actions tonight,\n\
-you should be BANNED\n\
-from this establishment.\n\
+Sneaking off on your own?\n\
+I should BAN you from this\n\
+establishment for that.\n\
 Lucky for you, however,\n\
 our audience is begging\n\
 for an @FF0000FFENCORE!@--------\n\

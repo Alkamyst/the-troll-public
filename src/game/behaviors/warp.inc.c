@@ -1,6 +1,8 @@
 // warp.inc.c
 
 void bhv_warp_loop(void) {
+    o->oDistanceToMario = dist_between_objects(o, gMarioObject);
+
     if (o->oTimer == 0) {
         u16 radius = GET_BPARAM1(o->oBehParams);
 
@@ -12,6 +14,11 @@ void bhv_warp_loop(void) {
             o->hitboxRadius = radius * 10.0f;
         }
         o->hitboxHeight = 50.0f;
+    }
+
+    if ((o->oDistanceToMario < 300.0f) && (gMarioState->heldObj != NULL)) {
+        mario_drop_held_object(gMarioState);
+        set_mario_action(gMarioState, ACT_CROUCH_SLIDE, 0);
     }
 
     o->oInteractStatus = INT_STATUS_NONE;

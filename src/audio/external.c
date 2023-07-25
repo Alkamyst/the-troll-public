@@ -295,12 +295,8 @@ u8 sBackgroundMusicDefaultVolume[] = {
     80,  // SEQ_EVENT_CUTSCENE_VICTORY
     70,  // SEQ_EVENT_CUTSCENE_ENDING
     65,  // SEQ_MENU_FILE_SELECT
-    75, // SEQ_PIZZA_DELUXE
     0,   // SEQ_EVENT_CUTSCENE_LAKITU (not in JP)
 };
-
-STATIC_ASSERT(ARRAY_COUNT(sBackgroundMusicDefaultVolume) == SEQ_COUNT,
-              "change this array if you are adding sequences");
 
 u8 sCurrentBackgroundMusicSeqId = SEQUENCE_NONE;
 u8 sMusicDynamicDelay = 0;
@@ -815,10 +811,6 @@ static void delete_sound_from_bank(u8 bank, u8 soundIndex) {
  * Called from threads: thread3_main, thread4_sound, thread5_game_loop
  */
 static void update_background_music_after_sound(u8 bank, u8 soundIndex) {
-    if (sSoundBanks[bank][soundIndex].soundBits & SOUND_LOWER_BACKGROUND_MUSIC) {
-        sSoundBanksThatLowerBackgroundMusic &= (1 << bank) ^ 0xffff;
-        begin_background_music_fade(50);
-    }
 }
 
 /**
@@ -1204,10 +1196,6 @@ static void update_game_sound(void) {
                 sSoundBanks[bank][soundIndex].soundStatus = soundStatus;
 
                 if (soundStatus == SOUND_STATUS_WAITING) {
-                    if (sSoundBanks[bank][soundIndex].soundBits & SOUND_LOWER_BACKGROUND_MUSIC) {
-                        sSoundBanksThatLowerBackgroundMusic |= 1 << bank;
-                        begin_background_music_fade(50);
-                    }
 
                     // Set sound status to PLAYING
                     sSoundBanks[bank][soundIndex].soundBits++;

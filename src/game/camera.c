@@ -8729,7 +8729,6 @@ void cutscene_enter_pyramid_top(struct Camera *c) {
 void cutscene_dialog_start(struct Camera *c) {
     s16 yaw;
 
-    cutscene_soften_music(c);
     set_time_stop_flags(TIME_STOP_ENABLED | TIME_STOP_DIALOG);
 
     if (c->mode == CAMERA_MODE_BOSS_FIGHT) {
@@ -8828,7 +8827,6 @@ void cutscene_dialog(struct Camera *c) {
         retrieve_info_star(c);
         transition_next_state(c, 15);
         sStatusFlags |= CAM_FLAG_UNUSED_CUTSCENE_ACTIVE;
-        cutscene_unsoften_music(c);
     }
 }
 
@@ -8854,7 +8852,6 @@ void cutscene_dialog_end(struct Camera *c) {
  * In this cutscene, cvar0.angle[0] is used as a state variable.
  */
 void cutscene_read_message_start(struct Camera *c) {
-    cutscene_soften_music(c);
     transition_next_state(c, 30);
     reset_pan_distance(c);
     store_info_star(c);
@@ -8905,7 +8902,6 @@ void cutscene_read_message(struct Camera *c) {
                 // Retrieve previous state
                 sCUpCameraPitch = sCutsceneVars[1].angle[0];
                 sModeOffsetYaw = sCutsceneVars[1].angle[1];
-                cutscene_unsoften_music(c);
             }
     }
     sStatusFlags |= CAM_FLAG_UNUSED_CUTSCENE_ACTIVE;

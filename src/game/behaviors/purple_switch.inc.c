@@ -10,6 +10,10 @@
 void bhv_purple_switch_loop(void) {
     s32 switch_bparam1 = GET_BPARAM1(o->oBehParams);
     
+    if (switch_bparam1 != 2) {
+        load_object_collision_model();
+    }
+
     switch (o->oAction) {
         /**
          * Set the switch's model and scale. If Mario is standing near the

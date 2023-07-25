@@ -560,9 +560,9 @@
         "Church Organ": {
             "release_rate": 19,
             "normal_range_hi": 50,
-            "envelope": "envelope0",
-            "sound": {"sample": "1B_organ_2", "tuning": 1.0},
-            "sound_hi": "1B_organ_2"
+            "envelope": "envelope33",
+            "sound": {"sample": "34b_organ"},
+            "sound_hi": "34c_organ_lq"
         },
         "Bells": {
             "release_rate": 208,

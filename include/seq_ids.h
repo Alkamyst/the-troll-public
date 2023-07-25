@@ -46,7 +46,11 @@ enum SeqId {
     SEQ_MENU_FILE_SELECT,             // 0x21
     SEQ_EVENT_CUTSCENE_LAKITU,        // 0x22 (not in JP)
     SEQ_PIZZA_DELUXE,                 // 0x23
-    SEQ_COUNT
+    SEQ_FURNACE_FUN,                  // 0x24
+    SEQ_CACKLETTA_FINAL_BATTLE,       // 0x25
+    SEQ_CRESCENT_MOON_VILLAGE,        // 0x26
+    SEQ_THWOMP_VOLCANO,               // 0x27
+    SEQ_COUNT,
 };
 
 #endif // SEQ_IDS_H

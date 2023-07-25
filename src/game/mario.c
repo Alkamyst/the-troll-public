@@ -687,12 +687,9 @@ void update_mario_sound_and_camera(struct MarioState *m) {
     s32 camPreset = m->area->camera->mode;
 
     if (action == ACT_FIRST_PERSON) {
-        raise_background_noise(2);
         gCameraMovementFlags &= ~CAM_MOVE_C_UP_MODE;
         // Go back to the last camera mode
         set_camera_mode(m->area->camera, -1, 1);
-    } else if (action == ACT_SLEEPING) {
-        raise_background_noise(2);
     }
 
     if (!(action & (ACT_FLAG_SWIMMING | ACT_FLAG_METAL_WATER)) && (camPreset == DEEP_WATER_CAMERA_MODE || camPreset == WATER_SURFACE_CAMERA_MODE)) {
