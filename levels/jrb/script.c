@@ -85,7 +85,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_TARGET, -4810, 5674, 817, 0, 90, 0, (1 << 16), bhvTarget),
 		OBJECT(MODEL_TARGET, -5049, 5674, 817, 0, 90, 0, (1 << 16), bhvTargetFall),
 		OBJECT(MODEL_TARGET, -302, 5598, 4734, 0, -180, 0, 0x00000000, bhvTarget),
-		OBJECT(MODEL_THE_TROLL, 6477, 3191, -2612, 0, -27, 0, 0x00000000, bhvTrollInteract),
+		OBJECT(MODEL_THE_TROLL, 6477, 3191, -2612, 0, -27, 0, (9 << 16), bhvTrollInteract),
 		OBJECT(MODEL_NONE, 3715, 136, 1455, 0, -180, 0, 0x000A0000, bhvSpinAirborneWarp),
 		MARIO_POS(0x01, -180, 3715, 136, 1455),
 		OBJECT(MODEL_NONE, 3715, 358, 1455, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),

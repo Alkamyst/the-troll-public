@@ -6173,6 +6173,9 @@ struct CameraTrigger sCamWF[] = {
 struct CameraTrigger sCamJRB[] = {
 	NULL_TRIGGER
 };
+struct CameraTrigger sCamCastleCourtyard[] = {
+	NULL_TRIGGER
+};
 struct CameraTrigger *sCameraTriggers[LEVEL_COUNT + 1] = {
     NULL,
     #include "levels/level_defines.h"
@@ -8017,7 +8020,28 @@ void cutscene_stage_dialog_1(struct Camera *c) {
     vec3f_copy(c->focus, sDMPos);
 
     if (gCutsceneTimer == 10) {
-        create_dialog_box(DIALOG_001);
+        create_dialog_box(DIALOG_005);
+        // gCutsceneTimer = CUTSCENE_STOP;
+        // c->cutscene = 0;
+    }
+
+    if ((gCutsceneTimer > (10)) && (get_dialog_id() == DIALOG_NONE)) {
+        gCutsceneTimer = CUTSCENE_LOOP;
+    }
+
+    // gCutsceneTimer = cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_FRONT);
+}
+
+void cutscene_stage_dialog_2(struct Camera *c) {
+    
+    Vec3f pos = { 6335.0f, 3405.0f, -2270.0f };
+    Vec3f sDMPos = { 6377.0f, 3291.0f, -2612.0f };
+
+    vec3f_copy(c->pos, pos);
+    vec3f_copy(c->focus, sDMPos);
+
+    if (gCutsceneTimer == 10) {
+        create_dialog_box(DIALOG_006);
         // gCutsceneTimer = CUTSCENE_STOP;
         // c->cutscene = 0;
     }
@@ -10464,7 +10488,7 @@ struct Cutscene sCutsceneEnterStage[] = {
     { cutscene_stage_intro, 150 },
     { cutscene_stage_dialog_1, CUTSCENE_LOOP },
     { cutscene_stage_contestant, 180 },
-    { cutscene_stage_dialog_1, CUTSCENE_LOOP },
+    { cutscene_stage_dialog_2, CUTSCENE_LOOP },
     { cutscene_stage_end, 0 }
     // { cutscene_bowser_arena_dialog, CUTSCENE_LOOP },
 };

@@ -104,6 +104,7 @@ const LevelScript level_wf_entry[] = {
 		OBJECT(MODEL_KEYDOOR1, 6045, 2496, 203, 0, -180, 0, 0x00000000, bhvKeyDoor),
 		OBJECT(MODEL_KEYDOOR1, 4755, 2496, 203, 0, -180, 0, 0x00000000, bhvKeyDoor),
 		OBJECT(MODEL_KEYDOOR1, 3596, 2496, 203, 0, -180, 0, 0x00000000, bhvKeyDoor),
+		OBJECT(MODEL_THE_TROLL, -103, 40, 4378, 0, 34, 0, (7 << 16), bhvTrollInteract),
 		OBJECT(MODEL_NONE, 322, 138, 4833, 0, -180, 0, 0x000A0000, bhvSpinAirborneWarp),
 		MARIO_POS(0x01, -180, 322, 138, 4833),
 		OBJECT(MODEL_NONE, 322, 346, 4833, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),

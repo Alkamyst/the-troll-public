@@ -109,6 +109,16 @@ Thank you to everyone\n\
 who worked on HackerSM64\n\
 and made several patches\n\
 for it and in general.\n\
+\n\
+One such patch is the\n\
+analog camera patch!\n\
+I highly recommend\n\
+enabling it.\n\
+\n\
+In Parallel Launcher,\n\
+change Input Mode to\n\
+@FF0000FFDual Analog.@--------\n\
+\n\
 "))
 
 DEFINE_DIALOG(DIALOG_004, 1, 4, 95, 200, _("\
@@ -141,71 +151,78 @@ there, @FF0000FFMario,@-------- but if\n\
 anybody can get that\n\
 @FFFF00FFStar,@-------- it's you!"))
 
-DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
-Hey, Mario! Is it true\n\
-that you beat the Big\n\
-Bob-omb? Cool!\n\
-You must be strong. And\n\
-pretty fast. So, how fast\n\
-are you, anyway?\n\
-Fast enough to beat me...\n\
-Koopa the Quick? I don't\n\
-think so. Just try me.\n\
-How about a race to the\n\
-mountaintop, where the\n\
-Big Bob-omb was?\n\
-Whaddya say? When I say\n\
-『Go,』 let the race begin!\n\
-\n\
-Ready....\n\
-\n\
-//Go!////Don't Go"))
+DEFINE_DIALOG(DIALOG_005, 1, 5, 30, 200, _("\
+Hello people of all ages,\n\
+places, and wages, and\n\
+welcome to @00FF00FFTHE TROLL☆!@--------\n\
+Boy, do we have a treat\n\
+for you tonight.\n\
+Give it up for some\n\
+random @FF0000FFplumber@-------- we found\n\
+on the street!"))
 
-DEFINE_DIALOG(DIALOG_006, 1, 3, 30, 200, _("\
-Hey!!! Don't try to " SCAM_ME
-"You've gotta run\n\
-the whole course.\n\
-Later. Look me up when\n\
-you want to race for\n\
-real."))
+DEFINE_DIALOG(DIALOG_006, 1, 5, 30, 200, _("\
+Despite this man's looks,\n\
+he works in the sewers\n\
+all day, and probably\n\
+makes more than me\n\
+while at it.\n\
+He came all this way to\n\
+win a @FFFF00FF★,@-------- but is he in for\n\
+what it takes to earn it?\n\
+There's only one way to\n\
+find out!\n\
+Welcome, one and all,\n\
+to @00FF00FFTHE TROLL☆!@--------"))
 
-DEFINE_DIALOG(DIALOG_007, 1, 5, 30, 200, _("\
-Hufff...fff...pufff...\n\
-Whoa! You...really...are...\n\
-fast! A human blur!\n\
-Here you go--you've won\n\
-it, fair and square!"))
+DEFINE_DIALOG(DIALOG_007, 1, 4, 30, 200, _("\
+Our contestant has made\n\
+it to @FF0000FFStage 2!@-------- Here,\n\
+we have an assortment\n\
+of keys and doors.\n\
+Will this mustachioed\n\
+man be able to surpass\n\
+the impassable?"))
 
-DEFINE_DIALOG(DIALOG_008, 1, 4, 30, 200, _("\
-BEWARE OF CHAIN CHOMP\n\
-Extreme Danger!\n\
-Get close and press [C]^\n\
-for a better look.\n\
-Scary, huh?\n\
-See the Red Coin on top\n\
-of the stake?\n\
+DEFINE_DIALOG(DIALOG_008, 1, 5, 30, 200, _("\
+You thought you could\n\
+go and grab my @FFFF00FF★@--------\n\
+just like that?\n\
 \n\
-When you collect eight of\n\
-them, a Power Star will\n\
-appear in the meadow\n\
-across the bridge."))
-
-DEFINE_DIALOG(DIALOG_009, 1, 5, 30, 200, _("\
-Long time, no see! Wow,\n\
-have you gotten fast!\n\
-Have you been training\n\
-on the sly, or is it the\n\
-power of the Stars?\n\
-I've been feeling down\n\
-about losing the last\n\
-race. This is my home\n\
-course--how about a\n\
-rematch?\n\
-The goal is in\n\
-Windswept Valley.\n\
-Ready?\n\
 \n\
-//Go//// Don't Go"))
+That's my prized\n\
+possession, young man!\n\
+I can't afford giving\n\
+that away!\n\
+\n\
+You aren't walking away\n\
+with anything of that\n\
+nature. No... @7F0622FFheheh...@--------\n\
+you're not walking away\n\
+at all.\n\
+You're a good contestant,\n\
+@FF0000FFplumber.@-------- You have talent.\n\
+I can't let you go to\n\
+waste.\n\
+\n\
+How about this:\n\
+you shall stay here,\n\
+putting on little\n\
+performances for\n\
+@00FF00FFTHE TROLL☆,@-------- @FF0000FFforever.@--------\n\
+Does that sound good?\n\
+I think it sounds\n\
+perfect, personally.\n\
+\n\
+\n\
+Now, stay here, @FF0000FFplumber.@--------\n\
+Our next show is coming\n\
+on in a few minutes..."))
+
+DEFINE_DIALOG(DIALOG_009, 1, 3, 30, 200, _("\
+What are you doing up\n\
+here, @FF0000FFcontestant???@--------\n\
+Get back on the stage!"))
 
 DEFINE_DIALOG(DIALOG_010, 1, 4, 30, 200, _("\
 You've stepped on the\n\

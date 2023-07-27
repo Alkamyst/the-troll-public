@@ -107,7 +107,6 @@ static void toad_message_faded(void) {
         if (o->oInteractStatus & INT_STATUS_INTERACTED) {
             o->oInteractStatus = INT_STATUS_NONE;
             o->oToadMessageState = TOAD_MESSAGE_TALKING;
-            play_toads_jingle();
         }
 
 //    if (o->oDistanceToMario > 700.0f) {
@@ -123,7 +122,6 @@ static void toad_message_opaque(void) {
         if (o->oInteractStatus & INT_STATUS_INTERACTED) {
             o->oInteractStatus = INT_STATUS_NONE;
             o->oToadMessageState = TOAD_MESSAGE_TALKING;
-            play_toads_jingle();
         }
 }
 

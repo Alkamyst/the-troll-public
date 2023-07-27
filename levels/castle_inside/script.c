@@ -107,6 +107,7 @@ const LevelScript level_castle_inside_entry[] = {
 		OBJECT(MODEL_NONE, -1500, -228, -6171, 0, -90, 0, 0x00150000, bhvAirborneDeathWarp),
 		TERRAIN(castle_inside_area_2_collision),
 		MACRO_OBJECTS(castle_inside_area_2_macro_objs),
+		SHOW_DIALOG(/*index*/ 0x00, DIALOG_008),
 		STOP_MUSIC(0),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */

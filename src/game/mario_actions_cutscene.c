@@ -1178,7 +1178,7 @@ s32 act_death_exit(struct MarioState *m) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
-        m->numLives--;
+        m->numLives++;
         if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }
@@ -1199,7 +1199,7 @@ s32 act_death_exit(struct MarioState *m) {
 s32 act_unused_death_exit(struct MarioState *m) {
     if (launch_mario_until_land(m, ACT_FREEFALL_LAND_STOP, MARIO_ANIM_GENERAL_FALL, 0.0f)) {
         play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
-        m->numLives--;
+        m->numLives++;
         if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }
@@ -1223,7 +1223,7 @@ s32 act_falling_death_exit(struct MarioState *m) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
-        m->numLives--;
+        m->numLives++;
         if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }
@@ -1282,7 +1282,7 @@ s32 act_special_death_exit(struct MarioState *m) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
-        m->numLives--;
+        m->numLives++;
         if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }

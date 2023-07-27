@@ -50,6 +50,7 @@ enum SeqId {
     SEQ_CACKLETTA_FINAL_BATTLE,       // 0x25
     SEQ_CRESCENT_MOON_VILLAGE,        // 0x26
     SEQ_THWOMP_VOLCANO,               // 0x27
+    SEQ_SML_ENDING,                   // 0x28
     SEQ_COUNT,
 };
 

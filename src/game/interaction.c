@@ -1725,7 +1725,7 @@ u32 check_npc_talk(struct MarioState *m, struct Object *obj) {
 #ifdef DIALOG_INDICATOR
         if (obj->behavior == segmented_to_virtual(bhvYoshi)) {
             spawn_object_relative(ORANGE_NUMBER_B, 0, 256, 64, obj, MODEL_NUMBER, bhvOrangeNumber);
-        } else if (obj->behavior == segmented_to_virtual(bhvTrollInteract)) {
+        } else if ((obj->behavior == segmented_to_virtual(bhvTrollInteract)) || (obj->behavior == segmented_to_virtual(bhvPeachMessage))) {
             spawn_object_relative(ORANGE_NUMBER_B, 0, 306, 0, obj, MODEL_NUMBER, bhvOrangeNumber);
         } else if (!(obj->behavior == segmented_to_virtual(bhvBobombBuddyOpensCannon))) {
             spawn_object_relative(ORANGE_NUMBER_B, 0, 160,  0, obj, MODEL_NUMBER, bhvOrangeNumber);
