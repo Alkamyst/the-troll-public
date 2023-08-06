@@ -224,48 +224,95 @@ What are you doing up\n\
 here, @FF0000FFcontestant???@--------\n\
 Get back on the stage!"))
 
-DEFINE_DIALOG(DIALOG_010, 1, 4, 30, 200, _("\
-You've stepped on the\n\
-Wing Cap Switch. Wearing\n\
-the Wing Cap, you can\n\
-soar through the sky.\n\
-Now Wing Caps will pop\n\
-out of all the red blocks\n\
-you find.\n\
+DEFINE_DIALOG(DIALOG_010, 1, 7, 30, 200, _("\
+@FF0000FF//// WANTED:\n\
+//IDIOT ON THE RUN@--------\n\
 \n\
-Would you like to Save?\n\
+NAME: Simple Javier Flips\n\
 \n\
-//Yes////No"))
+\n\
+\n\
+CRIMES:\n\
+- 3 Murders of the\n\
+Same Man\n\
+- High Security\n\
+Prison Escape\n\
+- Prison Headquarters\n\
+Slaughter\n\
+LAST SEEN: GBJ Fortress\n\
+\n\
+REWARD: Probably a lot\n\
+\n\
+\n\
+\n\
+\n\
+Please report any\n\
+information to your\n\
+friendly neighborhood\n\
+sign."))
 
-DEFINE_DIALOG(DIALOG_011, 1, 4, 30, 200, _("\
-You've just stepped on\n\
-the Metal Cap Switch!\n\
-The Metal Cap makes\n\
-Mario invincible.\n\
-Now Metal Caps will\n\
-pop out of all of the\n\
-green blocks you find.\n\
-\n\
-Would you like to Save?\n\
-\n\
-//Yes////No"))
+DEFINE_DIALOG(DIALOG_011, 1, 1, 30, 200, _("\
+Top Hat? Yes."))
 
-DEFINE_DIALOG(DIALOG_012, 1, 4, 30, 200, _("\
-You've just stepped on\n\
-the Vanish Cap Switch.\n\
-The Vanish Cap makes\n\
-Mario disappear.\n\
-Now Vanish Caps will pop\n\
-from all of the blue\n\
-blocks you find.\n\
+DEFINE_DIALOG(DIALOG_012, 1, 7, 30, 200, _("\
+@00FF00FFTHE TROLL☆@-------- @FF0000FFEXPOSED?@--------\n\
 \n\
-Would you like to Save?\n\
+Many people have\n\
+forgotten about the\n\
+buyout of the hit TV\n\
+show, 『Top Hat? Yes.』\n\
 \n\
-//Yes////No"))
+The famous game show\n\
+had its hosting company,\n\
+Top Hat Entertainment,\n\
+go under several years\n\
+ago.\n\
+\n\
+\n\
+The show has since been\n\
+bought and rebranded as\n\
+a completely different\n\
+program, @00FF00FF『THE TROLL☆.』@--------\n\
+\n\
+\n\
+\n\
+Ever since then, the show\n\
+has been dropping both in\n\
+ratings and revenue.\n\
+There even appears to\n\
+be some shady practices\n\
+going on behind the\n\
+scenes.\n\
+This includes sending\n\
+invitations for fake\n\
+prizes and disappearances\n\
+of many of its\n\
+contestants.\n\
+\n\
+\n\
+And then there is the\n\
+most shady part\n\
+of all: @FF0000FFThe Host.@--------\n\
+\n\
+\n\
+\n\
+\n\
+They have no known\n\
+name nor origin.\n\
+However, they have a\n\
+remarkable resemblance\n\
+to @FF0000FFVat Larj,@-------- a goblin\n\
+with a massive\n\
+criminal record.\n\
+Of course, The Host\n\
+is a troll... right?\n\
+Perhaps @00FF00FFTHE TROLL☆,@-------- is\n\
+some kind of cover-up\n\
+for something bigger..."))
 
 DEFINE_DIALOG(DIALOG_013, 1, 5, 30, 200, _("\
 You've collected 100\n\
-coins! Luigi gains more\n\
+coins! Mario gains more\n\
 power from the stars.\n\
 Do you want to Save?\n\
 //Yes////No"))
@@ -277,51 +324,53 @@ Do you want to Save?\n\
 //You Bet//Not Now"))
 
 DEFINE_DIALOG(DIALOG_015, 1, 4, 30, 200, _("\
-You can punch enemies to\n\
-knock them down. Press [A]\n\
-to jump, [B] to punch.\n\
-Press [A] then [B] to Kick.\n\
-To pick something up,\n\
-press [B], too. To throw\n\
-something you're holding,\n\
-press [B] again."))
+Ack! Oh. Why, greetings,\n\
+@FF0000FFplumber.@-------- I'm so terribly\n\
+sorry for the startle.\n\
+\n\
+I'm @FF0000FFThe Host@-------- of this\n\
+fine establishment.\n\
+You have gotten\n\
+an invitation, no?\n\
+You want to win a\n\
+@FFFF00FF★,@-------- is that it?\n\
+Well, you have come\n\
+to the right place!\n\
+You, @FF0000FFplumber,@-------- are going\n\
+to become a star! Yes...\n\
+come, come. @FF0000FFThe show@--------\n\
+is about to begin..."))
 
-DEFINE_DIALOG(DIALOG_016, 1, 3, 30, 200, _("\
-Hop on the shiny shell and\n\
-ride wherever you want to\n\
-go! Shred those enemies!"))
+DEFINE_DIALOG(DIALOG_016, 1, 4, 30, 200, _("\
+Well done, @FF0000FFMario!@--------\n\
+You got the @FFFF00FFPower Star!@--------\n\
+I just knew you\n\
+could do it!\n\
+And you only died\n\
+@FF0000FF[%] time(s)!@-------- You should\n\
+be proud of yourself!"))
 
 DEFINE_DIALOG(DIALOG_017, 1, 4, 30, 200, _("\
-I'm the Big Bob-omb, lord\n\
-of all blasting matter,\n\
-king of ka-booms the\n\
-world over!\n\
-How dare you scale my\n\
-mountain? By what right\n\
-do you set foot on my\n\
-imperial mountaintop?\n\
-You may have eluded my\n\
-guards, but you'll never\n\
-escape my grasp...\n\
-\n\
-...and you'll never take\n\
-away my Power Star. I\n\
-hereby challenge you,\n\
-Mario!\n\
-If you want the Star I\n\
-hold, you must prove\n\
-yourself in battle.\n\
-\n\
-Can you pick me up from\n\
-the back and hurl me to\n\
-this royal turf? I think\n\
-that you cannot!"))
+Thank you, @FF0000FFMario.@--------\n\
+You have done very well\n\
+recovering that\n\
+@FFFF00FFPower Star.@--------\n\
+I am so glad you made it\n\
+back! I will make sure\n\
+to bake a cake for you\n\
+when we get to the castle."))
 
-DEFINE_DIALOG(DIALOG_018, 1, 4, 30, 200, _("\
-I'm sleeping because...\n\
-...I'm sleepy. I don't\n\
-like being disturbed.\n\
-Please walk quietly."))
+DEFINE_DIALOG(DIALOG_018, 1, 5, 30, 200, _("\
+Congratulations!\n\
+You have finished\n\
+the hack!\n\
+\n\
+\n\
+Thank you so much for\n\
+playing it all the way\n\
+through to the end!\n\
+I hope you enjoyed.\n\
+//////@FFFF00FF--Alkamyst@--------"))
 
 DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
 Shhh! Please walk\n\
@@ -2071,31 +2120,16 @@ all. Now, I must be off.\n\
 Owww! Let me go!"))
 
 DEFINE_DIALOG(DIALOG_163, 1, 5, 30, 200, _("\
-Noooo! You've really\n\
-beaten me this time,\n\
-Mario! I can't stand\n\
-losing to you!\n\
-\n\
-My troops...worthless!\n\
-They've turned over all\n\
-the Power Stars! What?!\n\
-There are 120 in all???\n\
-\n\
-Amazing! There were some\n\
-in the castle that I\n\
-missed??!!\n\
-\n\
-\n\
-Now I see peace\n\
-returning to the world...\n\
-Oooo! I really hate that!\n\
-I can't watch--\n\
-I'm outta here!\n\
-Just you wait until next\n\
-time. Until then, keep\n\
-that Control Stick\n\
-smokin'!\n\
-Buwaa ha ha!"))
+No... this cannot be!\n\
+This... this is all...\n\
+going a-according to plan!\n\
+Y-Yes! I... I have\n\
+everything under control!\n\
+@FF0000FFPlumber,@-------- you have\n\
+underestimated me.\n\
+I-I've still got this!\n\
+Just... stay still...\n\
+and @FF0000FFdon't touch anything!@--------"))
 
 DEFINE_DIALOG(DIALOG_164, 1, 4, 30, 200, _("\
 Mario! What's up, pal?\n\

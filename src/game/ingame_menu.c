@@ -829,8 +829,8 @@ void handle_dialog_scroll_page_state(s8 lineNum, s8 totalLines, s8 *pageState, s
 }
 
 void render_star_count_dialog_text(s8 *xMatrix, s16 *linePos) {
-    s8 tensDigit = gDialogVariable / 10;
-    s8 onesDigit = gDialogVariable - (tensDigit * 10); // remainder
+    s8 tensDigit = gMarioState->numLives / 10;
+    s8 onesDigit = gMarioState->numLives - (tensDigit * 10); // remainder
 
     if (tensDigit != 0) {
         if (*xMatrix != 1) {
@@ -1059,13 +1059,13 @@ void render_dialog_triangle_next(s8 linesPerBox) {
 
 void handle_special_dialog_text(s16 dialogID) { // dialog ID tables, in order
     // King Bob-omb (Start), Whomp (Start), King Bob-omb (throw him out), Eyerock (Start), Wiggler (Start)
-    s16 dialogBossStart[] = { DIALOG_017, DIALOG_114, DIALOG_128, DIALOG_117, DIALOG_150 };
+    s16 dialogBossStart[] = { DIALOG_114, DIALOG_128, DIALOG_117, DIALOG_150 };
     // Koopa the Quick (BoB), Koopa the Quick (THI), Penguin Race, Fat Penguin Race (120 stars)
     s16 dialogRaceSound[] = { DIALOG_055, DIALOG_164             };
     // Red Switch, Green Switch, Blue Switch, 100 coins star, Bowser Red Coin Star
-    s16 dialogStarSound[] = { DIALOG_010, DIALOG_011, DIALOG_012, DIALOG_013, DIALOG_014 };
+    s16 dialogStarSound[] = { DIALOG_013, DIALOG_014 };
     // King Bob-omb (Start), Whomp (Defeated), King Bob-omb (Defeated, missing in JP), Eyerock (Defeated), Wiggler (Defeated)
-    s16 dialogBossStop[]  = { DIALOG_017, DIALOG_115, DIALOG_116, DIALOG_118, DIALOG_152 };
+    s16 dialogBossStop[]  = { DIALOG_115, DIALOG_116, DIALOG_118, DIALOG_152 };
     s16 i;
 
     for (i = 0; i < (s16) ARRAY_COUNT(dialogBossStart); i++) {

@@ -9,6 +9,10 @@ const GeoLayout castle_courtyard_area_1_geo[] = {
 			GEO_DISPLAY_LIST(LAYER_TRANSPARENT_DECAL, castle_courtyard_dl_Main_mesh_layer_6),
 		GEO_CLOSE_NODE(),
 		GEO_TRANSLATE_NODE_WITH_DL(LAYER_TRANSPARENT_DECAL, 4825, -1853, 8386, castle_courtyard_dl_Main_NoCol_mesh_layer_6),
+		GEO_OPEN_NODE(),
+			GEO_DISPLAY_LIST(LAYER_OPAQUE, castle_courtyard_dl_Main_NoCol_mesh_layer_1),
+			GEO_DISPLAY_LIST(LAYER_TRANSPARENT, castle_courtyard_dl_Main_NoCol_mesh_layer_5),
+		GEO_CLOSE_NODE(),
 	GEO_CLOSE_NODE(),
 	GEO_RETURN(),
 };

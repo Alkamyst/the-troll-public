@@ -901,8 +901,8 @@ void update_hud_values(void) {
             save_file_set_num_lives(MAX_NUM_LIVES);
         }
 #else
-        if (gMarioState->numLives > 100) {
-            gMarioState->numLives = 100;
+        if (gMarioState->numLives > 99) {
+            gMarioState->numLives = 99;
         }
 #endif
 

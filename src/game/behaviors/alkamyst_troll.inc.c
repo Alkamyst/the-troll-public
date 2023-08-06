@@ -1188,7 +1188,7 @@ void bhv_troll_engage_loop(void) {
         o->oMoveAngleYaw = approach_s16_symmetric(o->oMoveAngleYaw, o->oAngleToMario, 0x500);
 
         if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_FRONT,
-            DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_163)) {
+            DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, DIALOG_015)) {
             initiate_warp(LEVEL_JRB, EXIT_COURSE_AREA, 0x0A, 0);
             fade_into_special_warp(0, 0);
         }
