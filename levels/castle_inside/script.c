@@ -91,7 +91,6 @@ const LevelScript level_castle_inside_entry[] = {
 		WARP_NODE(0x0F, LEVEL_FINAL_BOSS, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		WARP_NODE(0x15, LEVEL_BOB, 0x01, 0x0A, WARP_NO_CHECKPOINT),
 		OBJECT(MODEL_GRATE_BREAK, 5129, 1393, -296, 0, 0, 0, (2 << 16), bhvGrateBreak),
-		OBJECT(MODEL_METAL_BOX, 7400, 100, -3145, 0, 90, 0, 0x00000000, bhvPushableMetalBox),
 		OBJECT(MODEL_NONE, -1247, 206, -414, 0, 90, 0, (10 << 16), bhvSignOnWall),
 		OBJECT(MODEL_NONE, 1287, 224, 174, 0, -90, 0, (11 << 16), bhvSignOnWall),
 		OBJECT(MODEL_NONE, -9029, 428, -2691, 0, 0, 0, (12 << 16), bhvSignOnWall),

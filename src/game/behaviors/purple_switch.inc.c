@@ -50,6 +50,7 @@ void bhv_purple_switch_loop(void) {
             if (o->oTimer == 3) {
                 if (switch_bparam1 == 1) {
                     obj_mark_for_deletion(o);
+                    gMarioState->vel[1] = 84.0f;
                 }
                 cur_obj_play_sound_2(SOUND_GENERAL2_PURPLE_SWITCH);
                 o->oAction = PURPLE_SWITCH_ACT_TICKING;

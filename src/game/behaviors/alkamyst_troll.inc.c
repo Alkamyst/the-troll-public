@@ -786,6 +786,7 @@ void bhv_dynamite_loop(void) {
             switchObj = cur_obj_nearest_object_with_behavior(bhvFloorSwitchHiddenObjects);
 
             if (switchObj == NULL) {
+                cur_obj_set_hitbox_radius_and_height(/*Radius*/ 500, /*Height*/ 100);
                 cur_obj_enable_rendering();
                 cur_obj_become_tangible();
                 cur_obj_unhide();
@@ -1194,6 +1195,47 @@ void bhv_troll_engage_loop(void) {
         }
 
         break;
+    }
+
+}
+
+void bhv_collect_fake_star_loop(void) {
+    o->oFaceAngleYaw += 0x800;
+    s32 floorType = gMarioState->floor->type;
+    f32 distToHome = o->oPosY - o->oHomeY;
+
+    switch (o->oAction) {
+        case 0:
+
+            if (floorType == SURFACE_INTERACTION5) {
+                o->oAction = 1;
+            }
+
+        break;
+
+        case 1:
+
+            if (distToHome < 700.0f) {
+                o->oPosY += 30.0f;
+            } else {
+                if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
+                    DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_163)) {
+                    initiate_warp(LEVEL_CASTLE, 0x02, 0x0A, 0);
+                    fade_into_special_warp(0, 0);
+                }
+            }
+
+        break;
+
+    }
+}
+
+void bhv_red_coin_bars(void) {
+
+    if (gRedCoinsCollected == 2) {
+        spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+        play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
+        obj_mark_for_deletion(o);
     }
 
 }

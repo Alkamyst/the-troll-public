@@ -25,7 +25,7 @@ static struct ObjectHitbox sRedCoinHitbox = {
  */
 void bhv_red_coin_init(void) {
     // Set the red coins to have a parent of the closest red coin star.
-    struct Object *hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar);
+    struct Object *hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvRedCoinBars);
     if (hiddenRedCoinStar != NULL) {
         o->parentObj = hiddenRedCoinStar;
     } else if ((hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvBowserCourseRedCoinStar)) != NULL) {
@@ -56,12 +56,12 @@ void bhv_red_coin_loop(void) {
             gRedCoinsCollected++;
 
             // Spawn the orange number counter, as long as it isn't the last coin.
-            if ((numRedCoinsRemaining - 2) > 1) {
+            if ((numRedCoinsRemaining) > 0) {
                 spawn_orange_number(o->parentObj->oHiddenStarTriggerCounter, 0, 0, 0);
             }
 
             // On all versions but the JP version, each coin collected plays a higher noise, as long as the last coin hasn't been collected.
-            if ((numRedCoinsRemaining - 2) > 0) {
+            if ((numRedCoinsRemaining) > 0) {
                 play_sound(SOUND_MENU_COLLECT_RED_COIN
                     + (((u8) o->parentObj->oHiddenStarTriggerCounter - 1) << 16),
                     gGlobalSoundSource);

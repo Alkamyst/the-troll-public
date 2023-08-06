@@ -1815,10 +1815,10 @@ void render_pause_course_options(s16 x, s16 y, s8 *index, s16 yIndex) {
     gDPSetEnvColor(gDisplayListHead++, 255, 255, 255, gDialogTextAlpha);
     
     print_generic_string(x + 38, y - 2, LANGUAGE_ARRAY(textContinue));
-    if (!(gCurrCourseNum == COURSE_WF)) {
+    if (!(gCurrCourseNum == COURSE_CCM)) {
         print_generic_string(18, 157, LANGUAGE_ARRAY(textMockA));
     }
-    if (gCurrCourseNum == COURSE_WF) {
+    if (gCurrCourseNum == COURSE_CCM) {
         print_generic_string(18, 157, LANGUAGE_ARRAY(textMockB));
     }
 

@@ -502,7 +502,7 @@ void render_hud_camera_status(void) {
 
     switch (sCameraHUD.status & CAM_STATUS_MODE_GROUP) {
         case CAM_STATUS_MARIO:
-            render_hud_tex_lut(x + 16, y, (*cameraLUT)[GLYPH_CAM_MARIO_HEAD]);
+            render_hud_tex_lut(x + 16, y, (*cameraLUT)[GLYPH_CAM_FIXED]);
             break;
         case CAM_STATUS_LAKITU:
             render_hud_tex_lut(x + 16, y, (*cameraLUT)[GLYPH_CAM_LAKITU_HEAD]);
