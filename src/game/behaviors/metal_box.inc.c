@@ -14,8 +14,8 @@ struct ObjectHitbox sMetalBoxHitbox = {
 
 s32 check_if_moving_over_floor(f32 maxDist, f32 offset) {
     struct Surface *floor;
-    f32 xPos = o->oPosX + sins(o->oMoveAngleYaw) * offset;
-    f32 zPos = o->oPosZ + coss(o->oMoveAngleYaw) * offset;
+    f32 xPos = o->oPosX - sins(o->oMoveAngleYaw) * offset;
+    f32 zPos = o->oPosZ - coss(o->oMoveAngleYaw) * offset;
 
     f32 floorHeight = find_floor(xPos, o->oPosY, zPos, &floor);
 
@@ -34,7 +34,7 @@ void bhv_pushable_loop(void) {
         s16 angleToMario = obj_angle_to_object(o, gMarioObject);
         if (abs_angle_diff(angleToMario, gMarioObject->oMoveAngleYaw) > 0x4000) {
             o->oMoveAngleYaw = (s16)((gMarioObject->oMoveAngleYaw + 0x2000) & 0xc000);
-            if (check_if_moving_over_floor(8.0f, 150.0f)) {
+            if (check_if_moving_over_floor(20.0f, 200.0f)) {
                 o->oForwardVel = -20.0f;
                 cur_obj_play_sound_1(SOUND_ENV_METAL_BOX_PUSH);
             }

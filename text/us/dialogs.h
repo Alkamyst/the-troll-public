@@ -370,7 +370,7 @@ Thank you so much for\n\
 playing it all the way\n\
 through to the end!\n\
 I hope you enjoyed.\n\
-//////@FFFF00FF--Alkamyst@--------"))
+//////--Alkamyst"))
 
 DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
 Shhh! Please walk\n\

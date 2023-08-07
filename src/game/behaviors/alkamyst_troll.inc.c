@@ -1232,7 +1232,7 @@ void bhv_collect_fake_star_loop(void) {
 
 void bhv_red_coin_bars(void) {
 
-    if (gRedCoinsCollected == 2) {
+    if (gRedCoinsCollected == 8) {
         spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
         play_sound(SOUND_MENU_STAR_SOUND, gMarioState->marioObj->header.gfx.cameraToObject);
         obj_mark_for_deletion(o);

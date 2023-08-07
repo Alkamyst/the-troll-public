@@ -374,9 +374,11 @@ s32 act_start_hanging(struct MarioState *m) {
     }
 
     // Only let go if A or B has been pressed
+/*
     if (m->input & (INPUT_A_PRESSED | INPUT_B_PRESSED)) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
+
 #else
     if ((m->input & INPUT_NONZERO_ANALOG) && m->actionTimer >= 31) {
         return set_mario_action(m, ACT_HANGING, 0);
@@ -385,8 +387,9 @@ s32 act_start_hanging(struct MarioState *m) {
     if (!(m->input & INPUT_A_DOWN)) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
+*/
 #endif
-
+/*
     if (m->input & INPUT_Z_PRESSED) {
         return set_mario_action(m, ACT_GROUND_POUND, 0);
     }
@@ -395,6 +398,7 @@ s32 act_start_hanging(struct MarioState *m) {
     if (m->ceil == NULL || m->ceil->type != SURFACE_HANGABLE) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
+*/
 
     set_mario_animation(m, MARIO_ANIM_HANG_ON_CEILING);
     play_sound_if_no_flag(m, SOUND_ACTION_HANGING_STEP, MARIO_ACTION_SOUND_PLAYED);
@@ -412,6 +416,7 @@ s32 act_hanging(struct MarioState *m) {
         return set_mario_action(m, ACT_HANG_MOVING, m->actionArg);
     }
 
+/*
 #ifdef BETTER_HANGING
     // Only let go if A or B is pressed
     if (m->input & (INPUT_A_PRESSED | INPUT_B_PRESSED)) {
@@ -431,6 +436,7 @@ s32 act_hanging(struct MarioState *m) {
     if (m->ceil == NULL || m->ceil->type != SURFACE_HANGABLE) {
         return set_mario_action(m, ACT_FREEFALL, 0);
     }
+*/
 
     if (m->actionArg & 1) {
         set_mario_animation(m, MARIO_ANIM_HANDSTAND_LEFT);
@@ -444,6 +450,7 @@ s32 act_hanging(struct MarioState *m) {
 }
 
 s32 act_hang_moving(struct MarioState *m) {
+/*
 #ifdef BETTER_HANGING
     // Only let go if A or B is pressed
     if (m->input & (INPUT_A_PRESSED | INPUT_B_PRESSED)) {
@@ -458,6 +465,7 @@ s32 act_hang_moving(struct MarioState *m) {
     if (m->input & INPUT_Z_PRESSED) {
         return set_mario_action(m, ACT_GROUND_POUND, 0);
     }
+*/
 
     // HackerSM64 fix: check if ceil is NULL to prevent crashing
     if (m->ceil == NULL || m->ceil->type != SURFACE_HANGABLE) {
