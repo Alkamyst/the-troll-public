@@ -94,7 +94,7 @@ extern Vtx jrb_dl_Main_NoCol_mesh_layer_1_vtx_2[4];
 extern Gfx jrb_dl_Main_NoCol_mesh_layer_1_tri_2[];
 extern Vtx jrb_dl_Main_NoCol_mesh_layer_1_vtx_3[8];
 extern Gfx jrb_dl_Main_NoCol_mesh_layer_1_tri_3[];
-extern Vtx jrb_dl_Street_Lamp_mesh_layer_1_vtx_0[201];
+extern Vtx jrb_dl_Street_Lamp_mesh_layer_1_vtx_0[223];
 extern Gfx jrb_dl_Street_Lamp_mesh_layer_1_tri_0[];
 extern Vtx jrb_dl_Street_Lamp_mesh_layer_5_vtx_0[60];
 extern Gfx jrb_dl_Street_Lamp_mesh_layer_5_tri_0[];

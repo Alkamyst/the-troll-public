@@ -78,7 +78,7 @@ void scroll_ccm_dl_Main_001_mesh_layer_4_vtx_0() {
 	int deltaX;
 	Vtx *vertices = segmented_to_virtual(ccm_dl_Main_001_mesh_layer_4_vtx_0);
 
-	deltaX = (int)(2.0 * 0x20) % width;
+	deltaX = (int)(1.0 * 0x20) % width;
 
 	if (absi(currentX) > width) {
 		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);

@@ -635,6 +635,12 @@ void throw_shell_act_move(void) {
         o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
     }
 
+    if (o->oPosY <= -100.0f) {
+        spawn_mist_particles();
+        o->oForwardVel = 0.0f;
+        cur_obj_set_pos_to_home();
+    }
+
     obj_check_floor_death(collisionFlags, sObjFloor);
 }
 
@@ -1012,7 +1018,7 @@ void bhv_target(void) {
 
         case 1:
 
-            if (dist_between_objects(o, shellObj) < 245.0f) {
+            if (dist_between_objects(o, shellObj) < 275.0f) {
 
                 gMarioState->numKeys = 0;
 
@@ -1038,7 +1044,7 @@ void bhv_target(void) {
                 f32 distToHome = sqrtf(sqr(dx) + sqr(dz));
 
                 if (dist_between_objects(o, shellObj) <= 800.0f) {
-                    if (distToHome < 400.0f) {
+                    if (distToHome < 600.0f) {
                         o->oPosZ -= 100.0f;
                     }
                 }
@@ -1075,7 +1081,7 @@ void bhv_target_fall(void) {
 
         case 1:
 
-            if (dist_between_objects(o, shellObj) < 245.0f) {
+            if (dist_between_objects(o, shellObj) < 275.0f) {
 
                 gMarioState->numKeys = 0;
 

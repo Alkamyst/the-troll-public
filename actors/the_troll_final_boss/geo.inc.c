@@ -1,7 +1,7 @@
 #include "src/game/envfx_snow.h"
 
 const GeoLayout the_troll_final_boss_geo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(2000),
 	GEO_OPEN_NODE(),
 		GEO_ANIMATED_PART(LAYER_OPAQUE, 0, -302, -1, the_troll_final_boss_Ship_mesh_layer_1),
 		GEO_OPEN_NODE(),

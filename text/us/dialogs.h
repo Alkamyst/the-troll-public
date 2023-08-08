@@ -83,9 +83,9 @@ YouTube channel with my\n\
 new name, but I have no\n\
 way of properly\n\
 communicating that info.\n\
-So! That is the point of.\n\
+So! That is the point of\n\
 this I just want people to\n\
-know that what happened.\n\
+know what happened.\n\
 I'm sorry if this came off\n\
 as selfless promoting.\n\
 I hope you enjoy the hack!\n\

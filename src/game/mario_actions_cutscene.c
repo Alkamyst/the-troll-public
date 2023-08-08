@@ -367,7 +367,9 @@ s32 act_reading_npc_dialog(struct MarioState *m) {
 
     if (m->actionState < 8) {
         // turn to NPC
-        m->faceAngle[1] = approach_angle(m->faceAngle[1], mario_obj_angle_to_object(m, m->usedObj), 0x800);
+        if (gMarioState->initCutsceneState != -1) {
+            m->faceAngle[1] = approach_angle(m->faceAngle[1], mario_obj_angle_to_object(m, m->usedObj), 0x800);
+        }
         // turn head to npc
         m->actionTimer += headTurnAmount;
         // set animation
@@ -1179,7 +1181,7 @@ s32 act_death_exit(struct MarioState *m) {
         queue_rumble_data(5, 80);
 #endif
         m->numLives++;
-        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
+        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF) || (gCurrCourseNum == COURSE_CCM)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }
 #ifdef SAVE_NUM_LIVES
@@ -1200,7 +1202,7 @@ s32 act_unused_death_exit(struct MarioState *m) {
     if (launch_mario_until_land(m, ACT_FREEFALL_LAND_STOP, MARIO_ANIM_GENERAL_FALL, 0.0f)) {
         play_sound(SOUND_MARIO_OOOF2, m->marioObj->header.gfx.cameraToObject);
         m->numLives++;
-        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
+        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF) || (gCurrCourseNum == COURSE_CCM)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }
 #ifdef SAVE_NUM_LIVES
@@ -1224,7 +1226,7 @@ s32 act_falling_death_exit(struct MarioState *m) {
         queue_rumble_data(5, 80);
 #endif
         m->numLives++;
-        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
+        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF) || (gCurrCourseNum == COURSE_CCM)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }
 #ifdef SAVE_NUM_LIVES
@@ -1283,7 +1285,7 @@ s32 act_special_death_exit(struct MarioState *m) {
         queue_rumble_data(5, 80);
 #endif
         m->numLives++;
-        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF)) { // laugh track
+        if ((gCurrCourseNum == COURSE_JRB) || (gCurrCourseNum == COURSE_WF) || (gCurrCourseNum == COURSE_CCM)) { // laugh track
             play_sound(SOUND_PEACH_THANK_YOU_MARIO, gGlobalSoundSource);
         }
 #ifdef SAVE_NUM_LIVES

@@ -7967,6 +7967,8 @@ void cutscene_final_init(struct Camera *c) {
 
     vec3f_copy(c->pos, pos);
     vec3f_copy(c->focus, sDMPos);
+
+    gMarioState->initCutsceneState = -1;
 }
 
 void cutscene_final_arena(struct Camera *c) {
@@ -7987,6 +7989,7 @@ void cutscene_final_arena(struct Camera *c) {
 
     if ((gCutsceneTimer > (4 * 30)) && (get_dialog_id() == DIALOG_NONE)) {
         gCutsceneTimer = CUTSCENE_LOOP;
+        gMarioState->initCutsceneState = 1;
     }
 
     // gCutsceneTimer = cutscene_common_set_dialog_state(MARIO_DIALOG_LOOK_FRONT);
@@ -7999,6 +8002,8 @@ void cutscene_stage_init(struct Camera *c) {
 
     vec3f_copy(c->pos, pos);
     vec3f_copy(c->focus, sDMPos);
+
+    gMarioState->initCutsceneState = -1;
 }
 
 void cutscene_stage_intro(struct Camera *c) {

@@ -68,7 +68,7 @@ extern Vtx wf_dl_Main_NoCol_mesh_layer_1_vtx_0[46];
 extern Gfx wf_dl_Main_NoCol_mesh_layer_1_tri_0[];
 extern Vtx wf_dl_Main_NoCol_mesh_layer_1_vtx_1[8];
 extern Gfx wf_dl_Main_NoCol_mesh_layer_1_tri_1[];
-extern Vtx wf_dl_Street_Lamp_mesh_layer_1_vtx_0[67];
+extern Vtx wf_dl_Street_Lamp_mesh_layer_1_vtx_0[75];
 extern Gfx wf_dl_Street_Lamp_mesh_layer_1_tri_0[];
 extern Vtx wf_dl_Street_Lamp_mesh_layer_5_vtx_0[20];
 extern Gfx wf_dl_Street_Lamp_mesh_layer_5_tri_0[];

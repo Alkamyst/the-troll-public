@@ -62,6 +62,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, 2925, 727, 915, 0, -180, 0, (1 << 16), bhvCoinFormation),
 		OBJECT(MODEL_RED_COIN, -2957, 360, -3152, 0, -180, 0, 0x00000000, bhvYellowCoin),
 		OBJECT(MODEL_RED_COIN, 1617, 843, -6585, 0, -180, 0, 0x00000000, bhvYellowCoin),
+		OBJECT(MODEL_RED_COIN, 1441, 229, 1419, 0, -180, 0, 0x00000000, bhvYellowCoin),
 		OBJECT(MODEL_GOOMBA, 4637, 55, -198, 0, -180, 0, 0x00000000, bhvGoomba),
 		OBJECT(MODEL_BREAKABLE_BOX, 1602, 194, -2660, 0, 90, 0, 0x00000000, bhvHiddenObject),
 		OBJECT(MODEL_BREAKABLE_BOX, 367, 371, -2281, 0, 90, 0, (1 << 16), bhvHiddenObject),
@@ -92,7 +93,7 @@ const LevelScript level_ccm_entry[] = {
 		OBJECT(MODEL_NONE, -7, 358, 315, 0, -180, 0, 0x000B0000, bhvAirborneDeathWarp),
 		TERRAIN(ccm_area_1_collision),
 		MACRO_OBJECTS(ccm_area_1_macro_objs),
-		SET_BACKGROUND_MUSIC(0x24, SEQ_FURNACE_FUN),
+		SET_BACKGROUND_MUSIC(0x24, SEQ_NSMBW_CASTLE),
 		TERRAIN_TYPE(TERRAIN_STONE),
 		/* Fast64 begin persistent block [area commands] */
 		/* Fast64 end persistent block [area commands] */
