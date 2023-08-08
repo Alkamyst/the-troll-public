@@ -21,9 +21,12 @@ void piranha_plant_act_idle(void) {
      */
     cur_obj_scale(1.0f);
 
-    if (o->oDistanceToMario < 1200.0f) {
-        o->oAction = PIRANHA_PLANT_ACT_SLEEPING;
-    }
+//    if (o->oDistanceToMario < 1200.0f) {
+//        o->oAction = PIRANHA_PLANT_ACT_SLEEPING;
+//    }
+
+    o->oAction = PIRANHA_PLANT_ACT_BITING;
+
 }
 
 /**
@@ -85,11 +88,14 @@ void piranha_plant_act_sleeping(void) {
             o->oAction = PIRANHA_PLANT_ACT_WOKEN_UP;
         }
     } else if (o->oDistanceToMario < 1000.0f) {
-        play_secondary_music(SEQ_EVENT_PIRANHA_PLANT, 0, 255, 1000);
         o->oPiranhaPlantSleepMusicState = PIRANHA_PLANT_SLEEP_MUSIC_PLAYING;
     } else if (o->oPiranhaPlantSleepMusicState == PIRANHA_PLANT_SLEEP_MUSIC_PLAYING) {
         o->oPiranhaPlantSleepMusicState++;
         func_80321080(50);
+    }
+
+    if (gMarioState->controller->buttonPressed & B_BUTTON) {
+        o->oAction = PIRANHA_PLANT_ACT_BITING;
     }
     piranha_plant_check_interactions();
 }
@@ -102,7 +108,7 @@ void piranha_plant_act_woken_up(void) {
     /**
      * Make Piranha Plants damage the player while awake.
      */
-    o->oDamageOrCoinValue = 3;
+    o->oDamageOrCoinValue = 8;
     if (o->oTimer == 0) {
         func_80321080(50);
     }
@@ -168,7 +174,7 @@ void piranha_plant_act_shrink_and_die(void) {
         o->oPiranhaPlantScale = o->oPiranhaPlantScale - 0.04f;
     } else {
         o->oPiranhaPlantScale = 0.0f;
-        cur_obj_spawn_loot_blue_coin();
+        spawn_object_relative(0, 0, 0, 0, o, MODEL_RED_COIN, bhvRedCoin);
         o->oAction = PIRANHA_PLANT_ACT_WAIT_TO_RESPAWN;
     }
 
@@ -181,9 +187,6 @@ void piranha_plant_act_shrink_and_die(void) {
  * Wait for Mario to move far away, then respawn the Piranha Plant.
  */
 void piranha_plant_act_wait_to_respawn(void) {
-    if (o->oDistanceToMario > 1200.0f) {
-        o->oAction = PIRANHA_PLANT_ACT_RESPAWN;
-    }
 }
 
 /**
@@ -228,6 +231,8 @@ void piranha_plant_act_biting(void) {
     s32 animFrame = o->header.gfx.animInfo.animFrame;
 
     cur_obj_become_tangible();
+
+    o->oDamageOrCoinValue = 8;
 
     o->oInteractType = INTERACT_DAMAGE;
 
@@ -304,6 +309,8 @@ ObjActionFunc TablePiranhaPlantActions[] = {
  */
 void bhv_piranha_plant_loop(void) {
     cur_obj_call_action_function(TablePiranhaPlantActions);
+    cur_obj_update_floor_and_walls();
+    cur_obj_move_standard(-78);
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
     // In WF, hide all Piranha Plants once high enough up.
     if (gCurrLevelNum == LEVEL_WF) {

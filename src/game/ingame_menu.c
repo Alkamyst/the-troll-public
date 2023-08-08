@@ -2392,10 +2392,12 @@ s32 render_menus_and_dialogs(void) {
         gDialogColorFadeTimer = (s16) gDialogColorFadeTimer + 0x1000;
     } else if (gDialogID != DIALOG_NONE) {
         // The Peach "Dear Mario" message needs to be repositioned separately
+/*
         if (gDialogID == DIALOG_020) {
             print_peach_letter_message();
             return mode;
         }
+*/
 
         render_dialog_entries();
         gDialogColorFadeTimer = (s16) gDialogColorFadeTimer + 0x1000;

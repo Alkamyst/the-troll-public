@@ -69,8 +69,30 @@ void scroll_ccm_dl_Main_001_mesh_layer_7_vtx_2() {
 	currentY += deltaY;
 }
 
+void scroll_ccm_dl_Main_001_mesh_layer_4_vtx_0() {
+	int i = 0;
+	int count = 32;
+	int width = 64 * 0x20;
+
+	static int currentX = 0;
+	int deltaX;
+	Vtx *vertices = segmented_to_virtual(ccm_dl_Main_001_mesh_layer_4_vtx_0);
+
+	deltaX = (int)(2.0 * 0x20) % width;
+
+	if (absi(currentX) > width) {
+		deltaX -= (int)(absi(currentX) / width) * width * signum_positive(deltaX);
+	}
+
+	for (i = 0; i < count; i++) {
+		vertices[i].n.tc[0] += deltaX;
+	}
+	currentX += deltaX;
+}
+
 void scroll_ccm() {
 	scroll_ccm_dl_Main_001_mesh_layer_7_vtx_0();
 	scroll_ccm_dl_Main_001_mesh_layer_7_vtx_1();
 	scroll_ccm_dl_Main_001_mesh_layer_7_vtx_2();
+	scroll_ccm_dl_Main_001_mesh_layer_4_vtx_0();
 }

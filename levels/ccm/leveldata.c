@@ -47,3 +47,8 @@
 #include "levels/ccm/areas/2/trajectory.inc.c"
 
 #include "levels/ccm/leveldata.inc.c"
+
+#include "levels/ccm/wall_jump_slip/collision.inc.c"
+#include "levels/ccm/wall_jump_slip/model.inc.c"
+#include "levels/ccm/red_coin_bars/collision.inc.c"
+#include "levels/ccm/red_coin_bars/model.inc.c"

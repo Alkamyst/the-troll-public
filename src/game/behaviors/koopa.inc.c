@@ -14,9 +14,9 @@
 static struct ObjectHitbox sKoopaHitbox = {
     /* interactType:      */ INTERACT_KOOPA,
     /* downOffset:        */ 0,
-    /* damageOrCoinValue: */ 0,
+    /* damageOrCoinValue: */ 8,
     /* health:            */ 0,
-    /* numLootCoins:      */ -1,
+    /* numLootCoins:      */ 0,
     /* radius:            */ 60,
     /* height:            */ 40,
     /* hurtboxRadius:     */ 40,
@@ -448,6 +448,10 @@ static void koopa_unshelled_update(void) {
 
     obj_handle_attacks(&sKoopaHitbox, o->oAction, sKoopaUnshelledAttackHandlers);
     cur_obj_move_standard(-78);
+
+    if ((gMarioState->controller->buttonPressed & B_BUTTON) && (o->oVelY == 0.0f)) {
+        o->oVelY = 50.0f;
+    }
 }
 
 /**
@@ -788,7 +792,8 @@ void bhv_koopa_update(void) {
                 koopa_unshelled_update();
                 break;
             case KOOPA_BP_NORMAL:
-                koopa_shelled_update();
+                koopa_unshelled_update();
+                // koopa_shelled_update();
                 break;
             case KOOPA_BP_KOOPA_THE_QUICK_BOB:
             case KOOPA_BP_KOOPA_THE_QUICK_THI:

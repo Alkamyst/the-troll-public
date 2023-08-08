@@ -94,7 +94,7 @@ working on it to create\n\
 my ambitious vision.\n\
 I hope it pays off!"))
 
-DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
+DEFINE_DIALOG(DIALOG_003, 1, 5, 30, 200, _("\
 This hack was created for\n\
 @FF0000FFSimpleFlips's 2023 Troll\n\
 Competition.@--------\n\
@@ -121,7 +121,7 @@ change Input Mode to\n\
 \n\
 "))
 
-DEFINE_DIALOG(DIALOG_004, 1, 4, 95, 200, _("\
+DEFINE_DIALOG(DIALOG_004, 1, 4, 30, 200, _("\
 Hey @FF0000FFMario!@-------- I'm so glad\n\
 you came! I heard that\n\
 you were looking for\n\
@@ -318,7 +318,7 @@ Do you want to Save?\n\
 //Yes////No"))
 
 DEFINE_DIALOG(DIALOG_014, 1, 4, 30, 200, _("\
-Wow! Luigi got a Star!\n\
+Wow! Mario got a Star!\n\
 Do you want to Save?\n\
 \n\
 //You Bet//Not Now"))
@@ -372,17 +372,43 @@ through to the end!\n\
 I hope you enjoyed.\n\
 //////--Alkamyst"))
 
-DEFINE_DIALOG(DIALOG_019, 1, 2, 30, 200, _("\
-Shhh! Please walk\n\
-quietly in the hallway!"))
+DEFINE_DIALOG(DIALOG_019, 1, 4, 30, 200, _("\
+Congrats, @FF0000FFplumber!@--------\n\
+You have made it to\n\
+the third and\n\
+@FF0000FFFinal Stage!@--------\n\
+We did not think you\n\
+would make it this far.\n\
+Honestly! Seriously!\n\
+Unbelievable!\n\
+What IS believable\n\
+is that that it's not\n\
+over yet.\n\
+\n\
+Our contestant needs to\n\
+collect @FF0000FF8 Red Coins@-------- to\n\
+open the way to the @FFFF00FF★.@--------\n\
+\n\
+Will he be able to\n\
+conquer this final\n\
+challenge?"))
 
-DEFINE_DIALOG(DIALOG_020, 1, 6, 95, 150, _("\
-Dear Mario:\n\
-Please come to the\n\
-castle. I've baked\n\
-a cake for you.\n\
-Yours truly--\n\
-Princess Toadstool"))
+DEFINE_DIALOG(DIALOG_020, 1, 4, 30, 200, _("\
+Well folks, it appears\n\
+that is all that we\n\
+have for tonight!\n\
+\n\
+Yes... hijinks\n\
+ensued, laughs were\n\
+had, and I have gone\n\
+into further debt.\n\
+Unfortunately, every\n\
+good time has to come\n\
+to a close...\n\
+...until next week.\n\
+Thank you, one and all,\n\
+for tuning into\n\
+@00FF00FFTHE TROLL☆!@--------"))
 
 DEFINE_DIALOG(DIALOG_021, 1, 5, 95, 200, _("\
 Welcome.\n\

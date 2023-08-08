@@ -476,6 +476,12 @@ static void obj_die_if_health_non_positive(void) {
 
         if ((s32)o->oNumLootCoins < 0) {
             spawn_object(o, MODEL_BLUE_COIN, bhvMrIBlueCoin);
+        } else  if (o->behavior == segmented_to_virtual(bhvGoomba)) {
+            spawn_object_relative(0, 0, 0, 0, o, MODEL_KOOPA_WITH_SHELL, bhvKoopa);
+        } else  if (o->behavior == segmented_to_virtual(bhvKoopa)) {
+            spawn_object_relative(0, 0, 0, 0, o, MODEL_PIRANHA_PLANT, bhvPiranhaPlant);
+        } else  if (o->behavior == segmented_to_virtual(bhvPiranhaPlant)) {
+            spawn_object_relative(0, 0, 0, 0, o, MODEL_RED_COIN, bhvRedCoin);
         } else {
             obj_spawn_loot_yellow_coins(o, o->oNumLootCoins, 20.0f);
         }

@@ -2474,9 +2474,10 @@ const BehaviorScript bhvPiranhaPlant[] = {
     SET_INTERACT_TYPE(INTERACT_DAMAGE),
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 200),
     SET_HURTBOX(/*Radius*/ 50, /*Height*/ 200),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 0, /*Friction*/ 0, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
     SET_INT(oIntangibleTimer,   0),
-    SET_INT(oDamageOrCoinValue, 3),
-    SET_INT(oNumLootCoins,      5),
+    SET_INT(oDamageOrCoinValue, 8),
+    SET_INT(oNumLootCoins,      0),
     SPAWN_CHILD(/*Model*/ MODEL_BUBBLE, /*Behavior*/ bhvPiranhaPlantBubble),
     SET_FLOAT(oDrawingDistance, 2000),
     SET_HOME(),
@@ -5103,7 +5104,6 @@ const BehaviorScript bhvFlyGuy[] = {
     SET_HOME(),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 50, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1000, /*Buoyancy*/ 600, /*Unused*/ 0, 0),
     CALL_NATIVE(bhv_init_room),
-    SET_INT(oInteractionSubtype, INT_SUBTYPE_TWIRL_BOUNCE),
     SET_FLOAT(oGraphYOffset, 30),
     SCALE(/*Unused*/ 0, /*Field*/ 150),
     BEGIN_LOOP(),
@@ -6619,16 +6619,32 @@ const BehaviorScript bhvFakeStar[] = {
     END_LOOP(),
 };
 
+extern const Collision red_coin_bars_collision[];
 extern void bhv_red_coin_bars();
 const BehaviorScript bhvRedCoinBars[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(metal_box_seg8_collision_08024C28),
+    LOAD_COLLISION_DATA(red_coin_bars_collision),
     //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
     SET_FLOAT(oDrawingDistance, 20000),
     SET_HOME(),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_red_coin_bars),
+        CALL_NATIVE(load_object_collision_model),
+    END_LOOP(),
+};
+
+extern const Collision wall_jump_slip_collision[];
+extern void bhv_wall_jump_slip_loop();
+const BehaviorScript bhvWallJumpSlip[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_COLLISION_DATA(wall_jump_slip_collision),
+    //LOAD_COLLISION_DATA(luigiman_moving_platform_collision),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_wall_jump_slip_loop),
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

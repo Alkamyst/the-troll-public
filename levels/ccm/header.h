@@ -60,4 +60,12 @@ extern const LevelScript level_ccm_entry[];
 
 #include "levels/ccm/header.inc.h"
 
+#include "levels/ccm/wall_jump_slip/collision_header.h"
+
+#include "levels/ccm/wall_jump_slip/geo_header.h"
+
+#include "levels/ccm/red_coin_bars/collision_header.h"
+
+#include "levels/ccm/red_coin_bars/geo_header.h"
+
 #endif

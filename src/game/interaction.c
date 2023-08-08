@@ -1350,7 +1350,7 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
     u32 interaction;
     interaction = determine_interaction(m, obj);
 
-    if (interaction & INT_ATTACK_NOT_FROM_BELOW) {
+    if ((interaction & INT_ATTACK_NOT_FROM_BELOW) && (obj->behavior != segmented_to_virtual(bhvFlyGuy))) {
 #if ENABLE_RUMBLE
         queue_rumble_data(5, 80);
 #endif
@@ -1373,11 +1373,19 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
         }
     } else if (take_damage_and_knock_back(m, obj)) {
         return TRUE;
+    } else {
+        if (interaction & INT_HIT_FROM_ABOVE) {
+            attack_object(obj, interaction);
+            bounce_back_from_attack(m, interaction);
+            bounce_off_object(m, obj, 30.0f);
+        } else if (take_damage_and_knock_back(m, obj)) {
+            return TRUE;
+        }
     }
 
     if (!(obj->oInteractionSubtype & INT_SUBTYPE_DELAY_INVINCIBILITY)) {
         sDelayInvincTimer = TRUE;
-    }
+    } 
 
     return FALSE;
 }

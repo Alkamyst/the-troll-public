@@ -614,4 +614,9 @@
 #define MODEL_GRATE_BREAK 0x40
 #define MODEL_SECRET_CRACK 0x41
 
+// stage_3
+
+#define MODEL_WALL_JUMP_SLIP 0x40
+#define MODEL_RED_COIN_BARS 0x41
+
 #endif // MODEL_IDS_H

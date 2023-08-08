@@ -25,3 +25,6 @@
 #include "levels/ccm/areas/2/geo.inc.c"
 
 #include "levels/ccm/geo.inc.c"
+
+#include "levels/ccm/wall_jump_slip/geo.inc.c"
+#include "levels/ccm/red_coin_bars/geo.inc.c"

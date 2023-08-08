@@ -1,7 +1,7 @@
 #include "src/game/envfx_snow.h"
 
 const GeoLayout final_slip_geo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(2000),
 	GEO_OPEN_NODE(),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, final_slip_Final_Slip_mesh_layer_1),
 		GEO_DISPLAY_LIST(LAYER_OPAQUE, final_slip_material_revert_render_settings),

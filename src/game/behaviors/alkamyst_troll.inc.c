@@ -194,6 +194,26 @@ void bhv_cannon_wall_slip_loop(void) {
     }
 }
 
+void bhv_wall_jump_slip_loop(void) {
+
+    if (gMarioState->floor != NULL) {
+        s32 floorType = gMarioState->floor->type;
+        f32 distToHome = o->oHomeY - o->oPosY;
+
+        if ((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) {
+            if (distToHome < 450.0f) {
+                o->oPosY -= 100.0f;
+            }
+        }
+
+        if ((floorType != SURFACE_INTERACTION) && (floorType != SURFACE_INTERACTION_DEATH)) {
+            if (distToHome > 0.0f) {
+                o->oPosY += 100.0f;
+            }
+        }
+    }
+}
+
 void bhv_grate_troll(void) {
 
     if (gMarioState->floor != NULL) {
@@ -1219,7 +1239,7 @@ void bhv_collect_fake_star_loop(void) {
                 o->oPosY += 30.0f;
             } else {
                 if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP,
-                    DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_163)) {
+                    DIALOG_FLAG_NONE, CUTSCENE_DIALOG, DIALOG_020)) {
                     initiate_warp(LEVEL_CASTLE, 0x02, 0x0A, 0);
                     fade_into_special_warp(0, 0);
                 }
