@@ -144,7 +144,7 @@ void bhv_pushing_wall_slip_loop(void) {
             break;
         
         case BOMP_ACT_LAUNCH:
-            o->oPosZ = (o->oPosZ + 60.0f);
+            o->oPosZ = (o->oPosZ + 55.0f);
 
             if (distToHome >= 3000.0f) {
                 struct Object *explosion = spawn_object(o, MODEL_EXPLOSION, bhvExplosion);

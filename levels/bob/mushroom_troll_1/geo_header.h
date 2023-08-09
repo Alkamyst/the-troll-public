@@ -5,7 +5,7 @@ extern u8 mushroom_troll_1_Texture0575_RGB_ci4[];
 extern u8 mushroom_troll_1_Texture0575_RGB_ci4_pal_rgba16[];
 extern Vtx mushroom_troll_1_Main_001_mesh_layer_1_vtx_0[12];
 extern Gfx mushroom_troll_1_Main_001_mesh_layer_1_tri_0[];
-extern Vtx mushroom_troll_1_Main_001_mesh_layer_1_vtx_1[38];
+extern Vtx mushroom_troll_1_Main_001_mesh_layer_1_vtx_1[44];
 extern Gfx mushroom_troll_1_Main_001_mesh_layer_1_tri_1[];
 extern Gfx mat_mushroom_troll_1_Mushroom_Bottom[];
 extern Gfx mat_revert_mushroom_troll_1_Mushroom_Bottom[];

@@ -222,7 +222,7 @@ u8 mushroom_troll_2_Texture0575_RGB_ci4_pal_rgba16[] = {
 	0xf6, 0xf7, 0xf7, 0xbd, 
 };
 
-Vtx mushroom_troll_2_Main_002_mesh_layer_1_vtx_0[12] = {
+Vtx mushroom_troll_2_Main_001_mesh_layer_1_vtx_0[12] = {
 	{{ {32, 0, 15}, 0, {769, 1008}, {0, 0, 0, 255} }},
 	{{ {0, 0, -41}, 0, {48, 1008}, {0, 0, 0, 30} }},
 	{{ {0, 2803, -41}, 0, {48, -16}, {163, 163, 163, 255} }},
@@ -237,8 +237,8 @@ Vtx mushroom_troll_2_Main_002_mesh_layer_1_vtx_0[12] = {
 	{{ {0, 2803, -41}, 0, {48, -16}, {163, 163, 163, 255} }},
 };
 
-Gfx mushroom_troll_2_Main_002_mesh_layer_1_tri_0[] = {
-	gsSPVertex(mushroom_troll_2_Main_002_mesh_layer_1_vtx_0 + 0, 12, 0),
+Gfx mushroom_troll_2_Main_001_mesh_layer_1_tri_0[] = {
+	gsSPVertex(mushroom_troll_2_Main_001_mesh_layer_1_vtx_0 + 0, 12, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 2, 3, 0),
 	gsSP1Triangle(4, 5, 6, 0),
@@ -248,7 +248,7 @@ Gfx mushroom_troll_2_Main_002_mesh_layer_1_tri_0[] = {
 	gsSPEndDisplayList(),
 };
 
-Vtx mushroom_troll_2_Main_002_mesh_layer_1_vtx_1[38] = {
+Vtx mushroom_troll_2_Main_001_mesh_layer_1_vtx_1[38] = {
 	{{ {247, 2803, -141}, 0, {-586, 86}, {143, 143, 143, 255} }},
 	{{ {0, 2893, -209}, 0, {-54, 842}, {255, 255, 255, 255} }},
 	{{ {182, 2893, -104}, 0, {-54, 242}, {255, 255, 255, 255} }},
@@ -289,8 +289,8 @@ Vtx mushroom_troll_2_Main_002_mesh_layer_1_vtx_1[38] = {
 	{{ {-182, 2893, 107}, 0, {985, 842}, {255, 255, 255, 255} }},
 };
 
-Gfx mushroom_troll_2_Main_002_mesh_layer_1_tri_1[] = {
-	gsSPVertex(mushroom_troll_2_Main_002_mesh_layer_1_vtx_1 + 0, 16, 0),
+Gfx mushroom_troll_2_Main_001_mesh_layer_1_tri_1[] = {
+	gsSPVertex(mushroom_troll_2_Main_001_mesh_layer_1_vtx_1 + 0, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 1, 0),
 	gsSP1Triangle(0, 4, 3, 0),
@@ -305,7 +305,7 @@ Gfx mushroom_troll_2_Main_002_mesh_layer_1_tri_1[] = {
 	gsSP1Triangle(10, 13, 9, 0),
 	gsSP1Triangle(14, 13, 10, 0),
 	gsSP1Triangle(14, 10, 15, 0),
-	gsSPVertex(mushroom_troll_2_Main_002_mesh_layer_1_vtx_1 + 16, 16, 0),
+	gsSPVertex(mushroom_troll_2_Main_001_mesh_layer_1_vtx_1 + 16, 16, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(0, 3, 4, 0),
 	gsSP1Triangle(5, 3, 0, 0),
@@ -320,7 +320,7 @@ Gfx mushroom_troll_2_Main_002_mesh_layer_1_tri_1[] = {
 	gsSP1Triangle(10, 14, 11, 0),
 	gsSP1Triangle(8, 14, 10, 0),
 	gsSP1Triangle(8, 10, 15, 0),
-	gsSPVertex(mushroom_troll_2_Main_002_mesh_layer_1_vtx_1 + 32, 6, 0),
+	gsSPVertex(mushroom_troll_2_Main_001_mesh_layer_1_vtx_1 + 32, 6, 0),
 	gsSP1Triangle(0, 1, 2, 0),
 	gsSP1Triangle(2, 3, 0, 0),
 	gsSP1Triangle(2, 4, 3, 0),
@@ -379,12 +379,12 @@ Gfx mat_revert_mushroom_troll_2_Mushroom_Top[] = {
 	gsSPEndDisplayList(),
 };
 
-Gfx mushroom_troll_2_Main_002_mesh_layer_1[] = {
+Gfx mushroom_troll_2_Main_001_mesh_layer_1[] = {
 	gsSPDisplayList(mat_mushroom_troll_2_Mushroom_Bottom),
-	gsSPDisplayList(mushroom_troll_2_Main_002_mesh_layer_1_tri_0),
+	gsSPDisplayList(mushroom_troll_2_Main_001_mesh_layer_1_tri_0),
 	gsSPDisplayList(mat_revert_mushroom_troll_2_Mushroom_Bottom),
 	gsSPDisplayList(mat_mushroom_troll_2_Mushroom_Top),
-	gsSPDisplayList(mushroom_troll_2_Main_002_mesh_layer_1_tri_1),
+	gsSPDisplayList(mushroom_troll_2_Main_001_mesh_layer_1_tri_1),
 	gsSPDisplayList(mat_revert_mushroom_troll_2_Mushroom_Top),
 	gsSPEndDisplayList(),
 };

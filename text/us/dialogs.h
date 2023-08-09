@@ -87,7 +87,7 @@ So! That is the point of\n\
 this I just want people to\n\
 know what happened.\n\
 I'm sorry if this came off\n\
-as selfless promoting.\n\
+as shameless promoting.\n\
 I hope you enjoy the hack!\n\
 I've spent all my free time\n\
 working on it to create\n\
@@ -117,9 +117,17 @@ enabling it.\n\
 \n\
 In Parallel Launcher,\n\
 change Input Mode to\n\
-@FF0000FFDual Analog.@--------\n\
+@FF0000FFDual Analog@-------- to\n\
+activate it.\n\
 \n\
-"))
+Thank you to everyone\n\
+that made the Midis I\n\
+used for the music ports:\n\
+Applemunch Studios,\n\
+Exploder MLMK,\n\
+Mike, tahutoa,\n\
+ThatEuphoniumGuy,\n\
+Machiavel, and Teck!"))
 
 DEFINE_DIALOG(DIALOG_004, 1, 4, 30, 200, _("\
 Hey @FF0000FFMario!@-------- I'm so glad\n\
@@ -306,7 +314,7 @@ with a massive\n\
 criminal record.\n\
 Of course, The Host\n\
 is a troll... right?\n\
-Perhaps @00FF00FFTHE TROLL☆,@-------- is\n\
+Perhaps @00FF00FFTHE TROLL☆@-------- is\n\
 some kind of cover-up\n\
 for something bigger..."))
 
