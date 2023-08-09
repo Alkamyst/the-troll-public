@@ -1,0 +1,15 @@
+extern const GeoLayout checkpoint_mario_geo[];
+extern u8 checkpoint_mario_ci4_nat_metal_i8[];
+extern u8 checkpoint_mario_Mario_ci8[];
+extern u8 checkpoint_mario_Mario_ci8_pal_rgba16[];
+extern Vtx checkpoint_mario_Checkpoint_001_mesh_layer_1_vtx_0[132];
+extern Gfx checkpoint_mario_Checkpoint_001_mesh_layer_1_tri_0[];
+extern Vtx checkpoint_mario_Checkpoint_001_mesh_layer_5_vtx_0[4];
+extern Gfx checkpoint_mario_Checkpoint_001_mesh_layer_5_tri_0[];
+extern Gfx mat_checkpoint_mario_Floor_001[];
+extern Gfx mat_revert_checkpoint_mario_Floor_001[];
+extern Gfx mat_checkpoint_mario_f3dlite_material_002[];
+extern Gfx mat_revert_checkpoint_mario_f3dlite_material_002[];
+extern Gfx checkpoint_mario_Checkpoint_001_mesh_layer_1[];
+extern Gfx checkpoint_mario_Checkpoint_001_mesh_layer_5[];
+extern Gfx checkpoint_mario_material_revert_render_settings[];

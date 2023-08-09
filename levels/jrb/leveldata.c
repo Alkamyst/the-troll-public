@@ -50,3 +50,5 @@
 #include "levels/jrb/falling_stage_1/model.inc.c"
 #include "levels/jrb/falling_stage_2/collision.inc.c"
 #include "levels/jrb/falling_stage_2/model.inc.c"
+#include "levels/jrb/checkpoint/model.inc.c"
+#include "levels/jrb/checkpoint_mario/model.inc.c"

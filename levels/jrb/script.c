@@ -52,6 +52,8 @@ const LevelScript level_jrb_entry[] = {
 	LOAD_MODEL_FROM_GEO(MODEL_SHELLDOOR, ShellDoor_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FALLING_STAGE_1, falling_stage_1_geo), 
 	LOAD_MODEL_FROM_GEO(MODEL_FALLING_STAGE_2, falling_stage_2_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CHECKPOINT, checkpoint_geo), 
+	LOAD_MODEL_FROM_GEO(MODEL_CHECKPOINT_MARIO, checkpoint_mario_geo), 
 
 	/* Fast64 begin persistent block [level commands] */
 	/* Fast64 end persistent block [level commands] */
@@ -65,6 +67,7 @@ const LevelScript level_jrb_entry[] = {
 		OBJECT(MODEL_EXCLAMATION_BOX, 4863, 516, 128, 0, -45, 0, (99 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, 1726, 2785, 979, 0, 0, 0, (1 << 16), bhvExclamationBox),
 		OBJECT(MODEL_EXCLAMATION_BOX, 1726, 5331, 950, 0, 0, 0, (6 << 16), bhvExclamationBox),
+		OBJECT(MODEL_CHECKPOINT, 1716, 2418, 351, 0, -180, 0, 0x00000000, bhvCheckpoint),
 		OBJECT(MODEL_YELLOW_COIN, 1490, 1245, -3867, 0, 0, 0, 0x00000000, bhvYellowCoin),
 		OBJECT(MODEL_SHELLDOOR, 1193, 4951, 2800, 0, 90, 0, (2 << 16), bhvShellDoor),
 		OBJECT(MODEL_SHELLDOOR, -926, 5382, 2800, 0, 90, 0, (2 << 16), bhvShellDoor),

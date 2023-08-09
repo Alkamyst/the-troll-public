@@ -28,3 +28,5 @@
 #include "levels/jrb/ShellDoor/geo.inc.c"
 #include "levels/jrb/falling_stage_1/geo.inc.c"
 #include "levels/jrb/falling_stage_2/geo.inc.c"
+#include "levels/jrb/checkpoint/geo.inc.c"
+#include "levels/jrb/checkpoint_mario/geo.inc.c"

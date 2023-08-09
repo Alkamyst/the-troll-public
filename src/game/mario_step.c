@@ -12,7 +12,7 @@
 
 #include "config.h"
 
-static s16 sMovingSandSpeeds[] = { 72, 120, 12, 0 }; // Moving Sand Speeds
+static s16 sMovingSandSpeeds[] = { 60, 120, 12, 0 }; // Moving Sand Speeds
 
 struct Surface gWaterSurfacePseudoFloor = {
     SURFACE_VERY_SLIPPERY,      // type

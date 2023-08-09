@@ -579,5 +579,6 @@ extern const BehaviorScript bhvPeachMessage[];
 extern const BehaviorScript bhvFakeStar[];
 extern const BehaviorScript bhvRedCoinBars[];
 extern const BehaviorScript bhvWallJumpSlip[];
+extern const BehaviorScript bhvCheckpoint[];
 
 #endif // BEHAVIOR_DATA_H

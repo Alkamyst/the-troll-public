@@ -6648,3 +6648,15 @@ const BehaviorScript bhvWallJumpSlip[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+extern void bhv_checkpoint();
+const BehaviorScript bhvCheckpoint[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_INT(oIntangibleTimer, 0),
+    SET_HITBOX(/*Radius*/ 100, /*Height*/ 300),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_checkpoint),
+    END_LOOP(),
+};

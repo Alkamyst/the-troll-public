@@ -1,0 +1,16 @@
+extern const GeoLayout checkpoint_geo[];
+extern u8 checkpoint_ci4_nat_metal_ci4[];
+extern u8 checkpoint_ci4_nat_metal_ci4_pal_rgba16[];
+extern u8 checkpoint_CheckpointFlagMark_nrm_0_ci8[];
+extern u8 checkpoint_CheckpointFlagMark_nrm_0_ci8_pal_rgba16[];
+extern Vtx checkpoint_Checkpoint_mesh_layer_1_vtx_0[132];
+extern Gfx checkpoint_Checkpoint_mesh_layer_1_tri_0[];
+extern Vtx checkpoint_Checkpoint_mesh_layer_5_vtx_0[4];
+extern Gfx checkpoint_Checkpoint_mesh_layer_5_tri_0[];
+extern Gfx mat_checkpoint_Floor[];
+extern Gfx mat_revert_checkpoint_Floor[];
+extern Gfx mat_checkpoint_f3dlite_material_001[];
+extern Gfx mat_revert_checkpoint_f3dlite_material_001[];
+extern Gfx checkpoint_Checkpoint_mesh_layer_1[];
+extern Gfx checkpoint_Checkpoint_mesh_layer_5[];
+extern Gfx checkpoint_material_revert_render_settings[];

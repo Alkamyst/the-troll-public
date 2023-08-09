@@ -1265,3 +1265,27 @@ void bhv_red_coin_bars(void) {
     }
 
 }
+
+void bhv_checkpoint(void) {
+    struct Object *warp;
+    warp = cur_obj_nearest_object_with_behavior(bhvAirborneDeathWarp);
+
+
+    switch (o->oAction) {
+        case 0:
+            if (obj_check_if_collided_with_object(o, gMarioObject) == TRUE) {
+                play_sound(SOUND_GENERAL2_RIGHT_ANSWER, gGlobalSoundSource);
+                spawn_object(o, MODEL_NONE, bhvStarKeyCollectionPuffSpawner);
+                cur_obj_set_model(MODEL_CHECKPOINT_MARIO);
+                warp->oPosX = o->oPosX;
+                warp->oPosY = o->oPosY + 200.0f;
+                warp->oPosZ = o->oPosZ + 200.0f;
+                o->oAction = 1;
+            }
+        break;
+
+        case 1:
+
+        break;
+    }
+}

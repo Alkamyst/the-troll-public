@@ -82,4 +82,8 @@ extern const LevelScript level_jrb_entry[];
 
 #include "levels/jrb/falling_stage_2/geo_header.h"
 
+#include "levels/jrb/checkpoint/geo_header.h"
+
+#include "levels/jrb/checkpoint_mario/geo_header.h"
+
 #endif
