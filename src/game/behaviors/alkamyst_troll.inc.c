@@ -201,7 +201,7 @@ void bhv_wall_jump_slip_loop(void) {
         f32 distToHome = o->oHomeY - o->oPosY;
 
         if ((floorType == SURFACE_INTERACTION) || (floorType == SURFACE_INTERACTION_DEATH)) {
-            if (distToHome < 450.0f) {
+            if (distToHome < 550.0f) {
                 o->oPosY -= 100.0f;
             }
         }
@@ -365,6 +365,8 @@ void bhv_troll_final_boss_loop(void) {
         case 1:
 
             if (o->oHealth <= 0) {
+                
+                o->oDamageOrCoinValue = 0;
 
                 cur_obj_init_animation(1);
 
@@ -1240,6 +1242,10 @@ void bhv_collect_fake_star_loop(void) {
         break;
 
         case 1:
+
+            if (distToHome == 300.0f) {
+                play_sound(SOUND_MENU_ENTER_PIPE, gMarioState->marioObj->header.gfx.cameraToObject);
+            }
 
             if (distToHome < 700.0f) {
                 o->oPosY += 30.0f;

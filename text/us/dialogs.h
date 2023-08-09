@@ -105,6 +105,11 @@ This hack was created by\n\
 models, level design,\n\
 music ports, coding...\n\
 etc.\n\
+Thank you to\n\
+Lamplighterr for the\n\
+drawing of The Host!\n\
+(You have already seen\n\
+it on the title screen!)\n\
 Thank you to everyone\n\
 who worked on HackerSM64\n\
 and made several patches\n\
