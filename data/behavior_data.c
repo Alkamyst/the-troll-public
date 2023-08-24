@@ -6089,57 +6089,6 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
-extern void bhv_luigiman_leaf_pile_init();
-extern void bhv_luigiman_leaf_pile_loop();
-const BehaviorScript bhvLuigimanLeafPile[] = {
-    BEGIN(OBJ_LIST_GENACTOR),
-    SET_INT(oNumLootCoins, 5),
-    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    SET_HITBOX(/*Radius*/ 200, /*Height*/ 100),
-    SET_FLOAT(oDrawingDistance, 20000),
-    SET_INT(oIntangibleTimer, 0),
-    CALL_NATIVE(bhv_luigiman_leaf_pile_init),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_luigiman_leaf_pile_loop),
-    END_LOOP(),
-};
-
-extern void bhv_luigiman_chestnut_init();
-extern void bhv_luigiman_chestnut_loop();
-const BehaviorScript bhvLuigimanChestnut[] = {
-    BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    SET_HOME(),
-    SET_HITBOX_WITH_OFFSET(/*Radius*/ 100, /*Height*/ 100, /*Downwards offset*/ 0),
-    SET_INTERACT_TYPE(INTERACT_DAMAGE),
-    SET_INT(oDamageOrCoinValue, 2),
-    SCALE(/*Unused*/ 0, /*Field*/ 90),
-    SET_INT(oIntangibleTimer, 0),
-    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 5, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
-    CALL_NATIVE(bhv_luigiman_chestnut_init),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_luigiman_chestnut_loop),
-    END_LOOP(),
-};
-
-extern void bhv_luigiman_golden_chestnut_init();
-extern void bhv_luigiman_golden_chestnut_loop();
-const BehaviorScript bhvLuigimanGoldenChestnut[] = {
-    BEGIN(OBJ_LIST_GENACTOR),
-    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    SET_HOME(),
-    SET_HITBOX_WITH_OFFSET(/*Radius*/ 125, /*Height*/ 100, /*Downwards offset*/ 0),
-    SET_INTERACT_TYPE(INTERACT_DAMAGE),
-    SET_INT(oDamageOrCoinValue, 2),
-    SCALE(/*Unused*/ 0, /*Field*/ 150),
-    SET_INT(oIntangibleTimer, 0),
-    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ 5, /*Bounciness*/ 0, /*Drag strength*/ 0, /*Friction*/ 1, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
-    CALL_NATIVE(bhv_luigiman_golden_chestnut_init),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_luigiman_golden_chestnut_loop),
-    END_LOOP(),
-};
-
 extern void bhv_hidden_cage_loop();
 const BehaviorScript bhvHiddenCage[] = {
     BEGIN(OBJ_LIST_SURFACE),

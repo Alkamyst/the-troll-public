@@ -84,7 +84,7 @@ new name, but I have no\n\
 way of properly\n\
 communicating that info.\n\
 So! That is the point of\n\
-this I just want people to\n\
+this. I just want people to\n\
 know what happened.\n\
 I'm sorry if this came off\n\
 as shameless promoting.\n\
@@ -395,7 +395,7 @@ would make it this far.\n\
 Honestly! Seriously!\n\
 Unbelievable!\n\
 What IS believable\n\
-is that that it's not\n\
+is that it's not\n\
 over yet.\n\
 \n\
 Our contestant needs to\n\
